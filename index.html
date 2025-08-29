@@ -4,43 +4,107 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All Online Tools | Free & Fast</title>
-  <meta name="description" content="Discover all free online tools in one place. Fast, keyboard-friendly, and easy to use. Start with our futuristic calculator.">
-  <meta name="keywords" content="online tools, free online tools, calculator, keyboard-friendly tools, fast tools, AI tools">
+  <meta name="description" content="Discover all free online tools in one place. Fast, keyboard-friendly, and easy-to-use tools including calculators, converters, and more.">
+  <meta name="keywords" content="online tools, free online tools, keyboard calculator, fast tools, AI tools, futuristic tools, online utilities">
+
   <style>
-    body {
+    /* Reset and base */
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       min-height: 100vh;
     }
-    header {
+
+    /* Top notice */
+    .notice {
+      background: rgba(0,255,255,0.1);
       text-align: center;
-      margin-bottom: 40px;
+      padding: 8px 0;
+      font-size: 0.9rem;
+      color: #0ff;
     }
-    header h1 {
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: rgba(20,20,40,0.95);
+      box-shadow: 0 0 15px rgba(0,200,255,0.4);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #0ff;
+      letter-spacing: 1px;
+    }
+    .menu {
+      display: flex;
+      gap: 30px;
+      font-weight: 500;
+    }
+    .menu a {
+      color: #aaa;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .menu a:hover {
+      color: #0ff;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 50px;
+    }
+    .hero h1 {
       font-size: 3rem;
       color: #0ff;
-      margin: 0;
+      margin-bottom: 20px;
     }
-    header p {
+    .hero p {
       font-size: 1.2rem;
       color: #aaa;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
+    .hero a.button {
+      padding: 15px 35px;
+      background: rgba(0,255,255,0.2);
+      color: #0ff;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .hero a.button:hover {
+      background: rgba(0,255,255,0.4);
+      box-shadow: 0 0 15px rgba(0,200,255,0.5);
+    }
+
+    /* Tools Section */
     .tools {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
       max-width: 1200px;
-      width: 100%;
-      padding: 0 20px;
+      margin: 0 auto;
+      padding: 40px 20px;
     }
     .tool-card {
-      background: rgba(20, 20, 40, 0.95);
+      background: rgba(20,20,40,0.95);
       padding: 25px;
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(0,200,255,0.4);
@@ -53,6 +117,7 @@
     .tool-card h3 {
       color: #0ff;
       margin-top: 0;
+      font-size: 1.3rem;
     }
     .tool-card p {
       color: #aaa;
@@ -74,30 +139,62 @@
       background: rgba(0,255,255,0.3);
       box-shadow: 0 0 10px rgba(0,200,255,0.5);
     }
+
+    /* Footer */
     footer {
       text-align: center;
       padding: 20px;
       color: #aaa;
       font-size: 0.9rem;
     }
+
+    @media(max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>All Online Tools</h1>
-    <p>Free, fast, and keyboard-friendly tools – all in one place</p>
-  </header>
+  <!-- Top notice -->
+  <div class="notice">
+    ⚡ New tools coming soon! All free and keyboard-friendly.
+  </div>
 
-  <section class="tools">
-    <!-- Calculator Tool Card -->
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">All Online Tools</div>
+    <div class="menu">
+      <a href="#tools">Tools</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Discover All Online Tools in One Place</h1>
+    <p>Access free, fast, and keyboard-friendly tools including calculators, converters, and more. Designed with a futuristic AI-inspired interface for efficiency and ease of use.</p>
+    <a href="https://millat-fullstack.github.io/keyboard-calculator/" class="button" target="_blank">Use Calculator Free</a>
+  </section>
+
+  <!-- Tools Section -->
+  <section class="tools" id="tools">
     <div class="tool-card">
       <h3>Futuristic Calculator</h3>
       <p>Fully keyboard-friendly, fast, and accurate. Modern AI-inspired design.</p>
       <a href="https://millat-fullstack.github.io/keyboard-calculator/" target="_blank">Use Tool</a>
     </div>
 
-    <!-- Future Tools Example -->
     <div class="tool-card">
       <h3>Tool 2</h3>
       <p>Description of your next tool goes here.</p>
