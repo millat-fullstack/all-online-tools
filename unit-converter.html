@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Converter | All Online Tools</title>
+  <meta name="description" content="Free all-in-one unit converter: convert length, weight, temperature, and currency instantly. Fast, accurate, and futuristic design.">
+  <meta name="keywords" content="unit converter, length converter, weight converter, temperature converter, currency converter, online tools">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #0ff;
+      margin-bottom: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: rgba(20,20,40,0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,200,255,0.4);
+    }
+    .converter {
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #0ff;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+    input, select {
+      padding: 10px;
+      margin: 5px;
+      border: 1px solid #0ff;
+      border-radius: 8px;
+      background: #111;
+      color: #0ff;
+      font-size: 1rem;
+    }
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #0ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>All-in-One Unit Converter</h1>
+  <div class="container">
+
+    <!-- Length Converter -->
+    <div class="converter">
+      <h2>Length Converter</h2>
+      <input type="number" id="lengthInput" placeholder="Enter value">
+      <select id="lengthFrom">
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+        <option value="cm">Centimeters</option>
+        <option value="mm">Millimeters</option>
+        <option value="ft">Feet</option>
+        <option value="in">Inches</option>
+        <option value="mi">Miles</option>
+      </select>
+      to
+      <select id="lengthTo">
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+        <option value="cm">Centimeters</option>
+        <option value="mm">Millimeters</option>
+        <option value="ft">Feet</option>
+        <option value="in">Inches</option>
+        <option value="mi">Miles</option>
+      </select>
+      <div class="result" id="lengthResult">Result: -</div>
+    </div>
+
+    <!-- Weight Converter -->
+    <div class="converter">
+      <h2>Weight Converter</h2>
+      <input type="number" id="weightInput" placeholder="Enter value">
+      <select id="weightFrom">
+        <option value="kg">Kilograms</option>
+        <option value="g">Grams</option>
+        <option value="lb">Pounds</option>
+        <option value="oz">Ounces</option>
+      </select>
+      to
+      <select id="weightTo">
+        <option value="kg">Kilograms</option>
+        <option value="g">Grams</option>
+        <option value="lb">Pounds</option>
+        <option value="oz">Ounces</option>
+      </select>
+      <div class="result" id="weightResult">Result: -</div>
+    </div>
+
+    <!-- Temperature Converter -->
+    <div class="converter">
+      <h2>Temperature Converter</h2>
+      <input type="number" id="tempInput" placeholder="Enter value">
+      <select id="tempFrom">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+        <option value="K">Kelvin</option>
+      </select>
+      to
+      <select id="tempTo">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+        <option value="K">Kelvin</option>
+      </select>
+      <div class="result" id="tempResult">Result: -</div>
+    </div>
+
+    <!-- Currency Converter -->
+    <div class="converter">
+      <h2>Currency Converter (Static Rates)</h2>
+      <input type="number" id="currencyInput" placeholder="Enter amount">
+      <select id="currencyFrom">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="INR">INR</option>
+        <option value="BDT">BDT</option>
+      </select>
+      to
+      <select id="currencyTo">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="INR">INR</option>
+        <option value="BDT">BDT</option>
+      </select>
+      <div class="result" id="currencyResult">Result: -</div>
+    </div>
+
+  </div>
+
+  <script>
+    // Length Conversion Factors (to meters)
+    const lengthFactors = { m:1, km:1000, cm:0.01, mm:0.001, ft:0.3048, in:0.0254, mi:1609.34 };
+    document.getElementById('lengthInput').addEventListener('input', convertLength);
+    document.getElementById('lengthFrom').addEventListener('change', convertLength);
+    document.getElementById('lengthTo').addEventListener('change', convertLength);
+    function convertLength() {
+      let val = parseFloat(document.getElementById('lengthInput').value);
+      if (isNaN(val)) return;
+      let from = document.getElementById('lengthFrom').value;
+      let to = document.getElementById('lengthTo').value;
+      let result = val * lengthFactors[from] / lengthFactors[to];
+      document.getElementById('lengthResult').textContent = "Result: " + result.toFixed(4) + " " + to;
+    }
+
+    // Weight Conversion Factors (to kilograms)
+    const weightFactors = { kg:1, g:0.001, lb:0.453592, oz:0.0283495 };
+    document.getElementById('weightInput').addEventListener('input', convertWeight);
+    document.getElementById('weightFrom').addEventListener('change', convertWeight);
+    document.getElementById('weightTo').addEventListener('change', convertWeight);
+    function convertWeight() {
+      let val = parseFloat(document.getElementById('weightInput').value);
+      if (isNaN(val)) return;
+      let from = document.getElementById('weightFrom').value;
+      let to = document.getElementById('weightTo').value;
+      let result = val * weightFactors[from] / weightFactors[to];
+      document.getElementById('weightResult').textContent = "Result: " + result.toFixed(4) + " " + to;
+    }
+
+    // Temperature Conversion
+    document.getElementById('tempInput').addEventListener('input', convertTemp);
+    document.getElementById('tempFrom').addEventListener('change', convertTemp);
+    document.getElementById('tempTo').addEventListener('change', convertTemp);
+    function convertTemp() {
+      let val = parseFloat(document.getElementById('tempInput').value);
+      if (isNaN(val)) return;
+      let from = document.getElementById('tempFrom').value;
+      let to = document.getElementById('tempTo').value;
+      let result;
+      // Convert to Celsius first
+      if (from === "C") result = val;
+      if (from === "F") result = (val - 32) * 5/9;
+      if (from === "K") result = val - 273.15;
+      // Convert Celsius to target
+      if (to === "C") result = result;
+      if (to === "F") result = (result * 9/5) + 32;
+      if (to === "K") result = result + 273.15;
+      document.getElementById('tempResult').textContent = "Result: " + result.toFixed(2) + " " + to;
+    }
+
+    // Currency Conversion (Static Rates relative to USD)
+    const rates = { USD:1, EUR:0.92, GBP:0.78, INR:83, BDT:118 };
+    document.getElementById('currencyInput').addEventListener('input', convertCurrency);
+    document.getElementById('currencyFrom').addEventListener('change', convertCurrency);
+    document.getElementById('currencyTo').addEventListener('change', convertCurrency);
+    function convertCurrency() {
+      let val = parseFloat(document.getElementById('currencyInput').value);
+      if (isNaN(val)) return;
+      let from = document.getElementById('currencyFrom').value;
+      let to = document.getElementById('currencyTo').value;
+      let result = val / rates[from] * rates[to];
+      document.getElementById('currencyResult').textContent = "Result: " + result.toFixed(2) + " " + to;
+    }
+  </script>
+</body>
+</html>
