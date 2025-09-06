@@ -7,6 +7,9 @@
   <meta name="description" content="Discover all free online tools in one place. Fast, keyboard-friendly, and easy-to-use tools including calculators, converters, and more.">
   <meta name="keywords" content="online tools, free online tools, keyboard calculator, fast tools, AI tools, futuristic tools, online utilities">
 
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     /* Reset and base */
     * {
@@ -15,19 +18,19 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: #fff;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #ffffff, #f5f5f5, #e6e6e6);
+      color: #333;
       min-height: 100vh;
     }
 
     /* Top notice */
     .notice {
-      background: rgba(0,255,255,0.1);
+      background: #f0f8ff;
       text-align: center;
       padding: 8px 0;
       font-size: 0.9rem;
-      color: #0ff;
+      color: #0077b6;
     }
 
     /* Navigation */
@@ -36,8 +39,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 50px;
-      background: rgba(20,20,40,0.95);
-      box-shadow: 0 0 15px rgba(0,200,255,0.4);
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -45,7 +48,7 @@
     .logo {
       font-size: 1.6rem;
       font-weight: bold;
-      color: #0ff;
+      color: #0077b6;
       letter-spacing: 1px;
     }
     .menu {
@@ -54,12 +57,12 @@
       font-weight: 500;
     }
     .menu a {
-      color: #aaa;
+      color: #555;
       text-decoration: none;
       transition: color 0.2s;
     }
     .menu a:hover {
-      color: #0ff;
+      color: #0077b6;
     }
 
     /* Hero Section */
@@ -69,12 +72,12 @@
     }
     .hero h1 {
       font-size: 3rem;
-      color: #0ff;
+      color: #0077b6;
       margin-bottom: 20px;
     }
     .hero p {
       font-size: 1.2rem;
-      color: #aaa;
+      color: #444;
       margin-bottom: 30px;
       max-width: 600px;
       margin-left: auto;
@@ -82,16 +85,16 @@
     }
     .hero a.button {
       padding: 15px 35px;
-      background: rgba(0,255,255,0.2);
-      color: #0ff;
+      background: #0077b6;
+      color: #fff;
       border-radius: 10px;
       font-weight: bold;
       text-decoration: none;
       transition: all 0.2s ease;
     }
     .hero a.button:hover {
-      background: rgba(0,255,255,0.4);
-      box-shadow: 0 0 15px rgba(0,200,255,0.5);
+      background: #0096c7;
+      box-shadow: 0 0 15px rgba(0, 119, 182, 0.4);
     }
 
     /* Tools Section */
@@ -104,23 +107,24 @@
       padding: 40px 20px;
     }
     .tool-card {
-      background: rgba(20,20,40,0.95);
+      background: #fff;
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,200,255,0.4);
+      border: 1px solid #eee;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       text-align: center;
       transition: all 0.3s ease;
     }
     .tool-card:hover {
-      box-shadow: 0 0 25px rgba(0,200,255,0.8);
+      box-shadow: 0 4px 15px rgba(0,119,182,0.2);
     }
-    .tool-card h3 {
-      color: #0ff;
+    .tool-card h2 {
+      color: #0077b6;
       margin-top: 0;
       font-size: 1.3rem;
     }
     .tool-card p {
-      color: #aaa;
+      color: #555;
       font-size: 0.95rem;
       min-height: 50px;
     }
@@ -128,24 +132,84 @@
       display: inline-block;
       margin-top: 15px;
       padding: 12px 25px;
-      background: rgba(0,255,255,0.1);
-      color: #0ff;
+      background: #0077b6;
+      color: #fff;
       text-decoration: none;
       border-radius: 10px;
       font-weight: bold;
       transition: all 0.2s ease;
     }
     .tool-card a:hover {
-      background: rgba(0,255,255,0.3);
-      box-shadow: 0 0 10px rgba(0,200,255,0.5);
+      background: #0096c7;
+      box-shadow: 0 0 10px rgba(0,119,182,0.3);
+    }
+
+    /* FAQ Section */
+    .faq {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+    .faq h2 {
+      text-align: center;
+      color: #0077b6;
+      margin-bottom: 30px;
+    }
+    .faq-item {
+      margin-bottom: 20px;
+    }
+    .faq-item h3 {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .faq-item p {
+      color: #555;
+      font-size: 0.95rem;
     }
 
     /* Footer */
     footer {
-      text-align: center;
-      padding: 20px;
-      color: #aaa;
+      background: #f8f9fa;
+      border-top: 1px solid #ddd;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      color: #444;
+    }
+    .footer-left .logo {
+      font-size: 1.4rem;
+      color: #0077b6;
+      margin-bottom: 10px;
+    }
+    .footer-left p {
       font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .footer-left small {
+      color: #777;
+    }
+    .footer-right h4 {
+      color: #0077b6;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+    .footer-right ul {
+      list-style: none;
+    }
+    .footer-right ul li {
+      margin-bottom: 8px;
+    }
+    .footer-right ul li a {
+      color: #444;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-right ul li a:hover {
+      color: #0077b6;
     }
 
     @media(max-width: 768px) {
@@ -176,6 +240,7 @@
     <div class="logo">All Online Tools</div>
     <div class="menu">
       <a href="#tools">Tools</a>
+      <a href="#faq">FAQ</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
@@ -191,15 +256,15 @@
   <!-- Tools Section -->
   <section class="tools" id="tools">
     <div class="tool-card">
-      <h3>Futuristic Calculator</h3>
+      <h2>Futuristic Calculator</h2>
       <p>Fully keyboard-friendly, fast, and accurate. Modern AI-inspired design.</p>
       <a href="https://millat-fullstack.github.io/keyboard-calculator/" target="_blank">Use Tool</a>
     </div>
 
     <div class="tool-card">
-    <h3>Word & Text Formatter</h3>
-    <p>Count words, characters, change case, and generate hashtags instantly.</p>
-    <a href="word-text-formatter.html">Use Tool</a>
+      <h2>Word & Text Formatter</h2>
+      <p>Count words, characters, change case, and generate hashtags instantly.</p>
+      <a href="word-text-formatter.html">Use Tool</a>
     </div>
 
     <div class="tool-card">
@@ -237,11 +302,67 @@
   <p>Convert your speech, music, or any audio to text, words or sentences</p>
   <a href="speech-to-text" target="_blank">Use Tool</a>
 </div>
-    
+  
   </section>
 
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>1. Are all the tools free to use?</h3>
+      <p>Yes, all tools on this website are 100% free and available without any sign-up.</p>
+    </div>
+    <div class="faq-item">
+      <h3>2. Do I need to install anything?</h3>
+      <p>No installation required. All tools run directly in your browser for quick and easy access.</p>
+    </div>
+    <div class="faq-item">
+      <h3>3. Are the tools mobile-friendly?</h3>
+      <p>Absolutely! Each tool is optimized to work smoothly on desktop, tablet, and mobile devices.</p>
+    </div>
+    <div class="faq-item">
+      <h3>4. Will you add more tools in the future?</h3>
+      <p>Yes, we are continuously adding new tools based on user feedback and emerging needs.</p>
+    </div>
+    <div class="faq-item">
+      <h3>5. Can I suggest a tool to be added?</h3>
+      <p>Of course! You can send your suggestions through our contact page, and we’ll consider adding them.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    &copy; 2025 All Online Tools. All rights reserved.
+    <div class="footer-left">
+      <div class="logo">All Online Tools</div>
+      <p>All Online Tools brings you a collection of free, fast, and easy-to-use utilities including calculators, text formatters, and converters to make your digital life simpler.</p>
+      <small>&copy; 2025 All Online Tools. All rights reserved.</small>
+    </div>
+    <div class="footer-right">
+      <h4>Features</h4>
+      <ul>
+        <li><a href="https://millat-fullstack.github.io/keyboard-calculator/" target="_blank">Futuristic Calculator</a></li>
+        <li><a href="word-text-formatter.html">Word & Text Formatter</a></li>
+        <li><a href="#tools">Explore All Tools</a></li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Case Studies</a></li>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Blogs</a></li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Ethics Guidelines</a></li>
+        <li><a href="#">Affiliates</a></li>
+        <li><a href="#">Partners</a></li>
+        <li><a href="#">Sitemap</a></li>
+      </ul>
+    </div>
   </footer>
 
 </body>
