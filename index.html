@@ -24,16 +24,16 @@
       min-height: 100vh;
     }
 
-    /* Top notice */
-    .notice {
-      background: #f0f8ff;
-      text-align: center;
-      padding: 8px 0;
-      font-size: 0.9rem;
-      color: #0077b6;
-    }
+    /* Top notice with soft gradient background using primary colors */
+.notice {
+  background: linear-gradient(90deg, #e3f2fd 0%, #b3eaff 100%);
+  text-align: center;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  color: #0077b6;
+}
 
-    /* Navigation */
+/* Navigation */
 nav {
   width: 100%;
   background: #fff;
@@ -91,19 +91,51 @@ nav {
     }
     .hero a.button {
       padding: 15px 35px;
-      background: #0077b6;
-      color: #fff;
+      background: linear-gradient(90deg, #e3f2fd 0%, #b3eaff 100%);
+      color: #0077b6; /* Best for readability and brand consistency */
       border-radius: 10px;
       font-weight: bold;
       text-decoration: none;
       transition: all 0.2s ease;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0,119,182,0.08);
     }
     .hero a.button:hover {
-      background: #0096c7;
-      box-shadow: 0 0 15px rgba(0, 119, 182, 0.4);
+      background: linear-gradient(90deg, #b3eaff 0%, #e3f2fd 100%);
+      color: #0096c7;
+      box-shadow: 0 0 15px rgba(0, 119, 182, 0.12);
     }
 
-    /* Tools Section */
+    /* Unified gradient style for ALL buttons in hero and tool cards */
+a.button,
+.tool-card a {
+  padding: 15px 35px;
+  background: linear-gradient(90deg, #e3f2fd 0%, #b3eaff 100%);
+  color: #0077b6;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,119,182,0.08);
+  display: inline-block;
+}
+
+a.button:hover,
+.tool-card a:hover {
+  background: linear-gradient(90deg, #b3eaff 0%, #e3f2fd 100%);
+  color: #0096c7;
+  box-shadow: 0 0 15px rgba(0, 119, 182, 0.12);
+}
+
+/* Remove previous solid background and color from tool-card a */
+.tool-card a {
+  /* background: #0077b6; */
+  /* color: #fff; */
+  /* padding: 12px 25px; */
+}
+
+/* Tools Section */
     .tools-layout {
       display: flex;
       justify-content: center;      /* Center the flex container */
@@ -182,12 +214,12 @@ nav {
       font-size: 0.95rem;
     }
 
-    /* Footer */
-    footer {
+    /* Footer with soft gradient background using primary colors */
+footer {
   width: 100%;
-  background: #f0f8ff;
+  background: linear-gradient(90deg, #e3f2fd 0%, #b3eaff 100%);
   border-top: 1px solid #ddd;
-  color: #555;
+  color: #0077b6;
 }
 .footer-container {
   max-width: 1200px;
@@ -210,6 +242,7 @@ nav {
 .footer-left small {
   text-align: center;
   margin: 0 auto 10px;
+  color: #0077b6;
 }
 .footer-right h4 {
   color: #0077b6; /* Logo color for headings */
@@ -225,7 +258,7 @@ nav {
   margin-bottom: 10px;
 }
 .footer-right a {
-  color: #0096c7; /* Restore previous link color */
+  color: #0096c7; /* Lighter accent for links */
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
