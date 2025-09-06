@@ -34,17 +34,23 @@
     }
 
     /* Navigation */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-      background: #ffffff;
-      border-bottom: 1px solid #ddd;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+nav {
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+}
+
     .logo {
       font-size: 1.6rem;
       font-weight: bold;
@@ -98,13 +104,21 @@
     }
 
     /* Tools Section */
+    .tools-layout {
+      display: flex;
+      justify-content: center;      /* Center the flex container */
+      align-items: flex-start;
+      gap: 40px;                    /* Required gap between tools and side-tabs */
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
     .tools {
+      flex: 1 1 0;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
+      max-width: 900px;
     }
     .tool-card {
       background: #fff;
@@ -170,61 +184,186 @@
 
     /* Footer */
     footer {
-      background: #f8f9fa;
-      border-top: 1px solid #ddd;
-      padding: 40px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 30px;
-      color: #444;
-    }
-    .footer-left .logo {
-      font-size: 1.4rem;
-      color: #0077b6;
-      margin-bottom: 10px;
-    }
-    .footer-left p {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 10px;
-    }
-    .footer-left small {
-      color: #777;
-    }
-    .footer-right h4 {
-      color: #0077b6;
-      margin-bottom: 10px;
-      font-size: 1rem;
-    }
-    .footer-right ul {
-      list-style: none;
-    }
-    .footer-right ul li {
-      margin-bottom: 8px;
-    }
-    .footer-right ul li a {
-      color: #444;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-    .footer-right ul li a:hover {
-      color: #0077b6;
-    }
+  width: 100%;
+  background: #f0f8ff;
+  border-top: 1px solid #ddd;
+  color: #555;
+}
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+  text-align: center;
+}
+.footer-left .logo {
+  font-size: 1.4rem;
+  color: #0077b6;
+  margin-bottom: 10px;
+}
+.footer-left p,
+.footer-left small {
+  text-align: center;
+  margin: 0 auto 10px;
+}
+.footer-right h4 {
+  color: #0077b6; /* Logo color for headings */
+  text-align: center;
+  margin-bottom: 12px;
+}
+.footer-right ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-right li {
+  margin-bottom: 10px;
+}
+.footer-right a {
+  color: #0096c7; /* Restore previous link color */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-right a:hover {
+  color: #0077b6;
+  text-decoration: underline;
+}
 
+    @media(max-width: 900px) {
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media(max-width: 600px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .footer-left, .footer-right {
+        margin-bottom: 25px;
+      }
+    }
     @media(max-width: 768px) {
-      nav {
+      .nav-container {
         flex-direction: column;
         gap: 15px;
-      }
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-      .hero p {
-        font-size: 1rem;
+        padding: 20px 10px;
       }
     }
 
+    .tools-article {
+  background: #fff;
+  border-radius: 15px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 35px 30px;
+  margin: 30px 0;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333;
+  font-size: 1.05rem;
+}
+.tools-article h2 {
+  color: #0077b6;
+  font-size: 2rem;
+  margin-bottom: 18px;
+}
+.tools-article h3 {
+  color: #0096c7;
+  margin-top: 28px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+.tools-article ul, .tools-article ol {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+.tools-article li {
+  margin-bottom: 7px;
+}
+
+.side-tabs {
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: sticky;
+  top: 100px;
+  align-self: flex-start;
+  width: 320px;
+  margin-right: 0;
+  z-index: 10;
+}
+.side-tab {
+  background: #fff;
+  border-radius: 15px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 25px 20px;
+  margin-bottom: 0;
+}
+.side-tab h3 {
+  color: #0077b6;
+  font-size: 1.15rem;
+  margin-bottom: 15px;
+  text-align: left;
+}
+.side-tab ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side-tab li {
+  margin-bottom: 12px;
+}
+.side-tab a {
+  color: #0096c7;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.side-tab a:hover {
+  color: #0077b6;
+  text-decoration: underline;
+}
+
+/* Responsive: stack tabs below tools on mobile */
+@media (max-width: 1100px) {
+  .tools-layout {
+    flex-direction: column;
+    gap: 0;
+    padding: 20px 5px;
+  }
+  .side-tabs {
+    position: static;
+    width: 100%;
+    margin: 30px auto 0 auto;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+  .side-tab {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 700px) {
+  .side-tabs {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .side-tab {
+    max-width: 100%;
+  }
+}
   </style>
   <meta name="google-site-verification" content="X2yMSHjesUsa1a5j5S2swjdRfReD1h4F8B5l52Zam6I" />
 </head>
@@ -237,12 +376,14 @@
 
   <!-- Navigation -->
   <nav>
-    <div class="logo">All Online Tools</div>
-    <div class="menu">
-      <a href="#tools">Tools</a>
-      <a href="#faq">FAQ</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+    <div class="nav-container">
+      <div class="logo">All Online Tools</div>
+      <div class="menu">
+        <a href="#tools">Tools</a>
+        <a href="#faq">FAQ</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
   </nav>
 
@@ -254,6 +395,7 @@
   </section>
 
   <!-- Tools Section -->
+  <div class="tools-layout">
   <section class="tools" id="tools">
     <div class="tool-card">
       <h2>Futuristic Calculator</h2>
@@ -305,6 +447,99 @@
   
   </section>
 
+  <div class="side-tabs">
+    <div class="side-tab popular-tools">
+      <h3>🔥 Popular Tools</h3>
+      <ul>
+        <li><a href="https://millat-fullstack.github.io/keyboard-calculator/" target="_blank">Futuristic Calculator</a></li>
+        <li><a href="word-text-formatter.html">Word & Text Formatter</a></li>
+        <li><a href="image-compressor.html" target="_blank">Image Compressor</a></li>
+        <li><a href="youtube-thumbnail-downloader.html">YouTube Thumbnail Downloader</a></li>
+        <li><a href="speech-to-text" target="_blank">Speech To Text Converter</a></li>
+      </ul>
+    </div>
+    <div class="side-tab recent-blogs">
+      <h3>📰 Recent Blogs & News</h3>
+      <ul>
+        <li><a href="#">How AI Tools Are Changing Productivity</a></li>
+        <li><a href="#">Top 5 Free Tools for Students in 2025</a></li>
+        <li><a href="#">Image Compression Tips for SEO</a></li>
+        <li><a href="#">Why Browser-Based Tools Are the Future</a></li>
+        <li><a href="#">New Features Coming Soon!</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <!-- Tools Article Section -->
+  <div class="tools-article">
+  <h2>All Online Tools – Free, Fast & Easy-to-Use Tools in One Place</h2>
+  <p>
+    Looking for the best free online tools to make your daily tasks easier? You’re in the right place. At All Online Tools, we provide everything from grammar checkers, AI detectors, word counters, image compressors, YouTube thumbnail downloaders, speech-to-text converters, and color pickers – all in one website. No downloads, no registration, just instant results.<br><br>
+    <strong>Our mission is simple:</strong> to give students, writers, developers, content creators, and marketers access to the most useful tools online in the easiest way possible.
+  </p>
+  <h3>How Our Online Tools Work</h3>
+  <ol>
+    <li>Choose the tool you need (for example, Grammar Checker or Image Compressor).</li>
+    <li>Paste, upload, or input your content.</li>
+    <li>Get instant results in just seconds.</li>
+  </ol>
+  <p>
+    Whether you’re checking grammar, compressing images for SEO, downloading YouTube thumbnails, or converting speech to text, our tools are built for maximum accuracy and efficiency.
+  </p>
+  <h3>Why Choose All Online Tools?</h3>
+  <ul>
+    <li><strong>Speed & Simplicity</strong> – No complicated setup, everything works right in your browser.</li>
+    <li><strong>100% Free Access</strong> – All major tools are free for everyone.</li>
+    <li><strong>Mobile-Friendly Design</strong> – Use our tools on your phone, tablet, or desktop.</li>
+    <li><strong>Multiple Categories</strong> – We cover SEO tools, writing tools, image tools, and productivity tools in one place.</li>
+    <li><strong>Privacy & Security</strong> – Your data stays safe; nothing is stored on our servers.</li>
+  </ul>
+  <h3>Benefits of Using Online Tools</h3>
+  <ul>
+    <li><strong>Save Time:</strong> Tools like our word counter, plagiarism checker, and AI detector give results instantly.</li>
+    <li><strong>Save Storage Space:</strong> No need to download apps – everything works online.</li>
+    <li><strong>Increase Productivity:</strong> Students can check grammar, writers can polish articles, and marketers can compress images – all in one place.</li>
+    <li><strong>Cross-Platform Access:</strong> Works on Windows, Mac, Android, and iOS without extra software.</li>
+    <li><strong>SEO Advantage:</strong> Our tools like image compressor and AI detector directly help with better search rankings.</li>
+  </ul>
+  <h3>Popular Tools We Offer</h3>
+  <ul>
+    <li>Grammar & Spell Checker – Fix mistakes and write error-free content.</li>
+    <li>AI Content Detector – Check if text is written by AI or human.</li>
+    <li>Word & Character Counter – Perfect for essays, SEO writing, and social media.</li>
+    <li>Image Compressor – Reduce file size without losing quality.</li>
+    <li>YouTube Thumbnail Downloader – Save high-quality thumbnails for any video.</li>
+    <li>Speech-to-Text Converter – Convert voice into accurate text.</li>
+    <li>Color Picker Tool – Grab HEX, RGB, or HSL color codes instantly.</li>
+  </ul>
+  <h3>Who Can Use These Tools?</h3>
+  <ul>
+    <li><strong>Students:</strong> Check grammar, count words, convert speech to text for notes.</li>
+    <li><strong>Writers & Bloggers:</strong> Improve readability, detect AI content, optimize articles.</li>
+    <li><strong>Designers & Developers:</strong> Use the color picker and image compressor for web projects.</li>
+    <li><strong>YouTubers & Creators:</strong> Download thumbnails, optimize images, and write better descriptions.</li>
+    <li><strong>Digital Marketers:</strong> Use AI detectors, compress images for SEO, and check content performance.</li>
+  </ul>
+  <h3>Safe & Secure Usage</h3>
+  <ul>
+    <li>No sign-up required for most tools.</li>
+    <li>We don’t store your content or files.</li>
+    <li>All operations are processed instantly and securely.</li>
+  </ul>
+  <h3>Future of All Online Tools</h3>
+  <ul>
+    <li>Add new AI-powered tools (like plagiarism checkers, text summarizers, and content improvers).</li>
+    <li>Expand into more categories such as PDF tools, calculator tools, and developer tools.</li>
+    <li>Improve speed and accuracy for all existing tools.</li>
+  </ul>
+  <p>
+    All Online Tools is your one-stop solution for free, secure, and powerful utilities. Whether you need to check grammar, detect AI content, count words, compress images, download thumbnails, convert speech to text, or pick colors, we’ve got you covered.<br><br>
+    Our mission is to help you work smarter, not harder – with tools that are always free, always fast, and always reliable.<br>
+    <span style="font-size:1.2em;font-weight:600;">👉 Try them today and make your work easier with All Online Tools!</span>
+  </p>
+</div>
+
   <!-- FAQ Section -->
   <section class="faq" id="faq">
     <h2>Frequently Asked Questions</h2>
@@ -332,36 +567,40 @@
 
   <!-- Footer -->
   <footer>
-    <div class="footer-left">
-      <div class="logo">All Online Tools</div>
-      <p>All Online Tools brings you a collection of free, fast, and easy-to-use utilities including calculators, text formatters, and converters to make your digital life simpler.</p>
-      <small>&copy; 2025 All Online Tools. All rights reserved.</small>
-    </div>
-    <div class="footer-right">
-      <h4>Features</h4>
-      <ul>
-        <li><a href="https://millat-fullstack.github.io/keyboard-calculator/" target="_blank">Futuristic Calculator</a></li>
-        <li><a href="word-text-formatter.html">Word & Text Formatter</a></li>
-        <li><a href="#tools">Explore All Tools</a></li>
-      </ul>
-    </div>
-    <div class="footer-right">
-      <h4>Resources</h4>
-      <ul>
-        <li><a href="#">Case Studies</a></li>
-        <li><a href="#">Help Center</a></li>
-        <li><a href="#">Blogs</a></li>
-      </ul>
-    </div>
-    <div class="footer-right">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Ethics Guidelines</a></li>
-        <li><a href="#">Affiliates</a></li>
-        <li><a href="#">Partners</a></li>
-        <li><a href="#">Sitemap</a></li>
-      </ul>
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <div class="logo">All Online Tools</div>
+          <p>All Online Tools brings you a collection of free, fast, and easy-to-use utilities including calculators, text formatters, and converters to make your digital life simpler.</p>
+          <small>&copy; 2025 All Online Tools. All rights reserved.</small>
+        </div>
+        <div class="footer-right">
+          <h4>Features</h4>
+          <ul>
+            <li><a href="https://millat-fullstack.github.io/keyboard-calculator/" target="_blank">Futuristic Calculator</a></li>
+            <li><a href="word-text-formatter.html">Word & Text Formatter</a></li>
+            <li><a href="#tools">Explore All Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-right">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Blogs</a></li>
+          </ul>
+        </div>
+        <div class="footer-right">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Ethics Guidelines</a></li>
+            <li><a href="#">Affiliates</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </footer>
 
