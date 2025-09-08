@@ -1,28 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://millat-fullstack.github.io/all-online-tools/</loc>
-    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://millat-fullstack.github.io/all-online-tools/emoji-picker.html</loc>
+  </url>
+  <url>
+    <loc>https://millat-fullstack.github.io/all-online-tools/fast-color-picker.html</loc>
   </url>
   <url>
     <loc>https://millat-fullstack.github.io/all-online-tools/image-compressor.html</loc>
-    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://millat-fullstack.github.io/all-online-tools/speech-to-text.html</loc>
+  </url>
+  <url>
+    <loc>https://millat-fullstack.github.io/all-online-tools/unit-converter.html</loc>
   </url>
   <url>
     <loc>https://millat-fullstack.github.io/all-online-tools/word-text-formatter.html</loc>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://millat-fullstack.github.io/all-online-tools/youtube-thumbnail-downloader.html</loc>
-    <priority>0.8</priority>
   </url>
-    <url>
-    <loc>https://millat-fullstack.github.io/all-online-tools/fast-color-picker.html</loc>
-    <priority>0.8</priority>
-  </url>
-    <url>
-    <loc>https://millat-fullstack.github.io/keyboard-calculator/</loc>
-    <priority>0.8</priority>
-  </url>
-  
 </urlset>
