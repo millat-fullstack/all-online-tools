@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-
-# Sitemap location
 Sitemap: https://millat-fullstack.github.io/all-online-tools/sitemap.xml
