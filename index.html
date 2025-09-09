@@ -6,7 +6,6 @@
   <title>All Online Tools | Free & Fast</title>
   <meta name="description" content="Discover all free online tools in one place. Fast, keyboard-friendly, and easy-to-use tools including calculators, converters, and more.">
   <meta name="keywords" content="online tools, free online tools, keyboard calculator, fast tools, AI tools, futuristic tools, online utilities">
-  <link rel="canonical" href="https://nextonlinetools.com/" />
 
   <!-- Inter Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -51,63 +50,62 @@ nav {
   align-items: center;
   padding: 20px 50px;
 }
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #0077b6;
+  letter-spacing: 1px;
+}
+.menu {
+  display: flex;
+  gap: 30px;
+  font-weight: 500;
+}
+.menu a {
+  color: #555;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.menu a:hover {
+  color: #0077b6;
+}
 
-    .logo {
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #0077b6;
-      letter-spacing: 1px;
-    }
-    .menu {
-      display: flex;
-      gap: 30px;
-      font-weight: 500;
-    }
-    .menu a {
-      color: #555;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .menu a:hover {
-      color: #0077b6;
-    }
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 80px 20px 50px;
+}
+.hero h1 {
+  font-size: 3rem;
+  color: #0077b6;
+  margin-bottom: 20px;
+}
+.hero p {
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero a.button {
+  padding: 15px 35px;
+  background: linear-gradient(90deg, #e3f2fd 0%, #b3eaff 100%);
+  color: #0077b6;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,119,182,0.08);
+}
+.hero a.button:hover {
+  background: linear-gradient(90deg, #b3eaff 0%, #e3f2fd 100%);
+  color: #0096c7;
+  box-shadow: 0 0 15px rgba(0, 119, 182, 0.12);
+}
 
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 80px 20px 50px;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      color: #0077b6;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #444;
-      margin-bottom: 30px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero a.button {
-      padding: 15px 35px;
-      background: linear-gradient(90deg, #e3f2fd 0%, #b3eaff 100%);
-      color: #0077b6; /* Best for readability and brand consistency */
-      border-radius: 10px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border: none;
-      box-shadow: 0 2px 8px rgba(0,119,182,0.08);
-    }
-    .hero a.button:hover {
-      background: linear-gradient(90deg, #b3eaff 0%, #e3f2fd 100%);
-      color: #0096c7;
-      box-shadow: 0 0 15px rgba(0, 119, 182, 0.12);
-    }
-
-    /* Unified gradient style for ALL buttons in hero and tool cards */
+/* Unified gradient style for ALL buttons in hero and tool cards */
 a.button,
 .tool-card a {
   padding: 15px 35px;
@@ -121,7 +119,6 @@ a.button,
   box-shadow: 0 2px 8px rgba(0,119,182,0.08);
   display: inline-block;
 }
-
 a.button:hover,
 .tool-card a:hover {
   background: linear-gradient(90deg, #b3eaff 0%, #e3f2fd 100%);
@@ -129,93 +126,77 @@ a.button:hover,
   box-shadow: 0 0 15px rgba(0, 119, 182, 0.12);
 }
 
-/* Remove previous solid background and color from tool-card a */
+/* Tools Section */
+.tools-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.tools {
+  flex: 1 1 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+}
+.tool-card {
+  background: #fff;
+  padding: 32px 22px; /* More vertical & horizontal spacing */
+  border-radius: 15px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: all 0.3s ease;
+  margin-bottom: 18px; /* Space between cards */
+}
+.tool-card h2,
+.tool-card h3 {
+  color: #0077b6; /* Primary blue for heading */
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.tool-card p {
+  color: #222; /* Primary black for text */
+  font-size: 1rem;
+  min-height: 48px;
+  margin-bottom: 22px;
+}
 .tool-card a {
-  /* background: #0077b6; */
-  /* color: #fff; */
-  /* padding: 12px 25px; */
+  padding: 11px 26px; /* Slightly smaller button */
+  font-size: 1rem;
 }
 
-/* Tools Section */
-    .tools-layout {
-      display: flex;
-      justify-content: center;      /* Center the flex container */
-      align-items: flex-start;
-      gap: 40px;                    /* Required gap between tools and side-tabs */
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-    .tools {
-      flex: 1 1 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 900px;
-    }
-    .tool-card {
-      background: #fff;
-      padding: 25px;
-      border-radius: 15px;
-      border: 1px solid #eee;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .tool-card:hover {
-      box-shadow: 0 4px 15px rgba(0,119,182,0.2);
-    }
-    .tool-card h2 {
-      color: #0077b6;
-      margin-top: 0;
-      font-size: 1.3rem;
-    }
-    .tool-card p {
-      color: #555;
-      font-size: 0.95rem;
-      min-height: 50px;
-    }
-    .tool-card a {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 25px;
-      background: #0077b6;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      transition: all 0.2s ease;
-    }
-    .tool-card a:hover {
-      background: #0096c7;
-      box-shadow: 0 0 10px rgba(0,119,182,0.3);
-    }
+/* FAQ Section */
+.faq {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+}
+.faq h2 {
+  text-align: center;
+  color: #0077b6;
+  margin-bottom: 30px;
+}
+.faq-item {
+  margin-bottom: 20px;
+}
+.faq-item h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+.faq-item p {
+  color: #555;
+  font-size: 0.95rem;
+}
 
-    /* FAQ Section */
-    .faq {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 20px;
-    }
-    .faq h2 {
-      text-align: center;
-      color: #0077b6;
-      margin-bottom: 30px;
-    }
-    .faq-item {
-      margin-bottom: 20px;
-    }
-    .faq-item h3 {
-      font-size: 1.1rem;
-      color: #333;
-      margin-bottom: 8px;
-    }
-    .faq-item p {
-      color: #555;
-      font-size: 0.95rem;
-    }
-
-    /* Footer with soft gradient background using primary colors */
+/* Footer with soft gradient background using primary colors */
 footer {
   width: 100%;
   background: linear-gradient(90deg, #e3f2fd 0%, #b3eaff 100%);
@@ -226,29 +207,51 @@ footer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0;
+  display: flex;
+  justify-content: center; /* Center the whole footer content */
 }
 .footer-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
+  gap: 50px;
   padding: 40px 20px;
-  text-align: center;
+  text-align: center; /* Center all text inside columns */
+  justify-items: center; /* Center grid items horizontally */
+}
+.footer-left,
+.footer-right {
+  text-align: center; /* Center text in all columns */
 }
 .footer-left .logo {
   font-size: 1.4rem;
   color: #0077b6;
-  margin-bottom: 10px;
+  margin-bottom: 18px; /* More space below logo */
 }
-.footer-left p,
-.footer-left small {
+.footer-left p {
+  margin-bottom: 16px; /* More space below description */
   text-align: center;
-  margin: 0 auto 10px;
   color: #0077b6;
 }
-.footer-right h4 {
-  color: #0077b6; /* Logo color for headings */
+.footer-left small {
+  display: block;
+  margin-top: 10px; /* Space above copyright */
   text-align: center;
+  color: #0077b6;
+}
+/* For left-aligning only the listing under headings */
+.footer-right ul {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+.footer-right {
+  text-align: left; /* Left align everything in the column */
+}
+.footer-right h4 {
+  color: #0077b6;
   margin-bottom: 12px;
+  font-size: 1.08rem;
+  text-align: left; /* Left align heading with list */
 }
 .footer-right ul {
   list-style: none;
@@ -259,7 +262,8 @@ footer {
   margin-bottom: 10px;
 }
 .footer-right a {
-  color: #0096c7; /* Lighter accent for links */
+  color: #222; /* Primary black for links */
+  font-size: 0.97rem; /* Make links smaller */
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
@@ -269,29 +273,8 @@ footer {
   text-decoration: underline;
 }
 
-    @media(max-width: 900px) {
-      .footer-content {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    @media(max-width: 600px) {
-      .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .footer-left, .footer-right {
-        margin-bottom: 25px;
-      }
-    }
-    @media(max-width: 768px) {
-      .nav-container {
-        flex-direction: column;
-        gap: 15px;
-        padding: 20px 10px;
-      }
-    }
-
-    .tools-article {
+/* Tools Article Section */
+.tools-article {
   background: #fff;
   border-radius: 15px;
   border: 1px solid #eee;
@@ -323,6 +306,7 @@ footer {
   margin-bottom: 7px;
 }
 
+/* Side Tabs */
 .side-tabs {
   flex: 0 0 320px;
   display: flex;
@@ -398,24 +382,40 @@ footer {
     max-width: 100%;
   }
 }
+@media(max-width: 900px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media(max-width: 600px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .footer-left, .footer-right {
+    margin-bottom: 25px;
+  }
+}
+@media(max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 10px;
+  }
+}
   </style>
   <meta name="google-site-verification" content="X2yMSHjesUsa1a5j5S2swjdRfReD1h4F8B5l52Zam6I" />
 </head>
 <body>
-
-  <!-- Top notice -->
   <div class="notice">
-    ⚡ New tools coming soon! All free and keyboard-friendly.
+    🚀 All Online Tools are 100% free and work instantly in your browser!
   </div>
-
-  <!-- Navigation -->
   <nav>
     <div class="nav-container">
-      <div class="logo">All Online Tools</div>
+      <div class="logo">Next Online Tools</div>
       <div class="menu">
         <a href="#tools">Tools</a>
         <a href="#faq">FAQ</a>
-        <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -431,12 +431,11 @@ footer {
   <!-- Tools Section -->
   <div class="tools-layout">
   <section class="tools" id="tools">
-
     <div class="tool-card">
-  <h3>Image Converter & Editor</h3>
-  <p>Convert JPG↔PNG, crop, rotate, resize and download — fast and local.</p>
-  <a href="image-edit-convert.html">Use Tool</a>
-  </div>
+      <h2>Futuristic Calculator</h2>
+      <p>Fully keyboard-friendly, fast, and accurate. Modern AI-inspired design.</p>
+      <a href="https://millat-fullstack.github.io/keyboard-calculator/" target="_blank">Use Tool</a>
+    </div>
 
     <div class="tool-card">
       <h2>Word & Text Formatter</h2>
@@ -479,12 +478,6 @@ footer {
   <p>Convert your speech, music, or any audio to text, words or sentences</p>
   <a href="speech-to-text" target="_blank">Use Tool</a>
 </div>
-
-        <div class="tool-card">
-      <h2>Futuristic Calculator</h2>
-      <p>Fully keyboard-friendly, fast, and accurate. Modern AI-inspired design.</p>
-      <a href="https://nextonlinetools.com/keyboard-calculator/" target="_blank">Use Tool</a>
-    </div>
   
   </section>
 
@@ -514,9 +507,9 @@ footer {
 
   <!-- Tools Article Section -->
   <div class="tools-article">
-  <h2>All Online Tools – Free, Fast & Easy-to-Use Tools in One Place</h2>
+  <h2>Next Online Tools – Free, Fast & Easy-to-Use Tools in One Place</h2>
   <p>
-    Looking for the best free online tools to make your daily tasks easier? You’re in the right place. At All Online Tools, we provide everything from grammar checkers, AI detectors, word counters, image compressors, YouTube thumbnail downloaders, speech-to-text converters, and color pickers – all in one website. No downloads, no registration, just instant results.<br><br>
+    Looking for the best free online tools to make your daily tasks easier? You’re in the right place. At Next Online Tools, we provide everything from grammar checkers, AI detectors, word counters, image compressors, YouTube thumbnail downloaders, speech-to-text converters, and color pickers – all in one website. No downloads, no registration, just instant results.<br><br>
     <strong>Our mission is simple:</strong> to give students, writers, developers, content creators, and marketers access to the most useful tools online in the easiest way possible.
   </p>
   <h3>How Our Online Tools Work</h3>
@@ -575,7 +568,7 @@ footer {
     <li>Improve speed and accuracy for all existing tools.</li>
   </ul>
   <p>
-    All Online Tools is your one-stop solution for free, secure, and powerful utilities. Whether you need to check grammar, detect AI content, count words, compress images, download thumbnails, convert speech to text, or pick colors, we’ve got you covered.<br><br>
+    Next Online Tools is your one-stop solution for free, secure, and powerful utilities. Whether you need to check grammar, detect AI content, count words, compress images, download thumbnails, convert speech to text, or pick colors, we’ve got you covered.<br><br>
     Our mission is to help you work smarter, not harder – with tools that are always free, always fast, and always reliable.<br>
     <span style="font-size:1.2em;font-weight:600;">👉 Try them today and make your work easier with All Online Tools!</span>
   </p>
@@ -611,9 +604,9 @@ footer {
     <div class="footer-container">
       <div class="footer-content">
         <div class="footer-left">
-          <div class="logo">All Online Tools</div>
-          <p>All Online Tools brings you a collection of free, fast, and easy-to-use utilities including calculators, text formatters, and converters to make your digital life simpler.</p>
-          <small>&copy; 2025 All Online Tools. All rights reserved.</small>
+          <div class="logo">Next Online Tools</div>
+          <p>Next Online Tools brings you a collection of free, fast, and easy-to-use utilities including calculators, text formatters, and converters to make your digital life simpler.</p>
+          <small>&copy; 2025 Next Online Tools. All rights reserved.</small>
         </div>
         <div class="footer-right">
           <h4>Features</h4>
