@@ -70,12 +70,40 @@
       <li><strong>Transparency:</strong> We aim to provide safe, accurate, and honest results.</li>
     </ul>
 
-    <h2>Subscribe & Stay Updated</h2>
-    <p>
-      Be the first to know when we launch new tools and updates. Subscribe to our newsletter 
-      and get free tips, productivity hacks, and special features directly in your inbox.
-    </p>
-    <p><em>(Add your subscription form or email capture box here.)</em></p>
+<h2>Subscribe & Stay Updated</h2>
+<p>
+  Be the first to know when we launch new tools and updates. Subscribe to our newsletter 
+  and get free tips, productivity hacks, and special features directly in your inbox.
+</p>
+
+<form id="subscribeForm">
+  <input type="email" name="email" placeholder="Enter your email" required 
+         style="padding:10px; width:70%; border:1px solid #ccc; border-radius:5px;">
+  <button type="submit" 
+          style="padding:10px 20px; background:#0073c6; color:#fff; border:none; border-radius:5px; cursor:pointer;">
+    Subscribe
+  </button>
+</form>
+
+<p id="responseMsg" style="color: green; margin-top: 10px;"></p>
+
+<script>
+  const form = document.getElementById("subscribeForm");
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const response = await fetch("YOUR_WEB_APP_URL", {
+      method: "POST",
+      body: formData
+    });
+    if (response.ok) {
+      document.getElementById("responseMsg").textContent = "✅ Thank you for subscribing!";
+      form.reset();
+    } else {
+      document.getElementById("responseMsg").textContent = "❌ Something went wrong. Try again!";
+    }
+  });
+</script>
 
     <h2>Privacy Policy</h2>
     <p>
