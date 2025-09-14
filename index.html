@@ -50,21 +50,6 @@
     fetch("footer.html")
       .then(res => res.text())
       .then(data => document.getElementById("footer").innerHTML = data);
-
-<!-- Under Maintenance -->
-<link id="um-css" rel="stylesheet" href="under-maintenance/under-maintenance.css">
-<div id="um-html"></div>
-
-<script>
-  fetch("under-maintenance/under-maintenance.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("um-html").innerHTML = html;
-    });
-</script>
-
-  
-<!-- Under Maintenance -->
     
   </script>
 </body>
