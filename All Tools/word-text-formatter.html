@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word & Text Formatter | Count Words, Characters & Generate Hashtags</title>
+  <meta name="description" content="Free text formatting tool: count words, characters, convert text to uppercase, lowercase, title case, and generate hashtags instantly. Fast and easy.">
+  <meta name="keywords" content="word counter, character counter, text formatter, uppercase lowercase converter, hashtag generator, online tools">
+  <link rel="canonical" href="https://yourusername.github.io/all-online-tools/word-text-formatter.html">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #0ff;
+      margin-bottom: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: rgba(20,20,40,0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,200,255,0.4);
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      background: #111;
+      color: #0ff;
+      border: 1px solid #0ff;
+      border-radius: 10px;
+      padding: 15px;
+      resize: none;
+      font-size: 1rem;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 0;
+      font-size: 1rem;
+      color: #0ff;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    button {
+      flex: 1;
+      min-width: 120px;
+      padding: 12px;
+      background: rgba(0,255,255,0.15);
+      color: #0ff;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button:hover {
+      background: rgba(0,255,255,0.35);
+      box-shadow: 0 0 10px rgba(0,200,255,0.5);
+    }
+    .output {
+      background: #111;
+      border: 1px solid #0ff;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 15px;
+      white-space: pre-wrap;
+      min-height: 100px;
+      color: #0ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Word & Text Formatter Tool</h1>
+  <div class="container">
+    <textarea id="inputText" placeholder="Type or paste your text here..."></textarea>
+    <div class="stats">
+      <span id="wordCount">Words: 0</span>
+      <span id="charCount">Characters: 0</span>
+    </div>
+
+    <div class="buttons">
+      <button onclick="toUpper()">UPPERCASE</button>
+      <button onclick="toLower()">lowercase</button>
+      <button onclick="toTitle()">Title Case</button>
+      <button onclick="toHashtags()">#Hashtags</button>
+      <button onclick="clearText()">Clear</button>
+    </div>
+
+    <div class="output" id="outputBox">Formatted text will appear here...</div>
+  </div>
+
+  <script>
+    const inputText = document.getElementById('inputText');
+    const wordCount = document.getElementById('wordCount');
+    const charCount = document.getElementById('charCount');
+    const outputBox = document.getElementById('outputBox');
+
+    inputText.addEventListener('input', updateStats);
+
+    function updateStats() {
+      const text = inputText.value.trim();
+      const words = text.length > 0 ? text.split(/\s+/).length : 0;
+      const chars = text.length;
+      wordCount.textContent = `Words: ${words}`;
+      charCount.textContent = `Characters: ${chars}`;
+    }
+
+    function toUpper() {
+      const result = inputText.value.toUpperCase();
+      outputBox.textContent = result;
+    }
+
+    function toLower() {
+      const result = inputText.value.toLowerCase();
+      outputBox.textContent = result;
+    }
+
+    function toTitle() {
+      const result = inputText.value.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+      outputBox.textContent = result;
+    }
+
+    function toHashtags() {
+      const result = inputText.value
+        .split(/\s+/)
+        .filter(word => word.length > 0)
+        .map(word => `#${word.replace(/[^a-zA-Z0-9]/g, '')}`)
+        .join(' ');
+      outputBox.textContent = result;
+    }
+
+    function clearText() {
+      inputText.value = '';
+      outputBox.textContent = 'Formatted text will appear here...';
+      updateStats();
+    }
+  </script>
+</body>
+</html>
