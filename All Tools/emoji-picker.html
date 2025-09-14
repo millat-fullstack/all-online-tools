@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji Picker & Copy Tool | All Online Tools</title>
+  <meta name="description" content="Copy and paste emojis instantly. Browse by categories like smileys, animals, food, objects, and symbols. Click to copy emoji fast and free.">
+  <meta name="keywords" content="emoji copy, emoji picker, emoji paste, copy paste emoji, emoji keyboard online">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #0ff;
+      margin: 20px 0;
+    }
+    p {
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    .categories button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0,255,255,0.1);
+      color: #0ff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .categories button:hover {
+      background: rgba(0,255,255,0.3);
+      box-shadow: 0 0 10px rgba(0,200,255,0.5);
+    }
+
+    .emoji-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+      gap: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .emoji {
+      font-size: 1.8rem;
+      background: rgba(20,20,40,0.9);
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s;
+    }
+    .emoji:hover {
+      background: rgba(0,255,255,0.2);
+      transform: scale(1.2);
+    }
+
+    .copied {
+      margin-top: 15px;
+      font-size: 1rem;
+      color: #0ff;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Emoji Picker & Copy Tool</h1>
+  <p>Click any emoji to copy it instantly!</p>
+
+  <!-- Category Buttons -->
+  <div class="categories">
+    <button onclick="showCategory('smileys')">😃 Smileys</button>
+    <button onclick="showCategory('animals')">🐶 Animals</button>
+    <button onclick="showCategory('food')">🍔 Food</button>
+    <button onclick="showCategory('objects')">🎁 Objects</button>
+    <button onclick="showCategory('symbols')">❤️ Symbols</button>
+  </div>
+
+  <!-- Emoji Grid -->
+  <div id="emojiGrid" class="emoji-grid"></div>
+  <div id="copiedMsg" class="copied">✅ Copied!</div>
+
+  <script>
+    const emojiCategories = {
+      smileys: ["😀","😁","😂","🤣","😃","😄","😅","😎","😍","😘","😜","🤔","😢","😭","😡"],
+      animals: ["🐶","🐱","🦁","🐯","🐭","🐹","🐰","🐻","🐼","🐨","🐸","🐵","🦄","🐔","🐧"],
+      food: ["🍏","🍎","🍌","🍉","🍇","🍓","🍒","🍑","🍔","🍟","🍕","🌭","🍿","🥗","🍩"],
+      objects: ["⌚","📱","💻","🖥️","🎧","📷","📚","🖊️","🛒","🎁","🚗","✈️","🏠","💡","⚽"],
+      symbols: ["❤️","🧡","💛","💚","💙","💜","🖤","💯","✔️","⭐","🌙","☀️","🔥","✨","🎵"]
+    };
+
+    const grid = document.getElementById("emojiGrid");
+    const copiedMsg = document.getElementById("copiedMsg");
+
+    function showCategory(category) {
+      grid.innerHTML = "";
+      emojiCategories[category].forEach(emoji => {
+        const span = document.createElement("span");
+        span.className = "emoji";
+        span.textContent = emoji;
+        span.onclick = () => copyEmoji(emoji);
+        grid.appendChild(span);
+      });
+    }
+
+    function copyEmoji(emoji) {
+      navigator.clipboard.writeText(emoji).then(() => {
+        copiedMsg.style.display = "block";
+        setTimeout(() => copiedMsg.style.display = "none", 1200);
+      });
+    }
+
+    // Default load Smileys
+    showCategory("smileys");
+  </script>
+
+</body>
+</html>
