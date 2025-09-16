@@ -1,0 +1,147 @@
+
+/* ===== Header ===== */
+header {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e8e0f5;
+  position: sticky;             /* sticky header */
+  top: 0;
+  z-index: 1100;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px; 
+  max-width: 1200px;    
+  margin: 0 auto;       
+}
+
+.logo img {
+  height: 50px;
+}
+
+/* ===== Navigation ===== */
+nav {
+  position: sticky;             /* make nav sticky separately */
+  top: 0;
+  z-index: 1200;
+  background: #ffffff;          /* keep background solid */
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #2c2c2c;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #8d6bcb;               /* softer hover purple */
+}
+
+/* ===== Notice Bar ===== */
+.notice-bar {
+  background: #a17edc;          /* primary color */
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Layout ===== */
+.container-main {
+  max-width: 1200px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+/* ===== Footer ===== */
+footer {
+  width: 100%;
+  background: #e4def3;         /* softer footer color */
+  color: #2c2c2c;
+  padding: 35px 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+footer a {
+  color: #2c2c2c;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Tools Article ===== */
+.tools-article {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #2c2c2c;
+    padding: 60px 50px; /* top/bottom 40px, left/right 50px */
+    border-radius: 12px;
+    border: 1px solid #e8e0f5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+    /* new additions */
+    max-width: 1100px;   /* limit width for readability */
+    margin: 50px auto;  /* center horizontally with space on top/bottom */
+}
+
+.tools-article h2 {
+    color: #a17edc;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.tools-article h3 {
+    color: #8a56e6;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    font-size: 1.3em;
+}
+
+.tools-article p, 
+.tools-article li {
+    line-height: 1.7;
+    font-size: 1.05em;
+}
+
+.tools-article ul, 
+.tools-article ol {
+    margin: 15px 0 20px 25px;
+}
+
+.tools-article strong {
+    color: #2c2c2c;
+}
+
+.tools-article span {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.tools-article ul li::marker {
+    color: #a17edc;
+}
+
+.tools-article ol li::marker {
+    color: #8a56e6;
+    font-weight: bold;
+}
