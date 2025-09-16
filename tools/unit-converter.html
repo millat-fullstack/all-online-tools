@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Converter | All Online Tools</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f6fb;
+      color: #2c2c2c;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 600px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #6b4de6;
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    .converter {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .converter.active {
+      display: block;
+    }
+
+    input {
+      padding: 12px;
+      width: 100%;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 20px;
+      background: #6b4de6;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #593ac7;
+    }
+
+    .result {
+      margin-top: 15px;
+      padding: 15px;
+      background: #f8f6fb;
+      border-radius: 8px;
+      font-size: 18px;
+      color: #333;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Unit Converter</h1>
+
+    <!-- Dropdown selector -->
+    <select id="toolSelector">
+      <option value="kmToMeter">Kilometer to Meter</option>
+      <option value="weightConverter">Weight Converter</option>
+    </select>
+
+    <!-- Kilometer to Meter -->
+    <div class="converter active" id="kmToMeter">
+      <h2>Kilometer to Meter</h2>
+      <input type="number" id="kmInput" placeholder="Enter kilometers">
+      <button onclick="convertKmToMeter()">Convert</button>
+      <div class="result" id="kmResult"></div>
+    </div>
+
+    <!-- Weight Converter -->
+    <div class="converter" id="weightConverter">
+      <h2>Weight Converter (Kg to Gram)</h2>
+      <input type="number" id="kgInput" placeholder="Enter kilograms">
+      <button onclick="convertKgToGram()">Convert</button>
+      <div class="result" id="kgResult"></div>
+    </div>
+  </div>
+
+<script>
+const selector = document.getElementById("toolSelector");
+const converters = document.querySelectorAll(".converter");
+
+// Change tool based on dropdown
+selector.addEventListener("change", () => {
+  converters.forEach(c => c.classList.remove("active"));
+  document.getElementById(selector.value).classList.add("active");
+});
+
+// Kilometer to Meter
+function convertKmToMeter() {
+  let km = document.getElementById("kmInput").value;
+  if (km === "") {
+    document.getElementById("kmResult").innerText = "Please enter a value.";
+    return;
+  }
+  let meters = km * 1000;
+  document.getElementById("kmResult").innerText = `${km} Kilometer = ${meters} Meter`;
+}
+
+// Weight Converter (Kg → Gram)
+function convertKgToGram() {
+  let kg = document.getElementById("kgInput").value;
+  if (kg === "") {
+    document.getElementById("kgResult").innerText = "Please enter a value.";
+    return;
+  }
+  let grams = kg * 1000;
+  document.getElementById("kgResult").innerText = `${kg} Kilogram = ${grams} Gram`;
+}
+</script>
+</body>
+</html>
