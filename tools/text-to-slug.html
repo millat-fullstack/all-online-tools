@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Slug Generator | Next Online Tools</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f6fb;
+      color: #2c2c2c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .slug-tool {
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid #e8e0f5;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      max-width: 600px;
+      width: 100%;
+    }
+    .slug-tool h2 {
+      text-align: center;
+      color: #8a56e6;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+    .slug-tool textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d5c9f2;
+      border-radius: 10px;
+      font-size: 1em;
+      resize: none;
+      outline: none;
+      transition: border 0.3s;
+      min-height: 80px;
+    }
+    .slug-tool textarea:focus {
+      border-color: #8a56e6;
+      box-shadow: 0 0 0 3px rgba(138, 86, 230, 0.2);
+    }
+    .slug-tool button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      background: #8a56e6;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .slug-tool button:hover {
+      background: #6a3bd9;
+    }
+    .slug-result {
+      margin-top: 25px;
+      background: #f1edfb;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1.05em;
+      word-break: break-all;
+      border: 1px dashed #b9a8eb;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="slug-tool">
+    <h2>Text to Slug Generator</h2>
+    <textarea id="inputText" placeholder="Enter your text or title here..."></textarea>
+    <button onclick="generateSlug()">Convert to Slug</button>
+    <div class="slug-result" id="slugResult"></div>
+  </div>
+
+  <script>
+    function generateSlug() {
+      let text = document.getElementById("inputText").value.trim();
+      if (!text) {
+        alert("Please enter some text.");
+        return;
+      }
+      let slug = text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')   // remove non-word chars
+        .replace(/\s+/g, '-')       // replace spaces with -
+        .replace(/-+/g, '-')        // merge multiple -
+        .replace(/^-+|-+$/g, '');   // trim - from start/end
+
+      let resultBox = document.getElementById("slugResult");
+      resultBox.style.display = "block";
+      resultBox.textContent = slug;
+    }
+  </script>
+</body>
+</html>
