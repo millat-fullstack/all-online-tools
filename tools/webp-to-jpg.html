@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebP to JPG Converter | All Online Tools</title>
+  <meta name="description" content="Free WebP to JPG converter. Upload, drag & drop, or paste an image or URL to convert WebP to JPG instantly. Fast, simple, and secure.">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #0ff;
+      margin-bottom: 20px;
+    }
+    .container {
+      max-width: 650px;
+      margin: auto;
+      background: rgba(20,20,40,0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,200,255,0.4);
+      text-align: center;
+    }
+    .drop-zone {
+      border: 2px dashed #0ff;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 15px 0;
+      cursor: pointer;
+      background: rgba(0,255,255,0.05);
+    }
+    .drop-zone:hover {
+      background: rgba(0,255,255,0.15);
+    }
+    .preview {
+      margin-top: 20px;
+      max-width: 100%;
+      display: none;
+      border-radius: 8px;
+    }
+    input[type="file"], input[type="text"] {
+      margin: 15px 0;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      width: 80%;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: rgba(0,255,255,0.15);
+      color: #0ff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: rgba(0,255,255,0.35);
+      box-shadow: 0 0 8px rgba(0,200,255,0.5);
+    }
+  </style>
+</head>
+<body>
+  <h1>WebP to JPG Converter</h1>
+  <div class="container">
+    <h3>Option 1: Upload, Drag & Drop, or Paste an Image</h3>
+    <div class="drop-zone" id="dropZone">Drop or Paste WebP Image Here</div>
+    <input type="file" id="fileInput" accept="image/webp">
+
+    <h3>Option 2: Paste Image URL</h3>
+    <input type="text" id="imageUrl" placeholder="Enter WebP image URL">
+    <button onclick="loadFromUrl()">Load Image</button>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+    <img id="preview" class="preview" alt="Preview">
+
+    <div id="downloadBtn"></div>
+  </div>
+
+  <script>
+    const dropZone = document.getElementById("dropZone");
+    const fileInput = document.getElementById("fileInput");
+    const preview = document.getElementById("preview");
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const imageUrl = document.getElementById("imageUrl");
+
+    // Handle File Input
+    fileInput.addEventListener("change", e => {
+      if (e.target.files.length > 0) {
+        handleFile(e.target.files[0]);
+      }
+    });
+
+    // Handle Drag & Drop
+    dropZone.addEventListener("dragover", e => {
+      e.preventDefault();
+      dropZone.style.background = "rgba(0,255,255,0.2)";
+    });
+    dropZone.addEventListener("dragleave", () => {
+      dropZone.style.background = "rgba(0,255,255,0.05)";
+    });
+    dropZone.addEventListener("drop", e => {
+      e.preventDefault();
+      dropZone.style.background = "rgba(0,255,255,0.05)";
+      if (e.dataTransfer.files.length > 0) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    // Handle Paste
+    window.addEventListener("paste", e => {
+      if (e.clipboardData.files.length > 0) {
+        handleFile(e.clipboardData.files[0]);
+      }
+    });
+
+    // Load from URL
+    function loadFromUrl() {
+      if (!imageUrl.value) return;
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        showImage(img);
+      };
+      img.onerror = () => alert("Could not load image from URL");
+      img.src = imageUrl.value;
+    }
+
+    // Handle File
+    function handleFile(file) {
+      if (!file.type.startsWith("image/")) {
+        alert("Please upload a valid image file");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          showImage(img);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Show Image & Convert
+    function showImage(img) {
+      preview.style.display = "block";
+      preview.src = img.src;
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      const jpgData = canvas.toDataURL("image/jpeg", 0.9);
+      downloadBtn.innerHTML = `<a href="${jpgData}" download="converted.jpg">
+        <button>Download JPG</button>
+      </a>`;
+    }
+  </script>
+</body>
+</html>
