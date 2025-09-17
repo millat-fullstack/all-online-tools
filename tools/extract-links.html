@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extract Links | All Online Tools</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f6fb;
+      color: #2c2c2c;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #6b4de6;
+      margin-bottom: 20px;
+    }
+
+    #inputBox {
+      width: 100%;
+      min-height: 180px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      text-align: left;
+      background: #fdfdfd;
+      overflow-y: auto;
+    }
+    #inputBox:empty:before {
+      content: "Paste your hyperlinked text here (Ctrl+V)...";
+      color: #aaa;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px 5px;
+      background: #6b4de6;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    button:hover { background: #593ac7; }
+
+    #output {
+      margin-top: 20px;
+      background: #f8f6fb;
+      border: 1px solid #e8e0f5;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: left;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔗 Extract Links Tool</h1>
+    <p>Copy cells from Google Sheets / Excel (with hyperlinks) and paste below.</p>
+
+    <div id="inputBox" contenteditable="true"></div>
+
+    <button onclick="extractLinks()">Extract Links</button>
+    <button onclick="copyLinks()">Copy Links</button>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function extractLinks() {
+      const inputHTML = document.getElementById("inputBox").innerHTML;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(inputHTML, "text/html");
+
+      // Extract unique links
+      let links = [...doc.querySelectorAll("a")].map(a => a.href);
+      links = [...new Set(links)]; // remove duplicates
+
+      const output = document.getElementById("output");
+      output.textContent = links.length ? links.join("\n") : "No links found!";
+    }
+
+    function copyLinks() {
+      const text = document.getElementById("output").textContent;
+      if (text.trim() === "" || text === "No links found!") {
+        alert("No links to copy!");
+        return;
+      }
+      navigator.clipboard.writeText(text);
+      alert("Links copied to clipboard!");
+    }
+  </script>
+</body>
+</html>

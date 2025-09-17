@@ -58,16 +58,6 @@ nav ul li a:hover {
   letter-spacing: 0.5px;
 }
 
-/* ===== Layout ===== */
-.container-main {
-  max-width: 1200px;
-  margin: 20px auto;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 20px;
-  padding: 0 20px;
-}
-
 /* ===== Footer ===== */
 footer {
   width: 100%;
