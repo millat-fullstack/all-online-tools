@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Compressor Online | Free JPG & PNG Size Reducer</title>
+  <meta name="description" content="Compress JPG and PNG images online for free. Reduce image size without losing quality. Fast, secure, and easy-to-use image compressor for SEO, students, and freelancers.">
+  <meta name="keywords" content="image compressor, compress jpg online, reduce image size, png compressor, online image size reducer">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    h1 {
+      color: #0ff;
+      margin-bottom: 20px;
+    }
+    p {
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+    .uploader {
+      background: rgba(20,20,40,0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,200,255,0.4);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    input[type="file"] {
+      margin: 20px 0;
+      padding: 10px;
+    }
+    .btn {
+      padding: 12px 25px;
+      background: rgba(0,255,255,0.2);
+      color: #0ff;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+    .btn:hover {
+      background: rgba(0,255,255,0.4);
+      box-shadow: 0 0 15px rgba(0,200,255,0.5);
+    }
+    canvas {
+      display: none;
+    }
+    .output {
+      margin-top: 20px;
+    }
+    .output a {
+      display: inline-block;
+      margin-top: 10px;
+    }
+    h2 {
+      color: #0ff;
+      margin-top: 40px;
+    }
+    ul {
+      text-align: left;
+      max-width: 700px;
+      margin: 20px auto;
+      color: #ccc;
+    }
+    ul li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Free Online Image Compressor</h1>
+  <p>Compress JPG and PNG images online to reduce file size without losing much quality. Perfect for SEO, students, freelancers, and anyone needing faster websites or smaller uploads.</p>
+
+  <div class="uploader">
+    <input type="file" id="upload" accept="image/png, image/jpeg"><br>
+    <button class="btn" onclick="compressImage()">Compress Image</button>
+    <canvas id="canvas"></canvas>
+    <div class="output" id="output"></div>
+  </div>
+
+  <!-- SEO Guideline Section -->
+  <section style="max-width:900px; margin:50px auto; border-radius:12px; line-height:1.7; font-size:1.05rem;">
+    <h2>How to Use Image Compressor Online</h2>
+    <p>
+      Upload your JPG or PNG file and click compress. Our online image compressor will reduce image size instantly while keeping good quality. This tool is SEO-friendly, fast, and secure — no files are stored. Use it to compress jpg online, reduce image size, and make your website or projects faster.
+    </p>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits">
+    <h2>Benefits of Using This Image Compressor</h2>
+    <ul>
+      <li>✅ Reduce image size without losing much quality.</li>
+      <li>✅ Free and secure – no signup required.</li>
+      <li>✅ Speeds up websites for SEO ranking boost.</li>
+      <li>✅ Saves storage space for students & freelancers.</li>
+      <li>✅ Works directly in your browser – no software needed.</li>
+    </ul>
+  </section>
+
+  <script>
+    function compressImage() {
+      const fileInput = document.getElementById('upload');
+      const canvas = document.getElementById('canvas');
+      const output = document.getElementById('output');
+
+      if (!fileInput.files.length) {
+        alert("Please upload an image first.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          const ctx = canvas.getContext("2d");
+          const width = img.width * 0.7; // 70% size
+          const height = img.height * 0.7;
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob(function(blob) {
+            const newFile = URL.createObjectURL(blob);
+            output.innerHTML = `
+              <p>Compressed Successfully 🎉</p>
+              <a href="${newFile}" download="compressed-${file.name}" class="btn">Download Image</a>
+            `;
+          }, file.type, 0.7); // 70% quality
+        }
+        img.src = event.target.result;
+      }
+      reader.readAsDataURL(file);
+    }
+  </script>
+
+  <section style="max-width:900px; margin:50px auto; background:#111; color:#fff; padding:40px; border-radius:12px; line-height:1.7; font-size:1.05rem;">
+  
+  <h2 style="color:#0ff; margin-bottom:15px;">Compress JPG and PNG Images Online for Free</h2>
+  <p>
+    Our <strong>online image compressor</strong> allows you to easily reduce the size of your JPG and PNG files without sacrificing quality. 
+    Whether you are a student, freelancer, or website owner, this <strong>free image compression tool</strong> helps optimize pictures for SEO, 
+    faster website loading, and better sharing on social platforms. Upload your images, compress them in seconds, and download instantly.
+  </p>
+
+  <h2 style="color:#0ff; margin-top:25px; margin-bottom:15px;">Why Use an Online Image Compressor?</h2>
+  <p>
+    Large image files slow down websites, reduce user experience, and negatively impact search engine rankings. 
+    By using a reliable <strong>JPG and PNG image compressor</strong>, you can maintain high visual quality while 
+    significantly reducing file size. This is especially important for bloggers, eCommerce store owners, and digital marketers 
+    who rely on fast-loading pages for SEO performance and audience engagement.
+  </p>
+
+  <h2 style="color:#0ff; margin-top:25px; margin-bottom:15px;">Benefits for SEO and Website Speed</h2>
+  <p>
+    Search engines like Google prioritize websites that load quickly. Heavy images can increase page load time, 
+    resulting in higher bounce rates and lower rankings. Using our <strong>free online image compressor</strong> ensures 
+    your images are optimized for web performance. Compressed JPG and PNG files improve Core Web Vitals, 
+    boost mobile responsiveness, and provide a seamless user experience.
+  </p>
+
+  <h2 style="color:#0ff; margin-top:25px; margin-bottom:15px;">Perfect Tool for Students and Freelancers</h2>
+  <p>
+    Students often need to upload assignments, presentations, or projects where file size limits apply. 
+    Freelancers in fields like design, writing, and digital marketing also benefit from <strong>fast image compression</strong> 
+    to deliver high-quality work efficiently. Our tool is easy to use, requires no installation, and keeps your files secure 
+    while saving valuable storage space.
+  </p>
+
+  <h2 style="color:#0ff; margin-top:25px; margin-bottom:15px;">Fast, Secure, and Easy-to-Use</h2>
+  <p>
+    With just a few clicks, you can upload images, compress them instantly, and download the results without any loss of clarity. 
+    The entire process is secure, and your files are never stored on the server. 
+    Whether you are optimizing for SEO, academic use, or freelance projects, our <strong>online image compressor</strong> 
+    is the simplest way to reduce image size while preserving quality.
+  </p>
+
+</section>
+
+
+</body>
+</html>
