@@ -15,7 +15,7 @@
       padding: 50px;
     }
     .container {
-      max-width: 650px;
+      max-width: 700px;
       background: #fff;
       padding: 30px;
       border-radius: 16px;
@@ -26,27 +26,6 @@
       color: #6b4de6;
       margin-bottom: 25px;
     }
-    select, input {
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 1em;
-      width: 90%;
-      max-width: 300px;
-    }
-    button {
-      padding: 10px 20px;
-      background: #6b4de6;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      margin-top: 15px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #593ac7;
-    }
     .converter {
       margin-top: 25px;
       display: none;
@@ -54,8 +33,44 @@
     .converter.active {
       display: block;
     }
+    .input-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .box {
+      flex: 1;
+      background: #f0f7ff;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .box input {
+      width: 100%;
+      font-size: 2em;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      text-align: center;
+      outline: none;
+    }
+    .box select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: #a17edc;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .box select:hover {
+      background: #8d6bcb;
+    }
     .result {
-      margin-top: 15px;
+      margin-top: 20px;
+      font-size: 1.2em;
       font-weight: bold;
       color: #333;
     }
@@ -82,217 +97,33 @@
     <!-- Length -->
     <div id="length" class="converter active">
       <h3>Length Converter</h3>
-      <input type="number" id="lengthInput" placeholder="Enter value">
-      <select id="lengthFrom">
-        <option value="km">Kilometer</option>
-        <option value="m">Meter</option>
-        <option value="cm">Centimeter</option>
-        <option value="mm">Millimeter</option>
-        <option value="in">Inch</option>
-        <option value="ft">Foot</option>
-        <option value="mi">Mile</option>
-      </select>
-      <select id="lengthTo">
-        <option value="m">Meter</option>
-        <option value="km">Kilometer</option>
-        <option value="cm">Centimeter</option>
-        <option value="mm">Millimeter</option>
-        <option value="in">Inch</option>
-        <option value="ft">Foot</option>
-        <option value="mi">Mile</option>
-      </select>
-      <button onclick="convertLength()">Convert</button>
+      <div class="input-row">
+        <div class="box">
+          <input type="number" id="lengthInput" placeholder="Enter value">
+          <select id="lengthFrom">
+            <option value="km">Kilometer</option>
+            <option value="m">Meter</option>
+            <option value="cm">Centimeter</option>
+            <option value="mm">Millimeter</option>
+            <option value="in">Inch</option>
+            <option value="ft">Foot</option>
+            <option value="mi">Mile</option>
+          </select>
+        </div>
+        <div class="box">
+          <input type="text" id="lengthOutput" readonly>
+          <select id="lengthTo">
+            <option value="m">Meter</option>
+            <option value="km">Kilometer</option>
+            <option value="cm">Centimeter</option>
+            <option value="mm">Millimeter</option>
+            <option value="in">Inch</option>
+            <option value="ft">Foot</option>
+            <option value="mi">Mile</option>
+          </select>
+        </div>
+      </div>
       <div class="result" id="lengthResult"></div>
-    </div>
-
-    <!-- Weight -->
-    <div id="weight" class="converter">
-      <h3>Weight Converter</h3>
-      <input type="number" id="weightInput" placeholder="Enter value">
-      <select id="weightFrom">
-        <option value="kg">Kilogram</option>
-        <option value="g">Gram</option>
-        <option value="lb">Pound</option>
-        <option value="oz">Ounce</option>
-        <option value="ton">Ton</option>
-      </select>
-      <select id="weightTo">
-        <option value="g">Gram</option>
-        <option value="kg">Kilogram</option>
-        <option value="lb">Pound</option>
-        <option value="oz">Ounce</option>
-        <option value="ton">Ton</option>
-      </select>
-      <button onclick="convertWeight()">Convert</button>
-      <div class="result" id="weightResult"></div>
-    </div>
-
-    <!-- Temperature -->
-    <div id="temperature" class="converter">
-      <h3>Temperature Converter</h3>
-      <input type="number" id="tempInput" placeholder="Enter value">
-      <select id="tempFrom">
-        <option value="c">Celsius</option>
-        <option value="f">Fahrenheit</option>
-        <option value="k">Kelvin</option>
-      </select>
-      <select id="tempTo">
-        <option value="f">Fahrenheit</option>
-        <option value="c">Celsius</option>
-        <option value="k">Kelvin</option>
-      </select>
-      <button onclick="convertTemperature()">Convert</button>
-      <div class="result" id="tempResult"></div>
-    </div>
-
-    <!-- Time -->
-    <div id="time" class="converter">
-      <h3>Time Converter</h3>
-      <input type="number" id="timeInput" placeholder="Enter value">
-      <select id="timeFrom">
-        <option value="sec">Seconds</option>
-        <option value="min">Minutes</option>
-        <option value="hr">Hours</option>
-        <option value="day">Days</option>
-        <option value="week">Weeks</option>
-      </select>
-      <select id="timeTo">
-        <option value="min">Minutes</option>
-        <option value="sec">Seconds</option>
-        <option value="hr">Hours</option>
-        <option value="day">Days</option>
-        <option value="week">Weeks</option>
-      </select>
-      <button onclick="convertTime()">Convert</button>
-      <div class="result" id="timeResult"></div>
-    </div>
-
-    <!-- Area -->
-    <div id="area" class="converter">
-      <h3>Area Converter</h3>
-      <input type="number" id="areaInput" placeholder="Enter value">
-      <select id="areaFrom">
-        <option value="sqm">Square Meter</option>
-        <option value="sqkm">Square Kilometer</option>
-        <option value="sqft">Square Foot</option>
-        <option value="acre">Acre</option>
-        <option value="hectare">Hectare</option>
-      </select>
-      <select id="areaTo">
-        <option value="sqkm">Square Kilometer</option>
-        <option value="sqm">Square Meter</option>
-        <option value="sqft">Square Foot</option>
-        <option value="acre">Acre</option>
-        <option value="hectare">Hectare</option>
-      </select>
-      <button onclick="convertArea()">Convert</button>
-      <div class="result" id="areaResult"></div>
-    </div>
-
-    <!-- Volume -->
-    <div id="volume" class="converter">
-      <h3>Volume Converter</h3>
-      <input type="number" id="volumeInput" placeholder="Enter value">
-      <select id="volumeFrom">
-        <option value="l">Liter</option>
-        <option value="ml">Milliliter</option>
-        <option value="gal">Gallon</option>
-        <option value="cup">Cup</option>
-        <option value="m3">Cubic Meter</option>
-      </select>
-      <select id="volumeTo">
-        <option value="ml">Milliliter</option>
-        <option value="l">Liter</option>
-        <option value="gal">Gallon</option>
-        <option value="cup">Cup</option>
-        <option value="m3">Cubic Meter</option>
-      </select>
-      <button onclick="convertVolume()">Convert</button>
-      <div class="result" id="volumeResult"></div>
-    </div>
-
-    <!-- Speed -->
-    <div id="speed" class="converter">
-      <h3>Speed Converter</h3>
-      <input type="number" id="speedInput" placeholder="Enter value">
-      <select id="speedFrom">
-        <option value="kmh">Km/h</option>
-        <option value="ms">m/s</option>
-        <option value="mph">Miles per hour</option>
-        <option value="knot">Knot</option>
-      </select>
-      <select id="speedTo">
-        <option value="ms">m/s</option>
-        <option value="kmh">Km/h</option>
-        <option value="mph">Miles per hour</option>
-        <option value="knot">Knot</option>
-      </select>
-      <button onclick="convertSpeed()">Convert</button>
-      <div class="result" id="speedResult"></div>
-    </div>
-
-    <!-- Energy -->
-    <div id="energy" class="converter">
-      <h3>Energy Converter</h3>
-      <input type="number" id="energyInput" placeholder="Enter value">
-      <select id="energyFrom">
-        <option value="j">Joule</option>
-        <option value="cal">Calorie</option>
-        <option value="kwh">kWh</option>
-        <option value="btu">BTU</option>
-      </select>
-      <select id="energyTo">
-        <option value="cal">Calorie</option>
-        <option value="j">Joule</option>
-        <option value="kwh">kWh</option>
-        <option value="btu">BTU</option>
-      </select>
-      <button onclick="convertEnergy()">Convert</button>
-      <div class="result" id="energyResult"></div>
-    </div>
-
-    <!-- Pressure -->
-    <div id="pressure" class="converter">
-      <h3>Pressure Converter</h3>
-      <input type="number" id="pressureInput" placeholder="Enter value">
-      <select id="pressureFrom">
-        <option value="pa">Pascal</option>
-        <option value="bar">Bar</option>
-        <option value="atm">Atmosphere</option>
-        <option value="psi">PSI</option>
-      </select>
-      <select id="pressureTo">
-        <option value="bar">Bar</option>
-        <option value="pa">Pascal</option>
-        <option value="atm">Atmosphere</option>
-        <option value="psi">PSI</option>
-      </select>
-      <button onclick="convertPressure()">Convert</button>
-      <div class="result" id="pressureResult"></div>
-    </div>
-
-    <!-- Data -->
-    <div id="data" class="converter">
-      <h3>Data Converter</h3>
-      <input type="number" id="dataInput" placeholder="Enter value">
-      <select id="dataFrom">
-        <option value="b">Bit</option>
-        <option value="B">Byte</option>
-        <option value="KB">Kilobyte</option>
-        <option value="MB">Megabyte</option>
-        <option value="GB">Gigabyte</option>
-        <option value="TB">Terabyte</option>
-      </select>
-      <select id="dataTo">
-        <option value="B">Byte</option>
-        <option value="b">Bit</option>
-        <option value="KB">Kilobyte</option>
-        <option value="MB">Megabyte</option>
-        <option value="GB">Gigabyte</option>
-        <option value="TB">Terabyte</option>
-      </select>
-      <button onclick="convertData()">Convert</button>
-      <div class="result" id="dataResult"></div>
     </div>
   </div>
 
@@ -305,47 +136,56 @@
       document.getElementById(toolSelector.value).classList.add("active");
     });
 
-    // Conversion logic (simplified for demo)
+    // --- Length Conversion ---
+    const lengthInput = document.getElementById("lengthInput");
+    const lengthFrom = document.getElementById("lengthFrom");
+    const lengthTo = document.getElementById("lengthTo");
+    const lengthOutput = document.getElementById("lengthOutput");
+    const lengthResult = document.getElementById("lengthResult");
+
     function convertLength() {
-      let val = document.getElementById("lengthInput").value;
-      document.getElementById("lengthResult").textContent = val + " converted (demo)";
+      let val = parseFloat(lengthInput.value);
+      if (isNaN(val)) {
+        lengthOutput.value = "";
+        lengthResult.textContent = "";
+        return;
+      }
+
+      const toMeters = {
+        km: 1000,
+        m: 1,
+        cm: 0.01,
+        mm: 0.001,
+        in: 0.0254,
+        ft: 0.3048,
+        mi: 1609.34
+      };
+
+      let meters = val * toMeters[lengthFrom.value];
+      let result = meters / toMeters[lengthTo.value];
+
+      // integer or fractional
+      const displayValue = Number.isInteger(result) ? result : result.toFixed(6);
+
+      lengthOutput.value = displayValue;
+
+      // Natural language result
+      const unitNames = {
+        km: "Kilometer",
+        m: "Meter",
+        cm: "Centimeter",
+        mm: "Millimeter",
+        in: "Inch",
+        ft: "Foot",
+        mi: "Mile"
+      };
+
+      lengthResult.textContent = `${val} ${unitNames[lengthFrom.value]} = ${displayValue} ${unitNames[lengthTo.value]}`;
     }
-    function convertWeight() {
-      let val = document.getElementById("weightInput").value;
-      document.getElementById("weightResult").textContent = val + " converted (demo)";
-    }
-    function convertTemperature() {
-      let val = document.getElementById("tempInput").value;
-      document.getElementById("tempResult").textContent = val + " converted (demo)";
-    }
-    function convertTime() {
-      let val = document.getElementById("timeInput").value;
-      document.getElementById("timeResult").textContent = val + " converted (demo)";
-    }
-    function convertArea() {
-      let val = document.getElementById("areaInput").value;
-      document.getElementById("areaResult").textContent = val + " converted (demo)";
-    }
-    function convertVolume() {
-      let val = document.getElementById("volumeInput").value;
-      document.getElementById("volumeResult").textContent = val + " converted (demo)";
-    }
-    function convertSpeed() {
-      let val = document.getElementById("speedInput").value;
-      document.getElementById("speedResult").textContent = val + " converted (demo)";
-    }
-    function convertEnergy() {
-      let val = document.getElementById("energyInput").value;
-      document.getElementById("energyResult").textContent = val + " converted (demo)";
-    }
-    function convertPressure() {
-      let val = document.getElementById("pressureInput").value;
-      document.getElementById("pressureResult").textContent = val + " converted (demo)";
-    }
-    function convertData() {
-      let val = document.getElementById("dataInput").value;
-      document.getElementById("dataResult").textContent = val + " converted (demo)";
-    }
+
+    lengthInput.addEventListener("input", convertLength);
+    lengthFrom.addEventListener("change", convertLength);
+    lengthTo.addEventListener("change", convertLength);
   </script>
 </body>
 </html>
