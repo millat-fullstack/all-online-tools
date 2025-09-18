@@ -1,9 +1,15 @@
 name: Generate Sitemap
 
+# Trigger on pushes to main, but ignore changes that are only to sitemap.xml
 on:
   push:
     branches:
-      - main   # or 'gh-pages' if you deploy from that branch
+      - main
+    paths-ignore:
+      - 'sitemap.xml'
+
+permissions:
+  contents: write   # allow the job to commit files back
 
 jobs:
   build:
@@ -11,22 +17,38 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Generate sitemap
-        run: |
-          npm install sitemap
-          node .github/scripts/generate-sitemap.js
+      - name: Install dependencies
+        run: npm install sitemap
 
-      - name: Commit and push sitemap
+      - name: Generate sitemap
+        run: node .github/scripts/generate-sitemap.js
+        env:
+          BASE_URL: "https://millat-fullstack.github.io"  # <-- set your domain here
+
+      - name: Show generated sitemap (debug)
+        run: |
+          echo "---- sitemap preview ----"
+          head -n 30 sitemap.xml || true
+          echo "---- end preview ----"
+
+      - name: Commit and push sitemap (only if changed)
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add sitemap.xml
-          git commit -m "Auto-update sitemap" || echo "No changes to commit"
-          git push
+          # commit only if there are staged changes
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto-update sitemap [skip ci]"
+            git push
+          else
+            echo "No changes to sitemap.xml"
+          fi
