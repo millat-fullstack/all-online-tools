@@ -1,0 +1,32 @@
+name: Generate Sitemap
+
+on:
+  push:
+    branches:
+      - main   # or 'gh-pages' if you deploy from that branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Generate sitemap
+        run: |
+          npm install sitemap
+          node .github/scripts/generate-sitemap.js
+
+      - name: Commit and push sitemap
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add sitemap.xml
+          git commit -m "Auto-update sitemap" || echo "No changes to commit"
+          git push
