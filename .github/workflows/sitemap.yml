@@ -4,7 +4,7 @@ name: Generate Sitemap
 on:
   push:
     branches:
-      - main
+      - '**'
     paths-ignore:
       - 'sitemap.xml'
 
