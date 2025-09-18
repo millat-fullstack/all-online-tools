@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF to JPG Converter</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f6fb;
+      color: #2c2c2c;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px;
+    }
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      color: #6b4de6;
+      margin-bottom: 20px;
+    }
+    input[type=file] {
+      margin: 20px 0;
+    }
+    button {
+      background: #a17edc;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #8d6bcb;
+    }
+    #progress {
+      margin-top: 15px;
+      font-size: 0.95em;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📄 PDF to JPG Converter</h1>
+    <p>Convert your PDF pages into JPG images directly in your browser.</p>
+
+    <input type="file" id="pdfFile" accept="application/pdf">
+    <br>
+    <button onclick="convertPDF()">Convert & Download</button>
+    <p id="progress"></p>
+  </div>
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+  <script>
+    async function convertPDF() {
+      const fileInput = document.getElementById("pdfFile");
+      const progress = document.getElementById("progress");
+      if (!fileInput.files.length) {
+        alert("Please upload a PDF file first.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const fileReader = new FileReader();
+
+      fileReader.onload = async function () {
+        const typedarray = new Uint8Array(this.result);
+        const pdf = await pdfjsLib.getDocument(typedarray).promise;
+        const zip = new JSZip();
+
+        progress.textContent = `Converting ${pdf.numPages} pages...`;
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const viewport = page.getViewport({ scale: 2 }); // scale=2 => good quality
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          await page.render({ canvasContext: context, viewport }).promise;
+
+          const imgData = canvas.toDataURL("image/jpeg", 0.9); // quality = 90%
+          const base64Data = imgData.split(",")[1]; // remove prefix
+          zip.file(`page_${i}.jpg`, base64Data, { base64: true });
+
+          progress.textContent = `Converted page ${i} of ${pdf.numPages}`;
+        }
+
+        // Save as zip
+        const content = await zip.generateAsync({ type: "blob" });
+        saveAs(content, file.name.replace(".pdf", "_images.zip"));
+
+        progress.textContent = "✅ Conversion complete! Download started.";
+      };
+
+      fileReader.readAsArrayBuffer(file);
+    }
+  </script>
+</body>
+</html>
