@@ -32,7 +32,7 @@ jobs:
       - name: Generate sitemap
         run: node .github/scripts/generate-sitemap.js
         env:
-          BASE_URL: "https://millat-fullstack.github.io"  # <-- set your domain here
+          BASE_URL: "https://github.com/millat-fullstack/all-online-tools"  # <-- set your domain here
 
       - name: Show generated sitemap (debug)
         run: |
