@@ -4,7 +4,7 @@ const path = require('path');
 const { SitemapStream, streamToPromise } = require('sitemap');
 const { Readable } = require('stream');
 
-const baseUrl = process.env.BASE_URL || 'https://nextonlinetools.com/';
+const baseUrl = process.env.BASE_URL || 'https://github.com/millat-fullstack/all-online-tools';
 
 // === helper to recursively find .html files inside a directory ===
 function getFiles(dir) {
