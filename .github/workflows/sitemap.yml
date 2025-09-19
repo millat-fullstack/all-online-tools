@@ -1,15 +1,9 @@
-name: Generate Sitemap
+name: Build and Deploy with Sitemap
 
-# Trigger on pushes to main, but ignore changes that are only to sitemap.xml
 on:
   push:
     branches:
-      - '**'
-    paths-ignore:
-      - 'sitemap.xml'
-
-permissions:
-  contents: write   # allow the job to commit files back
+      - main   # or change to your deploy branch
 
 jobs:
   build:
@@ -17,38 +11,21 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
 
-      - name: Install dependencies
+      - name: Install sitemap dependencies
         run: npm install sitemap
 
       - name: Generate sitemap
         run: node .github/scripts/generate-sitemap.js
-        env:
-          BASE_URL: "https://millat-fullstack.github.io"  # <-- set your domain here
 
-      - name: Show generated sitemap (debug)
-        run: |
-          echo "---- sitemap preview ----"
-          head -n 30 sitemap.xml || true
-          echo "---- end preview ----"
-
-      - name: Commit and push sitemap (only if changed)
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add sitemap.xml
-          # commit only if there are staged changes
-          if ! git diff --staged --quiet; then
-            git commit -m "Auto-update sitemap [skip ci]"
-            git push
-          else
-            echo "No changes to sitemap.xml"
-          fi
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./   # change if your build outputs to /dist or /build
