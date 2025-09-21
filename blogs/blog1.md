@@ -4,7 +4,7 @@ date: 2025-09-15
 description: Exploring how remote work is shaping productivity, collaboration, and lifestyle in 2025.
 author: Fahim
 views: 1250
-image: https://picsum.photos/900/400?random=1
+image: Assets/next-online-tools-cover-img.png
 ---
 
 # The Future of Remote Work 🌍
