@@ -44,7 +44,7 @@ async function loadBlog() {
     document.getElementById('blog-list').style.display = 'none';
     document.getElementById('blog-article').style.display = 'block';
 
-    const res = await fetch(`blogs/${blog.file}`);
+    const res = await fetch(`blogs/${blogFile}`);
     const text = await res.text();
 
     const meta = extractMeta(text);
