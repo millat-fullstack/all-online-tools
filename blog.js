@@ -1,8 +1,8 @@
 async function loadBlogList() {
     const blogList = [
-        { file: "blog1.md" },
-        { file: "blog2.md" },
-        { file: "blog3.md" }
+        { file: "blog1.html" },
+        { file: "blog2.html" },
+        { file: "blog3.html" }
     ];
 
     const container = document.getElementById('blog-list');
@@ -59,7 +59,9 @@ async function loadBlog() {
         document.getElementById('blog-image').src = meta.image;
         document.getElementById('blog-image').alt = meta.title;
     }
-    document.getElementById('blog-content').innerHTML = marked.parse(content);
+
+    // Render raw HTML content
+    document.getElementById('blog-content').innerHTML = content;
 }
 
 // --- Helpers ---
