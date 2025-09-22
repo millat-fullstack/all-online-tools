@@ -7,20 +7,36 @@
   <link rel="stylesheet" href="style.css">
   
   <style>
-body {
+    body {
   font-family: 'Inter', sans-serif;
-  background: #f8f6fb;           /* soft body background */
-  color: #2c2c2c;                /* soft black for text */
+  background: #f8f6fb;
+  color: #2c2c2c;
   line-height: 1.6;
+  margin: 0;
+  padding: 0;                 /* no padding here */
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 60px;
 }
-    .page-container {
-      max-width: 900px;
-      background: #fff;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      text-align: center;
-    }
+
+.page-container {
+  padding: 20px;              /* move padding here */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0
+,0.1);
+}
 
     h1 { color: #6b4de6; margin-bottom: 20px; }
 
@@ -258,6 +274,13 @@ function copyText(id){
   alert("Copied: "+text);
 }
 </script>
+
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
+<script src="../suggested.js"></script>
+
 
  <div id="footer"></div>
 
