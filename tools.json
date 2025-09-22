@@ -1,0 +1,23 @@
+[
+  {
+    "title": "PDF to JPG Converter",
+    "description": "Convert PDF pages into JPG images instantly.",
+    "link": "tools/pdf-to-jpg.html",
+    "category": "PDF",
+    "image": "images/pdf-to-jpg.png"
+  },
+  {
+    "title": "Word Counter",
+    "description": "Count words, characters, and sentences online.",
+    "link": "tools/word-counter.html",
+    "category": "Text",
+    "image": "assets/tools-images/word-counter.png"
+  },
+  {
+    "title": "Color Picker",
+    "description": "Pick colors and copy HEX, RGB, or HSL codes.",
+    "link": "tools/color-picker.html",
+    "category": "Design",
+    "image": "images/color-picker.png"
+  }
+]
