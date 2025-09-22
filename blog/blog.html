@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - My Website</title>
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+  <header class="blog-header">
+    <h1>Our Blog</h1>
+  </header>
+
+  <!-- Search + Filter -->
+  <section class="blog-controls">
+    <input type="text" id="searchInput" placeholder="Search blog...">
+    <select id="categoryFilter">
+      <option value="all">All Categories</option>
+      <option value="tech">Tech</option>
+      <option value="guides">Guides</option>
+      <option value="updates">Updates</option>
+    </select>
+  </section>
+
+  <!-- Blog List -->
+  <section class="blog-list" id="blogList"></section>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button id="prevBtn">← Prev</button>
+    <span id="pageInfo"></span>
+    <button id="nextBtn">Next →</button>
+  </div>
+
+  <footer class="blog-footer">
+    <p>© 2025 My Website - All rights reserved.</p>
+  </footer>
+
+  <script src="blog.js"></script>
+</body>
+</html>
