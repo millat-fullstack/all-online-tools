@@ -1,28 +1,4 @@
-const blogPosts = [
-  {
-    title: "Blog Post One",
-    description: "Quick summary of blog post one.",
-    image: "post-1.jpg",
-    link: "blog1.html",
-    category: "tech"
-  },
-  {
-    title: "Blog Post Two",
-    description: "Quick summary of blog post two.",
-    image: "post-2.jpg",
-    link: "blog2.html",
-    category: "guides"
-  },
-  {
-    title: "Blog Post Three",
-    description: "Quick summary of blog post three.",
-    image: "post-3.jpg",
-    link: "blog3.html",
-    category: "updates"
-  },
-  // ➕ add more as needed
-];
-
+let blogPosts = [];
 let currentPage = 1;
 const postsPerPage = 9;
 
@@ -33,13 +9,27 @@ const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const pageInfo = document.getElementById("pageInfo");
 
+// Fetch posts.json
+fetch("allblog/posts.json")
+  .then(res => res.json())
+  .then(data => {
+    blogPosts = data;
+    renderPosts();
+  })
+  .catch(err => {
+    console.error("Error loading posts.json:", err);
+  });
+
 function renderPosts() {
   const searchText = searchInput.value.toLowerCase();
   const category = categoryFilter.value;
 
   let filteredPosts = blogPosts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchText) || post.description.toLowerCase().includes(searchText);
-    const matchesCategory = category === "all" || post.category === category;
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchText) ||
+      post.description.toLowerCase().includes(searchText);
+    const matchesCategory =
+      category === "all" || post.category === category;
     return matchesSearch && matchesCategory;
   });
 
@@ -63,6 +53,7 @@ function renderPosts() {
   nextBtn.disabled = currentPage === totalPages || totalPages === 0;
 }
 
+// Pagination controls
 prevBtn.addEventListener("click", () => {
   currentPage--;
   renderPosts();
@@ -73,6 +64,7 @@ nextBtn.addEventListener("click", () => {
   renderPosts();
 });
 
+// Search + Filter
 searchInput.addEventListener("input", () => {
   currentPage = 1;
   renderPosts();
@@ -82,6 +74,3 @@ categoryFilter.addEventListener("change", () => {
   currentPage = 1;
   renderPosts();
 });
-
-// Initial render
-renderPosts();
