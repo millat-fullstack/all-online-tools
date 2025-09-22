@@ -1,0 +1,30 @@
+[
+  {
+    "title": "dflkjafflj",
+    "description": "Quick summary of blog post one.",
+    "image": "assets/next-online-tools-cover.img.png",
+    "link": "allblog/blog1.html",
+    "category": "tech"
+  },
+  {
+    "title": "Blog Post Two",
+    "description": "Quick summary of blog post two.",
+    "image": "allblog/images/post-2.jpg",
+    "link": "allblog/blog2.html",
+    "category": "guides"
+  },
+  {
+    "title": "Blog Post Three",
+    "description": "Quick summary of blog post three.",
+    "image": "allblog/images/post-3.jpg",
+    "link": "allblog/blog3.html",
+    "category": "updates"
+  },
+{
+    "title": "Blog Post Four",
+    "description": "Quick summary of blog post two.",
+    "image": "allblog/images/post-2.jpg",
+    "link": "allblog/blog4.html",
+    "category": "mides"
+  }
+]
