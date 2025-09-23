@@ -5,6 +5,10 @@ body {
   margin: 0;
   padding: 0;
   color: #2c2c2c;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
@@ -65,7 +69,7 @@ a:hover {
   border: 1px solid #e8e0f5;
   overflow: hidden;
   transition: transform 0.2s ease;
-}
+  }
 
 .blog-card:hover {
   transform: translateY(-5px);
@@ -89,6 +93,7 @@ a:hover {
 }
 
 /* Pagination */
+
 .pagination {
   text-align: center;
   margin: 20px 0;
@@ -110,6 +115,7 @@ a:hover {
 }
 
 /* Footer */
+
 .blog-footer {
   background: #e4def3;
   text-align: center;
@@ -150,4 +156,52 @@ a:hover {
 .blog-content p {
   margin-bottom: 15px;
   line-height: 1.6;
+}
+
+/* ===== Header ===== */
+header {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e8e0f5;
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+
+  /* 🚫 cancel body flex alignment */
+  align-self: stretch;
+  flex-shrink: 0;
+  margin: 0; 
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px; 
+  max-width: 1200px;    
+  margin: 0 auto;       
+}
+
+.logo img {
+  height: 50px;
+}
+
+/* ===== Footer ===== */
+footer {
+  width: 100%;
+  background: #e4def3;         /* softer footer color */
+  color: #2c2c2c;
+  padding: 35px 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+footer a {
+  color: #2c2c2c;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
