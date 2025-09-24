@@ -1,0 +1,111 @@
+/* ===== Base ===== */
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f8f6fb;
+      margin: 0;
+      padding: 0;
+      color: #2c2c2c;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #8d6bcb;
+      text-align: center;
+        margin-top: 40px;
+    }
+
+    p.description {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-size: 1rem;
+      text-align: center;
+      color: #2c2c2c;
+      line-height: 1.5;
+    }
+
+    /* ===== Contact Container ===== */
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto 60px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+          }
+
+    .contact-left,
+    .contact-right {
+      flex: 1 1 400px;
+      padding: 40px 30px;
+      box-sizing: border-box;
+    }
+
+    .contact-left img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    /* ===== Contact Form ===== */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+        margin-top: 10px;
+            }
+
+    input, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #e8e0f5;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        resize: vertical;
+        min-height: 50px;
+        box-sizing: border-box;
+            }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #a17edc;
+      box-shadow: 0 0 5px rgba(161, 126, 220, 0.4);
+    }
+
+    button {
+      background-color: #a17edc;
+      color: #fff;
+      padding: 14px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #8d6bcb;
+      transform: translateY(-2px);
+    }
+
+    #responseMsg {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px) {
+      .contact-container {
+        flex-direction: column;
+      }
+      .contact-left, .contact-right {
+        padding: 30px 20px;
+      }
+    }
