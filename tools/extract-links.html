@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Extract Links | All Online Tools</title>
+  <link rel="stylesheet" href="/style.css">
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -12,7 +13,13 @@
       padding: 40px;
       display: flex;
       justify-content: center;
-    }
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+      flex-direction: column;
+      margin: 0;
+      gap: 20px;
+          }
 
     .container {
       max-width: 700px;
@@ -73,6 +80,9 @@
   </style>
 </head>
 <body>
+
+  <div id="header"></div>
+
   <div class="container">
     <h1>🔗 Extract Links Tool</h1>
     <p>Copy cells from Google Sheets / Excel (with hyperlinks) and paste below.</p>
@@ -109,5 +119,9 @@
       alert("Links copied to clipboard!");
     }
   </script>
+
+  <div id="footer"></div>
+
+  <script src="/js/include.js"></script>
 </body>
 </html>
