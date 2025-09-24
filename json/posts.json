@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Best 5 Free Ai Tools for Student in 2025",
+    "description": "Know 5 best free AI tools for students in 2025 to enhance learning and productivity.",
+    "image": "../blog/images/ai-tools-for-students.png",
+    "link": "../blog/allblog/best-5-free-ai-tools-for-students.html",
+    "category": "ai tools"
+  },
+  {
+    "title": "Convert PDF to JPG Online",
+    "description": "The best online tool to convert PDF to JPG without losing quality.",
+    "image": "../blog/images/convert-pdf-to-jpg-online.png",
+    "link": "../blog/allblog/convert-pdf-to-jpg-online.html",
+    "category": "guides"
+  },
+  {
+    "title": "Blog Post Three",
+    "description": "Quick summary of blog post three.",
+    "image": "allblog/images/post-3.jpg",
+    "link": "allblog/blog3.html",
+    "category": "updates"
+  },
+{
+    "title": "Blog Post Four",
+    "description": "Quick summary of blog post two.",
+    "image": "allblog/images/post-2.jpg",
+    "link": "allblog/blog4.html",
+    "category": "mides"
+  }
+]
