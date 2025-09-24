@@ -4,46 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us | Next Online Tools</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      color: #333;
-    }
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    h1, h2 {
-      color: #0073c6;
-    }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-    h2 {
-      font-size: 22px;
-      margin-top: 30px;
-    }
-    p {
-      margin: 12px 0;
-    }
-    ul {
-      margin: 10px 0 10px 20px;
-    }
-    .highlight {
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/about.css">
+  <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
+  <div id="header"></div>
+
   <div class="container">
     <h1>About Next Online Tools</h1>
     <p>
@@ -54,21 +20,68 @@
       images, or extract colors from an image, we make it possible in just seconds.
     </p>
 
-    <h2>Our Mission</h2>
+<section class="vision">
+  <div class="container">
+    <h2>Our Vision</h2>
     <p>
-      <span class="highlight">Our mission is simple:</span> to provide reliable and 
-      free online tools that make digital life easier for everyone. We believe in 
-      speed, accuracy, and simplicity – so you can focus on your work while our 
-      tools handle the rest.
+      To empower individuals and businesses worldwide by making advanced digital tools 
+      universally accessible, intuitive, and reliable. We envision a future where 
+      technology enhances creativity, productivity, and innovation for everyone.
     </p>
 
+    <div class="vision-grid">
+      <div class="vision-card">
+        <div class="icon">🌍</div>
+        <h3>Global Reach</h3>
+        <p>We aim to serve users everywhere, breaking barriers of location and access.</p>
+      </div>
+
+      <div class="vision-card">
+        <div class="icon">⚡</div>
+        <h3>Innovation</h3>
+        <p>We constantly adapt and innovate to stay ahead in the digital space.</p>
+      </div>
+
+      <div class="vision-card">
+        <div class="icon">🤝</div>
+        <h3>Collaboration</h3>
+        <p>We believe in building tools that connect and empower communities.</p>
+      </div>
+
+      <div class="vision-card">
+        <div class="icon">🔒</div>
+        <h3>Trust</h3>
+        <p>We are committed to transparency, privacy, and user confidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Our Ethics Section ===== -->
+<section class="ethics">
+  <div class="container">
     <h2>Our Ethics</h2>
-    <ul>
-      <li><strong>No hidden costs:</strong> All tools are completely free to use.</li>
-      <li><strong>No downloads:</strong> Everything works online, directly in your browser.</li>
-      <li><strong>No spam:</strong> We never misuse your data or flood your inbox.</li>
-      <li><strong>Transparency:</strong> We aim to provide safe, accurate, and honest results.</li>
-    </ul>
+    <div class="ethics-grid">
+      <div class="ethics-card">
+        <strong>No hidden costs</strong>
+        <p>Always clear pricing, no surprises ever.</p>
+      </div>
+      <div class="ethics-card">
+        <strong>No downloads</strong>
+        <p>Use our tools directly online instantly.</p>
+      </div>
+      <div class="ethics-card">
+        <strong>No spam</strong>
+        <p>We respect your inbox, zero junk messages.</p>
+      </div>
+      <div class="ethics-card">
+        <strong>Transparency</strong>
+        <p>Open communication, honest practices every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <h2>Subscribe & Stay Updated</h2>
 <p>
@@ -80,7 +93,7 @@
   <input type="email" name="email" placeholder="Enter your email" required 
          style="padding:10px; width:70%; border:1px solid #ccc; border-radius:5px;">
   <button type="submit" 
-          style="padding:10px 20px; background:#0073c6; color:#fff; border:none; border-radius:5px; cursor:pointer;">
+          style="padding:10px 20px; background:#8a56e6; color:#fff; border:none; border-radius:5px; cursor:pointer;">
     Subscribe
   </button>
 </form>
@@ -113,5 +126,8 @@
       <a href="/privacy-policy.html">Privacy Policy</a> page.
     </p>
   </div>
+
+  <div id="footer"></div>
+<script src="/js/include.js"></script>
 </body>
 </html>
