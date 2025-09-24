@@ -163,14 +163,9 @@ header {
   width: 100%;
   background: #ffffff;
   border-bottom: 1px solid #e8e0f5;
-  position: sticky;
+  position: sticky;     /* stick to top */
   top: 0;
-  z-index: 1100;
-
-  /* 🚫 cancel body flex alignment */
-  align-self: stretch;
-  flex-shrink: 0;
-  margin: 0; 
+  z-index: 1100;        /* stays above content */
 }
 
 header .container {
@@ -185,6 +180,31 @@ header .container {
 .logo img {
   height: 50px;
 }
+
+nav ul {
+  list-style: none;               /* remove bullets */
+  display: flex;                  /* make horizontal */
+  gap: 24px;                      /* spacing between items */
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #2c2c2c;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #8d6bcb;                 /* softer hover purple */
+}
+
+/* ===== Header ===== */
 
 /* ===== Footer ===== */
 footer {
