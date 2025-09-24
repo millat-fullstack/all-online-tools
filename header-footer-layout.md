@@ -1,7 +1,3 @@
-
-
-<link rel="stylesheet" href="style.css">
-
 <div id="header"></div>
 
 <!-- Page content here -->
