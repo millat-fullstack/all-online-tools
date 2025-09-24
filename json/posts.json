@@ -14,11 +14,11 @@
     "category": "guides"
   },
   {
-    "title": "Blog Post Three",
-    "description": "Quick summary of blog post three.",
-    "image": "allblog/images/post-3.jpg",
-    "link": "allblog/blog3.html",
-    "category": "updates"
+    "title": "Online tools vs Desktop Software",
+    "description": "Learn the pros and cons of online tools vs downloadable software for various tasks.",
+    "image": "../blog/images/online-tools-vs-downloadable-software.png",
+    "link": "../blog/allblog/online-tools-vs-downloadable-software.html",
+    "category": "general-articles"
   },
 {
     "title": "Blog Post Four",
