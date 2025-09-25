@@ -5,27 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Advanced Grammar Checker | All Online Tools</title>
 <meta name="description" content="Free grammar checker and text enhancer. Paste text or upload document, check grammar, readability, errors, and convert text to uppercase, lowercase, title case, or headings. Add links easily.">
+<link rel="stylesheet" href="style.css">
 <style>
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    color: #fff;
-    min-height: 100vh;
-    padding: 20px;
-  }
+  font-family: 'Inter', sans-serif;
+  background: #f8f6fb;
+  color: #2c2c2c;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;                 /* no padding here */
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.page-container {
+  padding: 20px;              /* move padding here */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0
+,0.1);
+}
   h1 {
     text-align: center;
     color: #0ff;
     margin-bottom: 20px;
   }
-  .container {
-    max-width: 800px;
-    margin: auto;
-    background: rgba(20,20,40,0.95);
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,200,255,0.4);
-  }
+
   textarea {
     width: 100%;
     height: 220px;
@@ -79,10 +95,11 @@
 </style>
 </head>
 <body>
+  <div id="header"></div>
 
 <h1>Advanced Grammar Checker & Text Tools</h1>
 
-<div class="container">
+<div class="page-container">
   <h3>Paste Your Text</h3>
   <textarea id="textInput" placeholder="Paste text here..."></textarea>
 
@@ -252,5 +269,27 @@ function countSyllables(text){
 
 </section>
 
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
+
+<script src="../js/suggested.js"></script>
+
+
+ <div id="footer"></div>
+
+  <script>
+    // Load header
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+
+          // Load footer
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer").innerHTML = data);
+      
+    </script>
 </body>
 </html>
