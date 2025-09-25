@@ -18,13 +18,13 @@
     "description": "Learn the pros and cons of online tools vs downloadable software for various tasks.",
     "image": "../blog/images/online-tools-vs-downloadable-software.png",
     "link": "../blog/allblog/online-tools-vs-downloadable-software.html",
-    "category": "general-articles"
+    "category": "general articles"
   },
 {
-    "title": "Blog Post Four",
-    "description": "Quick summary of blog post two.",
-    "image": "allblog/images/post-2.jpg",
-    "link": "allblog/blog4.html",
-    "category": "mides"
+    "title": "Why image resizer tool is important?",
+    "description": "Learn the benefits of online image resizer tools.",
+    "image": "../blog/images/why-image-resizer-tools.png",
+    "link": "../blog/allblog/why-image-resizer-tools.html",
+    "category": "online tools"
   }
 ]
