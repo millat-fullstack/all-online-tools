@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator & Scanner</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f6fb;
+      color: #2c2c2c;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #e8e0f5;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    button, label {
+      background: #a17edc;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      margin: 5px;
+      transition: background 0.3s;
+      display: inline-block;
+    }
+    button:hover, label:hover {
+      background: #8d6bcb;
+    }
+    canvas {
+      margin: 20px 0;
+    }
+    #fileInput {
+      display: none;
+    }
+    .choose-file-label {
+      display: inline-block;
+      cursor: pointer;
+    }
+    .result-box {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f8f6fb;
+      border: 1px solid #e8e0f5;
+      border-radius: 8px;
+      word-wrap: break-word;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .copy-btn {
+      background: #a17edc;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: background 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: #8d6bcb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>QR Code Generator & Scanner</h2>
+    <input type="text" id="qrText" placeholder="Enter text or URL">
+    <canvas id="qrCanvas"></canvas>
+    <div id="downloadButtons" style="display:none;">
+      <button onclick="downloadQR('jpg')">Download</button>
+      <button onclick="downloadQR('png')">Download PNG</button>
+    </div>
+
+    <h3>Scan QR Code</h3>
+    <input type="file" id="fileInput" accept="image/*" onchange="scanQR(event)">
+    <label for="fileInput" class="choose-file-label">Choose File</label>
+    <div id="scanResult" class="result-box" style="display:none;">
+      <span id="scanText"></span>
+      <button class="copy-btn" onclick="copyScanResult()">📋Copy</button>
+    </div>
+  </div>
+
+  <script>
+    const qrText = document.getElementById("qrText");
+    const qrCanvas = document.getElementById("qrCanvas");
+    const downloadButtons = document.getElementById("downloadButtons");
+
+    // Auto-generate QR when typing
+    qrText.addEventListener("input", generateQR);
+
+    function generateQR() {
+      const text = qrText.value.trim();
+      if (!text) {
+        const ctx = qrCanvas.getContext("2d");
+        ctx.clearRect(0, 0, qrCanvas.width, qrCanvas.height);
+        downloadButtons.style.display = "none";
+        return;
+      }
+      QRCode.toCanvas(qrCanvas, text, { 
+        width: 200, 
+        margin: 1, 
+        color: { dark: "#000000", light: "#00000000" } 
+      }, function (error) {
+        if (error) console.error(error);
+        downloadButtons.style.display = "block";
+      });
+    }
+
+    // Download QR as JPG or PNG
+    function downloadQR(type) {
+      let link = document.createElement("a");
+
+      if (type === "jpg") {
+        // JPG with white background
+        let tempCanvas = document.createElement("canvas");
+        tempCanvas.width = qrCanvas.width;
+        tempCanvas.height = qrCanvas.height;
+        let ctx = tempCanvas.getContext("2d");
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+        ctx.drawImage(qrCanvas, 0, 0);
+
+        link.href = tempCanvas.toDataURL("image/jpeg");
+        link.download = "qr-code.jpg";
+      } else {
+        // Transparent PNG
+        link.href = qrCanvas.toDataURL("image/png");
+        link.download = "qr-code.png";
+      }
+      link.click();
+    }
+
+    // Scan QR Code
+    function scanQR(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function() {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const code = jsQR(imageData.data, canvas.width, canvas.height);
+
+          const scanResult = document.getElementById("scanResult");
+          const scanText = document.getElementById("scanText");
+
+          if (code) {
+            scanText.textContent = code.data;
+            scanResult.style.display = "flex";
+          } else {
+            scanText.textContent = "No QR code found.";
+            scanResult.style.display = "flex";
+          }
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Copy scanned result
+    function copyScanResult() {
+      const text = document.getElementById("scanText").textContent;
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
