@@ -4,32 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Extract Links | All Online Tools</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      background: #f8f6fb;
-      color: #2c2c2c;
-      padding: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      box-sizing: border-box;
-      flex-direction: column;
-      margin: 0;
-      gap: 20px;
-          }
+  font-family: 'Inter', sans-serif;
+  background: #f8f6fb;
+  color: #2c2c2c;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;                 /* no padding here */
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+  }
 
-    .container {
-      max-width: 700px;
-      width: 100%;
-      background: #fff;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      text-align: center;
-    }
+    .page-container {
+  padding: 20px;              /* move padding here */
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0
+,0.1);
+}
 
     h1 {
       color: #6b4de6;
@@ -53,16 +57,22 @@
       color: #aaa;
     }
 
-    button {
-      padding: 10px 20px;
-      margin: 10px 5px;
-      background: #6b4de6;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
-    }
+button {
+  display: inline-block;
+  padding: 8px 18px;              /* compact size */
+  margin: 10px 6px;
+  background: #8a56e6;            /* your primary color */
+  color: #fff;
+  border: none;
+  border-radius: 6px;             /* slightly rounded */
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;            /* keeps text in one line */
+  width: auto;                    /* prevent full-width */
+  max-width: fit-content;
+  transition: background 0.25s;
+}
     button:hover { background: #593ac7; }
 
     #output {
@@ -83,15 +93,15 @@
 
   <div id="header"></div>
 
-  <div class="container">
+  <div class="page-container">
     <h1>🔗 Extract Links Tool</h1>
     <p>Copy cells from Google Sheets / Excel (with hyperlinks) and paste below.</p>
 
     <div id="inputBox" contenteditable="true"></div>
-
+<div style="text-align: center;">
     <button onclick="extractLinks()">Extract Links</button>
     <button onclick="copyLinks()">Copy Links</button>
-
+</div>
     <div id="output"></div>
   </div>
 
@@ -120,8 +130,27 @@
     }
   </script>
 
-  <div id="footer"></div>
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
 
-  <script src="/js/include.js"></script>
+<script src="../js/suggested.js"></script>
+
+
+ <div id="footer"></div>
+
+  <script>
+    // Load header
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+
+          // Load footer
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer").innerHTML = data);
+      
+    </script>
 </body>
 </html>

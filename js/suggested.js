@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("../tools.json")
+  fetch("../json/tools.json")
     .then(response => response.json())
     .then(tools => {
       const suggestedList = document.querySelector("#suggested-tools .suggested-list");
