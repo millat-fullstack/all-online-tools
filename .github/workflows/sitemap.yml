@@ -12,14 +12,14 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          persist-credentials: false  # Important for using GITHUB_TOKEN
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true   # Important to allow git push
 
       - name: Generate sitemap.xml
         run: |
           echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
           echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
-          # Find all HTML files and skip hidden folders
-          find . -name "*.html" ! -path "*/.*" | sed 's|^\./||' | while read file; do
+          find . -name "*.html" ! -path "*/.*" ! -name "sitemap.xml" | sed 's|^\./||' | while read file; do
             echo "  <url><loc>https://millat-fullstack.github.io/all-online-tools/${file}</loc></url>" >> sitemap.xml
           done
           echo '</urlset>' >> sitemap.xml
@@ -31,5 +31,3 @@ jobs:
           git add sitemap.xml
           git commit -m "Auto-generate sitemap" || echo "No changes to commit"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
