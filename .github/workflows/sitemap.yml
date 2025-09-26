@@ -1,34 +1,31 @@
-name: Generate Sitemap
+name: Auto-generate sitemap
 
 on:
   push:
     branches:
-      - main   # or 'master' if that's your branch
+      - main  # change if your branch is 'master'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install Sitemap Generator
-        run: npm install -g @quasibit/gh-pages-sitemap
-
-      - name: Generate sitemap
+      - name: Generate sitemap.xml
         run: |
-          npx @quasibit/gh-pages-sitemap \
-            --base-url https://millat-fullstack.github.io/all-online-tools \
-            --output ./sitemap.xml
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
+          # Find all HTML files and skip hidden folders
+          find . -name "*.html" ! -path "*/.*" | sed 's|^\./||' | while read file; do
+            echo "  <url><loc>https://millat-fullstack.github.io/all-online-tools/${file}</loc></url>" >> sitemap.xml
+          done
+          echo '</urlset>' >> sitemap.xml
 
       - name: Commit sitemap
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml
-          git commit -m "Update sitemap" || echo "No changes to commit"
+          git commit -m "Auto-generate sitemap" || echo "No changes to commit"
           git push
