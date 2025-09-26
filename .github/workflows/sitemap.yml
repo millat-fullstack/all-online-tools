@@ -3,7 +3,7 @@ name: Generate Sitemap
 on:
   push:
     branches:
-      - main   # Change if your branch is 'master'
+      - main   # or 'master' if that's your branch
 
 jobs:
   build:
@@ -17,11 +17,13 @@ jobs:
           node-version: 18
 
       - name: Install Sitemap Generator
-        run: npm install -g sitemap-generator-cli
+        run: npm install -g @quasibit/gh-pages-sitemap
 
       - name: Generate sitemap
         run: |
-          sitemap-generator https://millat-fullstack.github.io/all-online-tools -o ./sitemap.xml
+          npx @quasibit/gh-pages-sitemap \
+            --base-url https://millat-fullstack.github.io/all-online-tools \
+            --output ./sitemap.xml
 
       - name: Commit sitemap
         run: |
