@@ -11,5 +11,5 @@ async function loadHTML(id, file) {
 }
 
 // Load header & footer
-loadHTML("header", "../../html/header.html");
-loadHTML("footer", "../../html/footer.html");
+loadHTML("header", "../all-online-tools/html/header.html");
+loadHTML("footer", "../all-online-tools/html/footer.html");
