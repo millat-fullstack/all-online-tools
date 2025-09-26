@@ -1,21 +1,80 @@
-const tools = [
-  { name: "QR Code Generator & Scanner", url: "qr-tool.html" },
-  { name: "Unit Converter", url: "unit-converter.html" },
-  { name: "Text to Slug Generator", url: "slug-tool.html" },
-  { name: "PDF to JPG Converter", url: "pdf-to-jpg.html" },
-  // add more tools here
+// --- Static pages (like About, Contact) ---
+const staticPages = [
+  { title: "About Us", url: "about.html", description: "Learn more about Next Online Tools." },
+  { title: "Contact", url: "contact.html", description: "Get in touch with us." },
 ];
 
-const searchInput = document.getElementById("toolSearch");
+// --- Initialize Search ---
+function initSearch() {
+  const searchBox = document.getElementById("toolSearch");
+  const suggestionsBox = document.getElementById("searchSuggestions");
+  if (!searchBox || !suggestionsBox) return;
 
-searchInput.addEventListener("keyup", function(e) {
-  if (e.key === "Enter") {
-    const query = searchInput.value.toLowerCase();
-    const match = tools.find(t => t.name.toLowerCase().includes(query));
-    if (match) {
-      window.location.href = match.url;
-    } else {
-      alert("No matching tool found.");
-    }
-  }
-});
+  let searchData = [...staticPages];
+
+  // --- 1. Load tools.json ---
+  const toolsPromise = fetch("json/tools.json")
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load tools.json");
+      return res.json();
+    })
+    .then(tools => {
+      tools.forEach(tool => {
+        searchData.push({
+          title: tool.title,
+          url: tool.link,
+          description: tool.description
+        });
+      });
+    })
+    .catch(err => console.error(err));
+
+  // --- 2. Load posts.json ---
+  const postsPromise = fetch("json/posts.json")
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load posts.json");
+      return res.json();
+    })
+    .then(posts => {
+      posts.forEach(post => {
+        searchData.push({
+          title: post.title,
+          url: post.link,
+          description: post.description
+        });
+      });
+    })
+    .catch(err => console.error(err));
+
+  // --- 3. Wait for both JSON files to finish ---
+  Promise.all([toolsPromise, postsPromise]).then(() => {
+    // --- Live search input ---
+    searchBox.addEventListener("input", function () {
+      const query = this.value.toLowerCase().trim();
+      suggestionsBox.innerHTML = "";
+      if (!query) return;
+
+      const results = searchData.filter(item =>
+        item.title.toLowerCase().includes(query) ||
+        (item.description && item.description.toLowerCase().includes(query))
+      );
+
+      results.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("suggestion-item");
+        div.innerHTML = `<strong>${item.title}</strong><br><small>${item.description || ""}</small>`;
+        div.addEventListener("click", () => {
+          window.location.href = item.url;
+        });
+        suggestionsBox.appendChild(div);
+      });
+    });
+
+    // --- Close suggestions when clicking outside ---
+    document.addEventListener("click", (e) => {
+      if (!searchBox.contains(e.target) && !suggestionsBox.contains(e.target)) {
+        suggestionsBox.innerHTML = "";
+      }
+    });
+  });
+}
