@@ -3,28 +3,35 @@
     "title": "Best 5 Free Ai Tools for Student in 2025",
     "description": "Know 5 best free AI tools for students in 2025 to enhance learning and productivity.",
     "image": "../blog/images/ai-tools-for-students.png",
-    "link": "../blog/allblog/best-5-free-ai-tools-for-students.html",
+    "link": "../blog/posts/best-5-free-ai-tools-for-students.html",
     "category": "ai tools"
   },
   {
     "title": "Convert PDF to JPG Online",
     "description": "The best online tool to convert PDF to JPG without losing quality.",
     "image": "../blog/images/convert-pdf-to-jpg-online.png",
-    "link": "../blog/allblog/convert-pdf-to-jpg-online.html",
+    "link": "../posts/allblog/convert-pdf-to-jpg-online.html",
     "category": "guides"
   },
   {
     "title": "Online tools vs Desktop Software",
     "description": "Learn the pros and cons of online tools vs downloadable software for various tasks.",
     "image": "../blog/images/online-tools-vs-downloadable-software.png",
-    "link": "../blog/allblog/online-tools-vs-downloadable-software.html",
+    "link": "../blog/posts/online-tools-vs-downloadable-software.html",
     "category": "general articles"
   },
-{
-    "title": "Why image resizer tool is important?",
-    "description": "Learn the benefits of online image resizer tools.",
-    "image": "../blog/images/why-online-image-resizer-tools.png",
-    "link": "../blog/allblog/why-image-resizer-tool-is-important.html",
-    "category": "online tools"
+  {
+    "title": "Top 10 Free Online Image Editors in 2025",
+    "description": "Discover the top 10 free online image editors in 2025 for quick and easy photo editing.",
+    "image": "../blog/images/free-online-image-editors.png",
+    "link": "../blog/posts/top-10-free-online-image-editors-in-2025.html",
+    "category": "image editing"
+  },
+  {
+    "title": "How to Compress PDF Files Online",
+    "description": "Learn how to compress PDF files online quickly and easily with our step-by-step guide.",
+    "image": "../blog/images/compress-pdf-files-online.png",
+    "link": "../blog/posts/how-to-compress-pdf-files-online.html",
+    "category": "guides"
   }
 ]
