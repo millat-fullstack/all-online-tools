@@ -114,16 +114,6 @@ a:hover {
   cursor: not-allowed;
 }
 
-/* Footer */
-
-.blog-footer {
-  background: #e4def3;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  font-size: 14px;
-}
-
 .single-blog {
   max-width: 800px;
   margin: 30px auto;
