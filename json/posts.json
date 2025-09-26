@@ -14,6 +14,13 @@
     "category": "guides"
   },
   {
+    "title": "How to Compress PDF Files Online",
+    "description": "Learn how to compress PDF files online quickly and easily with our step-by-step guide.",
+    "image": "../blog/images/how-to-compress-pdf-files-online.png",
+    "link": "../blog/posts/how-to-compress-pdf-files-online.html",
+    "category": "guides"
+  },
+  {
     "title": "Online tools vs Desktop Software",
     "description": "Learn the pros and cons of online tools vs downloadable software for various tasks.",
     "image": "../blog/images/online-tools-vs-downloadable-software.png",
@@ -23,15 +30,15 @@
   {
     "title": "Top 10 Free Online Image Editors in 2025",
     "description": "Discover the top 10 free online image editors in 2025 for quick and easy photo editing.",
-    "image": "../blog/images/free-online-image-editors.png",
+    "image": "../blog/images/top-10-free-online-image-editors-in-2025.png",
     "link": "../blog/posts/top-10-free-online-image-editors-in-2025.html",
     "category": "image editing"
   },
   {
-    "title": "How to Compress PDF Files Online",
-    "description": "Learn how to compress PDF files online quickly and easily with our step-by-step guide.",
-    "image": "../blog/images/compress-pdf-files-online.png",
-    "link": "../blog/posts/how-to-compress-pdf-files-online.html",
+    "title": "Why Use Online Image Resizer Tools?",
+    "description": "Learn the importance of using online image resizer tools for quick and easy image resizing.",
+    "image": "../blog/images/why-online-image-resizer-tools-are-essential-for-content-creators.png",
+    "link": "../blog/posts/why-online-image-resizer-tools-are-essential-for-content-creators.html",
     "category": "guides"
   }
 ]
