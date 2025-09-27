@@ -4,7 +4,7 @@
     "description": "Convert PDF pages into JPG images instantly.",
     "link": "tools/pdf-to-jpg.html",
     "category": "PDF",
-    "image": "../assets/tools-images/word-counter.png"
+    "image": "../assets/tools-images/pdf-to-jpg.png"
   },
   {
     "title": "Word Counter",
@@ -18,13 +18,125 @@
     "description": "Pick colors and copy HEX, RGB, or HSL codes.",
     "link": "tools/color-picker.html",
     "category": "Design",
-    "image": "../assets/tools-images/word-counter.png"
+    "image": "../assets/tools-images/color-picker.png"
   },
-    {
-    "title": "contact us",
-    "description": "Pick colors and copy HEX, RGB, or HSL codes.",
-    "link": "tools/color-picker.html",
-    "category": "Design",
-    "image": "../assets/tools-images/word-counter.png"
+  {
+    "title": "Emoji Picker",
+    "description": "Search and copy emojis instantly with one click.",
+    "link": "tools/emoji-picker.html",
+    "category": "Text",
+    "image": "../assets/tools-images/emoji-picker.png"
+  },
+  {
+    "title": "Extract Links",
+    "description": "Extract all links from text or webpages online.",
+    "link": "tools/extract-links.html",
+    "category": "Utility",
+    "image": "../assets/tools-images/extract-links.png"
+  },
+  {
+    "title": "Footer Generator",
+    "description": "Easily generate responsive website footers.",
+    "link": "tools/footer.html",
+    "category": "Web Development",
+    "image": "../assets/tools-images/footer.png"
+  },
+  {
+    "title": "Grammar Checker",
+    "description": "Check and fix grammar mistakes online instantly.",
+    "link": "tools/grammar-checker.html",
+    "category": "Text",
+    "image": "../assets/tools-images/grammar-checker.png"
+  },
+  {
+    "title": "Header Generator",
+    "description": "Create responsive website headers easily.",
+    "link": "tools/header.html",
+    "category": "Web Development",
+    "image": "../assets/tools-images/header.png"
+  },
+  {
+    "title": "Image Compressor",
+    "description": "Compress images without losing quality.",
+    "link": "tools/image-compressor.html",
+    "category": "Image",
+    "image": "../assets/tools-images/image-compressor.png"
+  },
+  {
+    "title": "Image to Word Converter",
+    "description": "Convert images to editable Word documents.",
+    "link": "tools/image-to-word-converter.html",
+    "category": "Document",
+    "image": "../assets/tools-images/image-to-word-converter.png"
+  },
+  {
+    "title": "New Tool",
+    "description": "Coming soon – a brand new online tool.",
+    "link": "tools/new-tool.html",
+    "category": "Utility",
+    "image": "../assets/tools-images/new-tool.png"
+  },
+  {
+    "title": "NewTool",
+    "description": "Placeholder for future tool release.",
+    "link": "tools/newtool.html",
+    "category": "Utility",
+    "image": "../assets/tools-images/newtool.png"
+  },
+  {
+    "title": "Passport Photo Maker",
+    "description": "Create passport-size photos instantly online.",
+    "link": "tools/passport-photo-maker.html",
+    "category": "Image",
+    "image": "../assets/tools-images/passport-photo-maker.png"
+  },
+  {
+    "title": "PNG to JPG Converter",
+    "description": "Convert PNG images to JPG format online.",
+    "link": "tools/png-to-jpg-converter.html",
+    "category": "Image",
+    "image": "../assets/tools-images/png-to-jpg-converter.png"
+  },
+  {
+    "title": "QR Code Generator",
+    "description": "Generate and scan QR codes for free.",
+    "link": "tools/qr-code-generator-create-free-qr-code-or-scan-r-code.html",
+    "category": "Utility",
+    "image": "../assets/tools-images/qr-code-generator.png"
+  },
+  {
+    "title": "Speech to Text",
+    "description": "Convert spoken words into text online.",
+    "link": "tools/speech-to-text.html",
+    "category": "Audio",
+    "image": "../assets/tools-images/speech-to-text.png"
+  },
+  {
+    "title": "Text to Slug",
+    "description": "Convert text into SEO-friendly slugs.",
+    "link": "tools/text-to-slug.html",
+    "category": "Text",
+    "image": "../assets/tools-images/text-to-slug.png"
+  },
+  {
+    "title": "Unit Converter",
+    "description": "Convert units like length, weight, and volume.",
+    "link": "tools/unit-converter.html",
+    "category": "Utility",
+    "image": "../assets/tools-images/unit-converter.png"
+  },
+  {
+    "title": "WebP to JPG Converter",
+    "description": "Convert WebP images into JPG format online.",
+    "link": "tools/webp-to-jpg.html",
+    "category": "Image",
+    "image": "../assets/tools-images/webp-to-jpg.png"
+  },
+  {
+    "title": "YouTube Thumbnail Downloader",
+    "description": "Download high-quality YouTube thumbnails online.",
+    "link": "tools/youtube-thumbnail-downloader.html",
+    "category": "Video",
+    "image": "../assets/tools-images/youtube-thumbnail-downloader.png"
   }
 ]
