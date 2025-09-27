@@ -15,21 +15,37 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!container) return;
 
       // Filter tools by category (case-insensitive)
-      const filtered = tools.filter(tool =>
-        tool.category.toLowerCase() === category.toLowerCase()
+      const filtered = tools.filter(
+        tool => tool.category.toLowerCase() === category.toLowerCase()
       );
 
       // Generate HTML
       if (filtered.length) {
-        container.innerHTML = filtered.map(tool => `
-          <div class="tool-card">
-            <a href="${tool.link}">
-              <img src="${tool.image}" alt="${tool.title}">
-              <h3>${tool.title}</h3>
-              <p>${tool.description}</p>
-            </a>
-          </div>
-        `).join("");
+        container.innerHTML = filtered
+          .map(tool => {
+            // ✅ Fix tool link so it always points to /tools/ at root
+            let link = tool.link;
+            if (!link.startsWith("/")) {
+              link = "/" + link;
+            }
+
+            // ✅ Fix image path in case it's relative
+            let image = tool.image;
+            if (!image.startsWith("/")) {
+              image = "/" + image;
+            }
+
+            return `
+              <div class="tool-card">
+                <a href="${link}">
+                  <img src="${image}" alt="${tool.title}">
+                  <h3>${tool.title}</h3>
+                  <p>${tool.description}</p>
+                </a>
+              </div>
+            `;
+          })
+          .join("");
       } else {
         container.innerHTML = `<p>No tools found in the "${category}" category.</p>`;
       }
