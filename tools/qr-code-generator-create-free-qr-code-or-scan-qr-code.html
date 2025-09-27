@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QR Code Generator & Scanner</title>
+    <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/suggested.css">
+
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
   <style>
@@ -88,6 +91,7 @@
   </style>
 </head>
 <body>
+  <div id="header"></div>
   <div class="container">
     <h2>QR Code Generator & Scanner</h2>
     <input type="text" id="qrText" placeholder="Enter text or URL">
@@ -200,5 +204,19 @@
       });
     }
   </script>
+
+<!-- Extra Sections -->
+
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
+
+<script src="../js/suggested.js"></script>
+
+
+  <div id="footer"></div>
+<script src="../js/include.js"></script>
+
 </body>
 </html>

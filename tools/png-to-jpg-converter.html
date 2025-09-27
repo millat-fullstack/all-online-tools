@@ -6,6 +6,9 @@
   <title>Image Converter & Editor | JPG ⇄ PNG, Crop, Rotate, Resize</title>
   <meta name="description" content="Convert JPG to PNG and PNG to JPG, crop, rotate, and resize images online. Fast client-side image editor — no uploads, secure and free." />
   <meta name="keywords" content="jpg to png, png to jpg, image converter, crop image online, rotate image, resize image, image editor online" />
+    <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/suggested.css">
+
   <style>
     /* Futuristic neon theme matching your site */
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,6 +86,7 @@
   </style>
 </head>
 <body>
+  <div id="header"></div>
   <div class="wrap">
     <h1>Image Converter & Editor — JPG ⇄ PNG</h1>
     <p class="lead">Convert images between JPG and PNG, crop (drag), rotate, resize, and download — fully client-side and secure.</p>
@@ -484,5 +488,19 @@
     // Update image when canvas is ready
     // (drawImageToCanvas already called after load)
   </script>
+
+<!-- Extra Sections -->
+
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
+
+<script src="../js/suggested.js"></script>
+
+
+  <div id="footer"></div>
+<script src="../js/include.js"></script>
+
 </body>
 </html>

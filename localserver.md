@@ -1,3 +1,5 @@
 cd all-online-tools
-http://localhost:8000
+
 python -m http.server
+
+http://localhost:8000

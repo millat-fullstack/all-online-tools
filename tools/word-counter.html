@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Word & Text Formatter | Count Words, Characters & Generate Hashtags</title>
+    <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/suggested.css">
   <meta name="description" content="Free text formatting tool: count words, characters, convert text to uppercase, lowercase, title case, and generate hashtags instantly. Fast and easy.">
   <meta name="keywords" content="word counter, character counter, text formatter, uppercase lowercase converter, hashtag generator, online tools">
   <link rel="canonical" href="https://yourusername.github.io/all-online-tools/word-text-formatter.html">
@@ -81,6 +83,8 @@
   </style>
 </head>
 <body>
+  <div id="header"></div>
+
   <h1>Word & Text Formatter Tool</h1>
   <div class="container">
     <textarea id="inputText" placeholder="Type or paste your text here..."></textarea>
@@ -146,5 +150,19 @@
       updateStats();
     }
   </script>
+
+<!-- Extra Sections -->
+
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
+
+<script src="../js/suggested.js"></script>
+
+
+  <div id="footer"></div>
+<script src="../js/include.js"></script>
+
 </body>
 </html>
