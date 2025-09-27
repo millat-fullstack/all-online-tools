@@ -13,7 +13,7 @@ function initSearch() {
   let searchData = [...staticPages];
 
   // --- 1. Load tools.json ---
-  const toolsPromise = fetch("json/tools.json")
+  const toolsPromise = fetch("./json/tools.json")
     .then(res => {
       if (!res.ok) throw new Error("Failed to load tools.json");
       return res.json();
@@ -30,7 +30,7 @@ function initSearch() {
     .catch(err => console.error(err));
 
   // --- 2. Load posts.json ---
-  const postsPromise = fetch("json/posts.json")
+  const postsPromise = fetch("./json/posts.json")
     .then(res => {
       if (!res.ok) throw new Error("Failed to load posts.json");
       return res.json();
@@ -52,28 +52,38 @@ function initSearch() {
     searchBox.addEventListener("input", function () {
       const query = this.value.toLowerCase().trim();
       suggestionsBox.innerHTML = "";
-      if (!query) return;
+
+      if (!query) {
+        suggestionsBox.style.display = "none";
+        return;
+      }
 
       const results = searchData.filter(item =>
         item.title.toLowerCase().includes(query) ||
         (item.description && item.description.toLowerCase().includes(query))
       );
 
-      results.forEach(item => {
-        const div = document.createElement("div");
-        div.classList.add("suggestion-item");
-        div.innerHTML = `<strong>${item.title}</strong><br><small>${item.description || ""}</small>`;
-        div.addEventListener("click", () => {
-          window.location.href = item.url;
+      if (results.length) {
+        suggestionsBox.style.display = "block";
+        results.forEach(item => {
+          const div = document.createElement("div");
+          div.classList.add("suggestion-item");
+          div.innerHTML = `<strong>${item.title}</strong><br><small>${item.description || ""}</small>`;
+          div.addEventListener("click", () => {
+            window.location.href = item.url;
+          });
+          suggestionsBox.appendChild(div);
         });
-        suggestionsBox.appendChild(div);
-      });
+      } else {
+        suggestionsBox.style.display = "none";
+      }
     });
 
     // --- Close suggestions when clicking outside ---
     document.addEventListener("click", (e) => {
       if (!searchBox.contains(e.target) && !suggestionsBox.contains(e.target)) {
         suggestionsBox.innerHTML = "";
+        suggestionsBox.style.display = "none";
       }
     });
   });
