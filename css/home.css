@@ -37,6 +37,7 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
   padding: 15px 20px;
 }
 
@@ -49,6 +50,7 @@ header .container {
   position: relative;
   max-width: 250px;
   width: 100%;
+  flex-shrink: 0;
 }
 
 .search-box input {
@@ -90,16 +92,20 @@ header .container {
 
 /* ===== Navigation ===== */
 nav {
-  position: sticky;             /* make nav sticky separately */
-  top: 0;
-  z-index: 1200;
-  background: #ffffff;          /* keep background solid */
+  margin-left: auto;            /* push nav to right */
+  background: #ffffff;
 }
 
 nav ul {
   list-style: none;
   display: flex;
   gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  position: relative;
 }
 
 nav ul li a {
@@ -107,10 +113,47 @@ nav ul li a {
   color: #2c2c2c;
   font-weight: 500;
   transition: color 0.3s ease;
+  padding: 8px 0;
+  display: block;
 }
 
 nav ul li a:hover {
   color: #8d6bcb;               /* softer hover purple */
+}
+
+/* ===== Dropdown Menu ===== */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  display: none;
+  min-width: 180px;
+  z-index: 1000;
+}
+
+.dropdown-menu li {
+  margin: 0;
+}
+
+.dropdown-menu li a {
+  padding: 10px 15px;
+  white-space: nowrap;
+  color: #2c2c2c;
+}
+
+.dropdown-menu li a:hover {
+  background: #f5f2fc;
+  color: #8d6bcb;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
 /* ===== Notice Bar ===== */
