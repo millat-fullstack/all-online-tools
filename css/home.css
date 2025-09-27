@@ -51,6 +51,7 @@ header .container {
   max-width: 250px;
   width: 100%;
   flex-shrink: 0;
+  margin-left: 40px;
 }
 
 .search-box input {
