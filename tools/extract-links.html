@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Extract Links | All Online Tools</title>
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/suggested.css">
+
   <style>
     body {
   font-family: 'Inter', sans-serif;
@@ -130,6 +132,8 @@ button {
     }
   </script>
 
+<!-- Extra Sections -->
+
 <section id="suggested-tools">
   <h2>Suggested Tools</h2>
   <div class="suggested-list"></div>
@@ -138,19 +142,8 @@ button {
 <script src="../js/suggested.js"></script>
 
 
- <div id="footer"></div>
+  <div id="footer"></div>
+<script src="../js/include.js"></script>
 
-  <script>
-    // Load header
-    fetch("header.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("header").innerHTML = data);
-
-          // Load footer
-    fetch("footer.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("footer").innerHTML = data);
-      
-    </script>
 </body>
 </html>

@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Speech to Text Converter | Voice Typing Tool</title>
+    <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/suggested.css">
   <meta name="description" content="Free Speech to Text Converter (voice typing) using the Web Speech API. Dictate, copy, and download transcripts instantly. Works in Chrome and other supported browsers." />
   <meta name="keywords" content="speech to text, voice typing, speech recognition online, dictate text, web speech api" />
   <style>
@@ -94,6 +96,7 @@
   </style>
 </head>
 <body>
+  <div id="header"></div>
   <div class="container">
     <h1>Speech → Text Converter (Voice Typing)</h1>
     <p class="lead">Dictate using your microphone and convert spoken words into editable text instantly. Best used in Chrome/Edge (desktop & mobile) which support the Web Speech API.</p>
@@ -305,5 +308,19 @@
       }
     });
   </script>
+
+<!-- Extra Sections -->
+
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
+
+<script src="../js/suggested.js"></script>
+
+
+  <div id="footer"></div>
+<script src="../js/include.js"></script>
+
 </body>
 </html>

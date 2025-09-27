@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Color Picker | All Online Tools</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/suggested.css">
   
   <style>
   
@@ -274,6 +275,8 @@ function copyText(id){
 }
 </script>
 
+/* Extra Sections */
+
 <section id="suggested-tools">
   <h2>Suggested Tools</h2>
   <div class="suggested-list"></div>
@@ -282,19 +285,8 @@ function copyText(id){
 <script src="../js/suggested.js"></script>
 
 
- <div id="footer"></div>
+  <div id="footer"></div>
+<script src="../js/include.js"></script>
 
-  <script>
-    // Load header
-    fetch("header.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("header").innerHTML = data);
-
-          // Load footer
-    fetch("footer.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("footer").innerHTML = data);
-      
-    </script>
 </body>
 </html>

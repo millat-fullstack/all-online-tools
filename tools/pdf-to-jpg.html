@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PDF to JPG Converter</title>
+    <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/suggested.css">
+
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -52,6 +55,7 @@
   </style>
 </head>
 <body>
+  <div id="header"></div>
   <div class="container">
     <h1>📄 PDF to JPG Converter</h1>
     <p>Convert your PDF pages into JPG images directly in your browser.</p>
@@ -113,5 +117,19 @@
       fileReader.readAsArrayBuffer(file);
     }
   </script>
+
+<!-- Extra Sections -->
+
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
+
+<script src="../js/suggested.js"></script>
+
+
+  <div id="footer"></div>
+<script src="../js/include.js"></script>
+
 </body>
 </html>
