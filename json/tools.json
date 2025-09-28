@@ -63,20 +63,6 @@
     "image": "../assets/suggested-tools.png"
   },
   {
-    "title": "New Tool",
-    "description": "Coming soon – a brand new online tool.",
-    "link": "tools/new-tool.html",
-    "category": "Utility",
-    "image": "../assets/suggested-tools.png"
-  },
-  {
-    "title": "NewTool",
-    "description": "Placeholder for future tool release.",
-    "link": "tools/newtool.html",
-    "category": "Utility",
-    "image": "../assets/suggested-tools.png"
-  },
-  {
     "title": "Passport Photo Maker",
     "description": "Create passport-size photos instantly online.",
     "link": "tools/passport-photo-maker.html",
