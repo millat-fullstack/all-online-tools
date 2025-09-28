@@ -8,72 +8,124 @@
   <link rel="stylesheet" href="../css/suggested.css">
   <meta name="description" content="Free WebP to JPG converter. Upload, drag & drop, or paste an image or URL to convert WebP to JPG instantly. Fast, simple, and secure.">
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: #fff;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      color: #0ff;
-      margin-bottom: 20px;
-    }
-    .container {
-      max-width: 650px;
-      margin: auto;
-      background: rgba(20,20,40,0.95);
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,200,255,0.4);
-      text-align: center;
-    }
-    .drop-zone {
-      border: 2px dashed #0ff;
-      border-radius: 12px;
-      padding: 30px;
-      margin: 15px 0;
-      cursor: pointer;
-      background: rgba(0,255,255,0.05);
-    }
-    .drop-zone:hover {
-      background: rgba(0,255,255,0.15);
-    }
-    .preview {
-      margin-top: 20px;
-      max-width: 100%;
-      display: none;
-      border-radius: 8px;
-    }
-    input[type="file"], input[type="text"] {
-      margin: 15px 0;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      width: 80%;
-    }
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background: rgba(0,255,255,0.15);
-      color: #0ff;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover {
-      background: rgba(0,255,255,0.35);
-      box-shadow: 0 0 8px rgba(0,200,255,0.5);
-    }
-  </style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f8f6fb;
+    color: #2c2c2c;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  .page-container {
+    padding: 40px;
+    max-width: 900px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  h1 {
+    text-align: center;
+    color: #a17edc; /* primary */
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: 600;
+    margin-top: 30px;
+  }
+  h3 {
+    color: #2c2c2c;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .drop-zone {
+    border-radius: 12px;
+    padding: 35px;
+    font-size: 16px;
+    color: #555;
+    border: 2px dashed #e8e0f5; /* normal */
+    width: 100%; 
+    margin: 20px 0;
+    cursor: pointer;
+    background: #f8f6fb;
+    transition: 0.3s;
+    max-width: 700px; /* increased from 500px */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    user-select: none;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    gap: 10px;
+    flex-direction: column;
+    font-size: 18px;
+    color: #6b4de6;
+    transition: 0.3s;
+    border: 2px dashed #a17edc; /* primary */
+
+  }
+
+  .drop-zone:hover {
+    background: #f0ebfa;
+    border-color: #8d6bcb; /* hover */
+  }
+
+  .preview {
+    margin-top: 20px;
+    max-width: 100%;
+    display: none;
+    border-radius: 10px;
+    border: 1px solid #e8e0f5;
+  }
+
+  input[type="file"], input[type="text"] {
+    margin: 20px 0;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #e8e0f5;
+    width: 90%;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    color: #2c2c2c;
+  }
+
+  button {
+    margin-top: 15px;
+    padding: 10px 22px;
+    background: #a17edc; /* primary */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #8d6bcb; /* hover */
+  }
+</style>
+
 </head>
 <body>
 <div id="header"></div>
 
   <h1>WebP to JPG Converter</h1>
-  <div class="container">
+  <div class="page-container">
     <h3>Option 1: Upload, Drag & Drop, or Paste an Image</h3>
     <div class="drop-zone" id="dropZone">Drop or Paste WebP Image Here</div>
     <input type="file" id="fileInput" accept="image/webp">
