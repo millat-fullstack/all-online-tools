@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📏 Image Resizer Tool</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .tool-box {
+      max-width: 1200px;
+      margin: 20px auto;
+      display: flex;
+      gap: 20px;
+    }
+    .left-panel, .right-panel {
+      flex: 1;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .upload-zone {
+      border: 2px dashed #ccc;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+    canvas {
+      max-width: 100%;
+      border: 1px solid #ddd;
+      margin: 10px auto;
+      display: block;
+      cursor: grab;
+    }
+    .controls {
+      margin-top: 15px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    input[type="number"], input[type="range"] {
+      width: 100px;
+      margin: 5px;
+      padding: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #8d6bcb;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:hover {
+      background: #7552b6;
+    }
+    .preset-menu {
+      position: relative;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .preset-dropdown {
+      display: none;
+      position: absolute;
+      top: 30px;
+      left: 0;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+    .preset-dropdown div {
+      padding: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .preset-dropdown div:hover {
+      background: #f5f5f5;
+    }
+    .preset-menu:hover .preset-dropdown {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<div id="header"></div>
+
+<div class="tool-box">
+  <!-- Left panel -->
+  <div class="left-panel">
+    <h2>Upload & Resize</h2>
+    <div class="upload-zone" id="uploadZone">
+      <p>Click or drag & drop image here</p>
+      <input type="file" id="fileInput" accept="image/*" hidden>
+    </div>
+    
+    <div class="controls">
+      <label>Custom Size:</label>
+      <input type="number" id="customWidth" placeholder="Width"> x
+      <input type="number" id="customHeight" placeholder="Height">
+      <button onclick="resizeImage()">Resize</button>
+      <button onclick="resetImage()">Reset</button>
+    </div>
+
+    <div class="controls">
+      <label>Zoom:</label>
+      <input type="range" id="zoomSlider" min="0.1" max="3" step="0.01" value="1">
+    </div>
+
+    <h2>Quick Presets</h2>
+    <div class="preset-menu">
+      <button>Facebook ▼</button>
+      <div class="preset-dropdown">
+        <div onclick="setPreset(820,312)">Facebook Cover (820x312)</div>
+        <div onclick="setPreset(1200,628)">Facebook Ad (1200x628)</div>
+        <div onclick="setPreset(1080,1080)">Facebook Post (1080x1080)</div>
+      </div>
+    </div>
+    <br>
+    <div class="preset-menu">
+      <button>Instagram ▼</button>
+      <div class="preset-dropdown">
+        <div onclick="setPreset(1080,1080)">Instagram Square (1080x1080)</div>
+        <div onclick="setPreset(1080,1350)">Instagram Portrait (1080x1350)</div>
+        <div onclick="setPreset(1080,566)">Instagram Landscape (1080x566)</div>
+      </div>
+    </div>
+    <br>
+    <div class="preset-menu">
+      <button>YouTube ▼</button>
+      <div class="preset-dropdown">
+        <div onclick="setPreset(2560,1440)">YouTube Channel Art (2560x1440)</div>
+        <div onclick="setPreset(1280,720)">YouTube Thumbnail (1280x720)</div>
+      </div>
+    </div>
+
+    <button onclick="downloadImage()">⬇️ Download Resized Image</button>
+  </div>
+
+  <!-- Right panel -->
+  <div class="right-panel">
+    <h2>Preview</h2>
+    <canvas id="canvas"></canvas>
+  </div>
+</div>
+
+<script>
+  const uploadZone = document.getElementById("uploadZone");
+  const fileInput = document.getElementById("fileInput");
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  const customWidth = document.getElementById("customWidth");
+  const customHeight = document.getElementById("customHeight");
+  const zoomSlider = document.getElementById("zoomSlider");
+
+  let img = null;
+  let imgType = "image/png";
+  let scale = 1;
+  let offsetX = 0;
+  let offsetY = 0;
+  let isDragging = false;
+  let startX, startY;
+
+  // Upload events
+  uploadZone.addEventListener("click", () => fileInput.click());
+  fileInput.addEventListener("change", e => {
+    if (e.target.files[0]) loadImage(e.target.files[0]);
+  });
+  uploadZone.addEventListener("dragover", e => e.preventDefault());
+  uploadZone.addEventListener("drop", e => {
+    e.preventDefault();
+    if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
+  });
+
+  function loadImage(file) {
+    imgType = file.type; 
+    const reader = new FileReader();
+    reader.onload = e => {
+      img = new Image();
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+
+        customWidth.value = img.width;
+        customHeight.value = img.height;
+        scale = 1;
+        offsetX = 0;
+        offsetY = 0;
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // Zoom
+  zoomSlider.addEventListener("input", () => {
+    scale = parseFloat(zoomSlider.value);
+    drawImage();
+  });
+
+  // Drag
+  canvas.addEventListener("mousedown", e => {
+    isDragging = true;
+    startX = e.offsetX - offsetX;
+    startY = e.offsetY - offsetY;
+    canvas.style.cursor = "grabbing";
+  });
+  canvas.addEventListener("mousemove", e => {
+    if (isDragging) {
+      offsetX = e.offsetX - startX;
+      offsetY = e.offsetY - startY;
+      drawImage();
+    }
+  });
+  canvas.addEventListener("mouseup", () => {
+    isDragging = false;
+    canvas.style.cursor = "grab";
+  });
+  canvas.addEventListener("mouseleave", () => {
+    isDragging = false;
+    canvas.style.cursor = "grab";
+  });
+
+  function drawImage() {
+    if (!img) return;
+    const w = parseInt(customWidth.value);
+    const h = parseInt(customHeight.value);
+    canvas.width = w;
+    canvas.height = h;
+    ctx.clearRect(0, 0, w, h);
+
+    const iw = img.width * scale;
+    const ih = img.height * scale;
+    const dx = offsetX + (w - iw) / 2;
+    const dy = offsetY + (h - ih) / 2;
+
+    ctx.drawImage(img, dx, dy, iw, ih);
+  }
+
+  function resizeImage() {
+    if (!img) return alert("Please upload an image first!");
+    scale = 1;
+    offsetX = 0;
+    offsetY = 0;
+    drawImage();
+  }
+
+  function resetImage() {
+    if (!img) return;
+    customWidth.value = img.width;
+    customHeight.value = img.height;
+    scale = 1;
+    offsetX = 0;
+    offsetY = 0;
+    zoomSlider.value = 1;
+    drawImage();
+  }
+
+  function setPreset(w,h) {
+    customWidth.value = w;
+    customHeight.value = h;
+    resizeImage();
+  }
+
+  function downloadImage() {
+    if (!img) return alert("Upload and resize an image first!");
+    const link = document.createElement("a");
+    link.download = "resized." + imgType.split("/")[1];
+    link.href = canvas.toDataURL(imgType);
+    link.click();
+  }
+</script>
+</body>
+</html>
