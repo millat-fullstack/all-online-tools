@@ -53,7 +53,7 @@
     "description": "Compress images without losing quality.",
     "link": "tools/image-compressor.html",
     "category": "Image",
-    "image": "../assets/suggested-tools.png"
+    "image": "../assets/online-tools.png"
   },
   {
     "title": "Image to Word Converter",
@@ -109,7 +109,7 @@
     "description": "Convert text into SEO-friendly slugs.",
     "link": "tools/text-to-slug.html",
     "category": "Text",
-    "image": "../assets/suggested-tools.png"
+    "image": "../assets/online-tools.png"
   },
   {
     "title": "Unit Converter",
@@ -130,6 +130,13 @@
     "description": "Download high-quality YouTube thumbnails online.",
     "link": "tools/youtube-thumbnail-downloader.html",
     "category": "Video",
-    "image": "../assets/suggested-tools.png"
+    "image": "../assets/online-tools.png"
+  },
+  {
+    "title": "Free Image Resizer",
+    "description": "Resize images online for free.",
+    "link": "tools/image-resizer.html",
+    "category": "Image",
+    "image": "../assets/online-tools.png"
   }
 ]
