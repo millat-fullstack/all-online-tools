@@ -4,17 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>📏 Image Resizer Tool</title>
+    <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/suggested.css">
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
-    }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f8f6fb;
+    color: #2c2c2c;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
     .tool-box {
       max-width: 1200px;
       margin: 20px auto;
       display: flex;
       gap: 20px;
+      padding: 20px;
+      box-sizing: border-box;
     }
     .left-panel, .right-panel {
       flex: 1;
@@ -30,6 +37,12 @@
       cursor: pointer;
       margin-bottom: 20px;
       border-radius: 10px;
+    }
+      h1 { text-align: center; color: #6b4de6; margin-bottom: 10px; margin-top: 20px; }
+
+    h2 { color: #6b4de6; margin-bottom: 10px; }
+    .upload-zone:hover {
+      background: #f0f0f0;
     }
     canvas {
       max-width: 100%;
@@ -53,7 +66,7 @@
       padding: 5px;
     }
     button {
-      margin-top: 15px;
+      margin-top: 5px;
       padding: 10px 20px;
       border: none;
       border-radius: 8px;
@@ -97,6 +110,8 @@
 <body>
 <div id="header"></div>
 
+<h1>📏 Image Resizer Tool</h1>
+
 <div class="tool-box">
   <!-- Left panel -->
   <div class="left-panel">
@@ -119,7 +134,7 @@
       <input type="range" id="zoomSlider" min="0.1" max="3" step="0.01" value="1">
     </div>
 
-    <h2>Quick Presets</h2>
+    <h3>Quick Presets</h3>
     <div class="preset-menu">
       <button>Facebook ▼</button>
       <div class="preset-dropdown">
@@ -284,5 +299,19 @@
     link.click();
   }
 </script>
+
+  <!-- Extra Sections -->
+
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
+
+<script src="../js/suggested.js"></script>
+
+
+  <div id="footer"></div>
+<script src="../js/include.js"></script>
+
 </body>
 </html>
