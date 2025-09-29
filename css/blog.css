@@ -5,7 +5,6 @@ body {
   margin: 0;
   padding: 0;
   color: #2c2c2c;
-
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -121,38 +120,4 @@ a:hover {
 .pagination button:disabled {
   background: #ccc;
   cursor: not-allowed;
-}
-
-.single-blog {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 20px;
-  background: #fff;
-  border: 1px solid #e8e0f5;
-  border-radius: 8px;
-}
-
-.single-blog .intro {
-  font-size: 16px;
-  font-style: italic;
-  margin-bottom: 10px;
-}
-
-.blog-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-.blog-image {
-  width: 100%;
-  border-radius: 6px;
-  margin: 15px 0;
-}
-
-.blog-content p {
-  margin-bottom: 15px;
-  line-height: 1.6;
 }
