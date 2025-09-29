@@ -24,7 +24,7 @@
     "title": "Emoji Picker",
     "description": "Search and copy emojis instantly with one click.",
     "link": "tools/emoji-picker.html",
-    "category": "Text",
+    "category": "Miscellaneous",
     "image": "../assets/online-tools.png"
   },
   {
@@ -124,5 +124,54 @@
     "link": "tools/image-resizer.html",
     "category": "Image",
     "image": "../assets/online-tools.png"
+  },
+  {
+    "title": "PDF Compressor",
+    "description": "Compress PDF files to reduce size online.",
+    "link": "tools/pdf-compressor.html",
+    "category": "PDF",
+    "image": "../assets/online-tools.png"
+  },
+  {
+    "title": "Website Screenshot",
+    "description": "Capture full-page website screenshots online.",
+    "link": "tools/website-screenshot.html",
+    "category": "Utility",
+    "image": "../assets/suggested-tools.png"
+  },
+  {
+    "title": "PDF to Word Converter",
+    "description": "Convert PDF documents into editable Word files.",
+    "link": "tools/pdf-to-word-converter.html",
+    "category": "Document",
+    "image": "../assets/online-tools.png"
+  },
+  {
+    "title": "Image to PDF Converter",
+    "description": "Convert images into PDF documents easily.",
+    "link": "tools/image-to-pdf-converter.html",
+    "category": "PDF",
+    "image": "../assets/suggested-tools.png"
+  },
+  {
+    "title": "PDF Merger",
+    "description": "Merge multiple PDF files into one online.",
+    "link": "tools/pdf-merger.html",
+    "category": "PDF",
+    "image": "../assets/suggested-tools.png"
+  },
+  {
+    "title": "PDF Splitter",
+    "description": "Split PDF files into separate pages online.",
+    "link": "tools/pdf-splitter.html",
+    "category": "PDF",
+    "image": "../assets/suggested-tools.png"
+  },
+  {
+    "title": "Password Generator",
+    "description": "Generate strong and secure passwords online.",
+    "link": "tools/password-generator.html",
+    "category": "Utility",
+    "image": "../assets/suggested-tools.png"
   }
 ]
