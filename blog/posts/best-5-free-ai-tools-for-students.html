@@ -5,16 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>This is tech</title>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../css/style.css">
+
 </head>
 
 <body>
 
     <div id="header"></div>
-
-<header class="blog-header">
-  <h1>Best 5 Free AI Tools for Students</h1>
-</header>
+  
+    <h1>Best 5 Free AI Tools for Students</h1>
 
 <article class="single-blog">
   <p class="intro">
@@ -66,20 +65,13 @@
     <a href="blog.html">← Back to Blog</a>
   </footer>
 
+  <!-- Extra Sections -->
+
   <div id="footer"></div>
+<script src="../js/include.js"></script>
+<script src="../js/main.js"></script>
 
-  <script>
-    // Load header
-    fetch("../../tools/header.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("header").innerHTML = data);
-
-          // Load footer
-    fetch("../../tools/footer.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("footer").innerHTML = data);
-      
-    </script> 
-  
 </body>
 </html>
+
+
