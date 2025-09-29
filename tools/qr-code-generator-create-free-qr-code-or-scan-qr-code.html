@@ -19,7 +19,6 @@
     padding: 0;
     min-height: 100vh;
   }
-
   .page-container {
     padding: 40px;
     max-width: 900px;
@@ -32,6 +31,11 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
+  }
+  
+  h1 {
+    color: #6b4de6;
+    margin-bottom: 20px;
   }
 
     input[type="text"] {
@@ -97,7 +101,7 @@
 <body>
   <div id="header"></div>
   <div class="page-container">
-    <h2>QR Code Generator & Scanner</h2>
+    <h1>QR Code Generator & Scanner</h1>
     <input type="text" id="qrText" placeholder="Enter text or URL">
     <canvas id="qrCanvas"></canvas>
     <div id="downloadButtons" style="display:none;">

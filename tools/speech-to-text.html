@@ -6,62 +6,116 @@
 <title>Speech to Text Converter | Voice & Audio File Transcription</title>
 <link rel="stylesheet" href="../css/home.css">
 <link rel="stylesheet" href="../css/suggested.css">
+
 <style>
-/* --- Shared site look (matches your other tools) --- */
 body {
   font-family: 'Inter', sans-serif;
-  background:#f8f6fb;
-  color:#2c2c2c;
-  margin:0;
-  padding:0;
-  min-height:100vh;
+  background: #f8f6fb;
+  color: #2c2c2c;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
+
 .page-container {
-  padding:40px;
-  max-width:900px;
-  margin:50px auto;
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.1);
-  text-align:center;
-  box-sizing:border-box;
-  position:relative;
-  overflow:hidden;
-  z-index:1;
+  padding: 40px;
+  max-width: 900px;
+  margin: 50px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #e8e0f5; /* subtle border */
 }
-h1{color:#6b4de6;margin-bottom:10px;}
-.lead{color:#555;margin-bottom:25px;}
-.controls{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:20px;}
-select,button,input[type=file]{
-  padding:10px 16px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  background:#f8f6fb;
-  cursor:pointer;
-  font-weight:600;
+
+h1 {
+  color: #a17edc; /* primary */
+  margin-bottom: 10px;
 }
-button:hover{background:#ece7fa;}
-.status{margin-bottom:12px;color:#6b4de6;font-weight:600;}
-.transcript{
-  margin-top:12px;
-  background:#fafafa;
-  border:1px solid #eee;
-  padding:16px;
-  border-radius:8px;
-  min-height:160px;
-  white-space:pre-wrap;
-  text-align:left;
-  overflow-y:auto;
+
+.lead {
+  color: #555;
+  margin-bottom: 25px;
 }
-.actions{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
-.note{margin-top:16px;color:#666;font-size:0.92rem;}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+select,
+button,
+input[type=file] {
+  padding: 10px 16px;
+  border: 1px solid #e8e0f5;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color: #2c2c2c;
+  transition: 0.3s;
+}
+
+button {
+  background: #a17edc; /* primary */
+  color: #fff;
+  border: none;
+}
+
+button:hover {
+  background: #8d6bcb; /* hover */
+  color: #fff;
+}
+
+.status {
+  margin-bottom: 12px;
+  color: #8a56e6; /* accent */
+  font-weight: 600;
+}
+
+.transcript {
+  margin-top: 12px;
+  background: #fdfdfd;
+  border: 1px solid #e8e0f5;
+  padding: 16px;
+  border-radius: 10px;
+  min-height: 160px;
+  white-space: pre-wrap;
+  text-align: left;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  color: #2c2c2c;
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.note {
+  margin-top: 16px;
+  color: #666;
+  font-size: 0.9rem;
+}
 </style>
+
+
 </head>
 <body>
 <div id="header"></div>
 
 <div class="page-container">
-  <h1>🎙️ Speech → Text Converter</h1>
+  <h1>🎙️ Speech to Text Converter</h1>
   <p class="lead">Dictate live or upload an audio file to convert it to editable text – all in your browser.</p>
 
   <!-- ===== Live Microphone Section ===== -->
