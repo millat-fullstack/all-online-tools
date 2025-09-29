@@ -10,7 +10,7 @@ const nextBtn = document.getElementById("nextBtn");
 const pageInfo = document.getElementById("pageInfo");
 
 // Fetch posts.json
-fetch("../../json/posts.json")
+fetch("../json/posts.json")
   .then(res => res.json())
   .then(data => {
     blogPosts = data;

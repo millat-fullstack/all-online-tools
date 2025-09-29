@@ -10,6 +10,6 @@ async function loadHTML(id, file) {
   }
 }
 
-// Load header & footer
-loadHTML("header", "../html/header.html");
-loadHTML("footer", "../html/footer.html");
+// Always load from site root
+loadHTML("header", "/html/header.html");
+loadHTML("footer", "/html/footer.html");
