@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>This is tech</title>
-  <link rel="stylesheet" href="../style.css">
+  <title>Color Picker | All Online Tools</title>
+  <link rel="stylesheet" href="../../css/home.css">
+  <link rel="stylesheet" href="../../css/blog.css">
 </head>
 
 <body>
+  <div id="header"></div>
 
-    <div id="header"></div>
+  <!-- Blog Post Content -->
 
-<header class="blog-header">
   <h1>The Benefits of Using Online Tools vs. Downloadable Software</h1>
 </header>
 
@@ -101,20 +101,8 @@
         <a href="blog.html">← Back to Blog</a>
     </footer>
     
-  <div id="footer"></div>
+<div id="footer"></div>
+<script src="../../js/include.js"></script>
 
-  <script>
-    // Load header
-    fetch("../../tools/header.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("header").innerHTML = data);
-
-          // Load footer
-    fetch("../../tools/footer.html")
-      .then(res => res.text())
-      .then(data => document.getElementById("footer").innerHTML = data);
-      
-    </script> 
-  
 </body>
 </html>
