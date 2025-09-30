@@ -1,38 +1,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Pages -->
   <url>
     <loc>https://nextonlinetools.com/</loc>
   </url>
+  <url>
+    <loc>https://nextonlinetools.com/about.html</loc>
+  </url>
+  <url>
+    <loc>https://nextonlinetools.com/blog.html</loc>
+  </url>
+  <url>
+    <loc>https://nextonlinetools.com/contact.html</loc>
+  </url>
+
+  <!-- Tools -->
   <url>
     <loc>https://nextonlinetools.com/tools/color-picker.html</loc>
   </url>
   <url>
     <loc>https://nextonlinetools.com/tools/emoji-picker.html</loc>
   </url>
-    <url>
+  <url>
     <loc>https://nextonlinetools.com/tools/extract-links.html</loc>
   </url>
-      <url>
+  <url>
     <loc>https://nextonlinetools.com/tools/grammar-checker.html</loc>
   </url>
-        <url>
+  <url>
     <loc>https://nextonlinetools.com/tools/image-compressor.html</loc>
   </url>
   <url>
     <loc>https://nextonlinetools.com/tools/image-to-word-converter.html</loc>
   </url>
-    <url>
+  <url>
     <loc>https://nextonlinetools.com/tools/passport-photo-maker.html</loc>
   </url>
   <url>
     <loc>https://nextonlinetools.com/tools/png-to-jpg.html</loc>
   </url>
-    <url>
+  <url>
     <loc>https://nextonlinetools.com/tools/qr-code-generator-create-free-qr-code-or-scan-qr-code.html</loc>
   </url>
   <url>
     <loc>https://nextonlinetools.com/tools/speech-to-text.html</loc>
   </url>
-    <url>
+  <url>
     <loc>https://nextonlinetools.com/tools/text-to-slug.html</loc>
   </url>
   <url>
@@ -44,7 +56,33 @@
   <url>
     <loc>https://nextonlinetools.com/tools/word-counter.html</loc>
   </url>
-    <url>
+  <url>
     <loc>https://nextonlinetools.com/tools/youtube-thumbnail-downloader.html</loc>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://nextonlinetools.com/blog/posts/best-5-free-ai-tools-for-students.html</loc>
+  </url>
+  <url>
+    <loc>https://nextonlinetools.com/blog/posts/convert-pdf-to-jpg-online.html</loc>
+  </url>
+  <url>
+    <loc>https://nextonlinetools.com/blog/posts/how-to-compress-pdf-files-online.html</loc>
+  </url>
+  <url>
+    <loc>https://nextonlinetools.com/blog/posts/online-tools-vs-downloadable-software.html</loc>
+  </url>
+  <url>
+    <loc>https://nextonlinetools.com/blog/posts/top-10-free-online-image-editors-in-2025.html</loc>
+  </url>
+  <url>
+    <loc>https://nextonlinetools.com/blog/posts/why-online-image-resizer-tools-are-essential-for-content-creators.html</loc>
+  </url>
+  <url>
+    <loc>https://nextonlinetools.com/blog/posts/how-to-convert-jpg-to-png-online.html</loc>
+  </url>
+  <url>
+    <loc>https://nextonlinetools.com/blog/posts/top-5-free-online-pdf-editors-2025.html</loc>
   </url>
 </urlset>
