@@ -1,4 +1,12 @@
-/* ===== General Reset ===== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add some spacing when jumping to tools section */
+#tools {
+  scroll-margin-top: 150px; /* adjust based on your header height */
+}
 
 * {
   margin: 0;
@@ -13,6 +21,35 @@ body {
   line-height: 1.7;
   width: 100%;
   overflow-x: hidden;
+}
+
+/* Top Header */
+.header-top {
+  text-align: center;
+  padding: 40px 20px 30px;
+  margin-bottom: 30px;
+  background: #e4def3;
+  border-bottom: 1px solid #e5e5e5;
+  color: #2A2340;
+}
+
+.top-btn {
+  background: #9B6CE3;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.top-btn:hover {
+  background: #7F4FDB;
 }
 
 /* ===== Containers ===== */
@@ -58,7 +95,7 @@ header .container {
 .search-box input {
   width: 100%;
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: 5px;
   border: 1px solid #D1CEDB;
   outline: none;
   font-size: 0.95em;
@@ -76,7 +113,7 @@ header .container {
   right: 0;
   background: #fff;
   border: 1px solid #E8E0F5;
-  border-radius: 8px;
+  border-radius: 5px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   z-index: 9999;
   display: none;
@@ -130,7 +167,7 @@ nav ul li a:hover {
   left: 0;
   background: #fff;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  border-radius: 8px;
+  border-radius: 5px;
   list-style: none;
   padding: 10px 0;
   margin: 0;
@@ -179,7 +216,7 @@ nav ul li a:hover {
 .main-content {
   background: #fff;
   padding: 40px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid #E8E0F5;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -203,7 +240,7 @@ button,
   color: #fff;
   border: none;
   padding: 12px 20px;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 15px;
   font-weight: 500;
@@ -226,7 +263,7 @@ button:hover,
 .tool-card {
   background: #fff;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid #E8E0F5;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -249,7 +286,7 @@ button:hover,
   padding: 8px 16px;
   background: #9B6CE3;
   color: #fff;
-  border-radius: 6px;
+  border-radius: 5px;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
@@ -269,7 +306,7 @@ button:hover,
 .sidebar {
   background: #fff;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid #E8E0F5;
 }
 
@@ -304,7 +341,7 @@ button:hover,
 .tools-article {
   color: #6C6280;
   padding: 60px 50px;
-  border-radius: 12px;
+  border-radius: 5px;
   max-width: 1100px;
   margin: 50px auto;
 }
