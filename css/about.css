@@ -84,7 +84,7 @@ button:hover, .btn:hover {
 .vision-card {
   background: #fff;
   padding: 25px 20px;
-  border-radius: 12px;
+  border-radius: 5px;
   border: 1px solid #e8e0f5;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
@@ -136,7 +136,7 @@ a:hover {
 /* ===== Inputs ===== */
 input, textarea, select {
   border: 1px solid #e8e0f5;
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 10px;
   font-family: 'Inter', sans-serif;
   width: 100%;
