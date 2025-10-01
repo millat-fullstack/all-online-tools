@@ -2,114 +2,107 @@
   {
     "title": "PDF to JPG Converter",
     "description": "Convert PDF pages into JPG images instantly.",
-    "link": "tools/pdf-to-jpg.html",
+    "link": "https://nextonlinetools.com/tools/pdf-to-jpg.html",
     "category": "PDF",
-    "image": "../assets/online-tools.png"
+    "image": "https://nextonlinetools.com/assets/online-tools.png"
   },
   {
     "title": "Word Counter",
     "description": "Count words, characters, and sentences online.",
-    "link": "tools/word-counter.html",
+    "link": "https://nextonlinetools.com/tools/word-counter.html",
     "category": "Text",
-    "image": "../assets/online-tools.png"
+    "image": "https://nextonlinetools.com/assets/online-tools.png"
   },
   {
     "title": "Color Picker",
     "description": "Pick colors and copy HEX, RGB, or HSL codes.",
-    "link": "tools/color-picker.html",
+    "link": "https://nextonlinetools.com/tools/color-picker.html",
     "category": "Design",
-    "image": "../assets/online-tools.png"
+    "image": "https://nextonlinetools.com/assets/online-tools.png"
   },
   {
     "title": "Emoji Picker",
     "description": "Search and copy emojis instantly with one click.",
-    "link": "tools/emoji-picker.html",
+    "link": "https://nextonlinetools.com/tools/emoji-picker.html",
     "category": "Miscellaneous",
-    "image": "../assets/online-tools.png"
+    "image": "https://nextonlinetools.com/assets/online-tools.png"
   },
   {
     "title": "Extract Links",
     "description": "Extract all links from text or webpages online.",
-    "link": "tools/extract-links.html",
+    "link": "https://nextonlinetools.com/tools/extract-links.html",
     "category": "Utility",
-    "image": "../assets/suggested-tools.png"
-  },
-  {
-    "title": "Footer Generator",
-    "description": "Easily generate responsive website footers.",
-    "link": "tools/footer.html",
-    "category": "Web Development",
-    "image": "../assets/suggested-tools.png"
+    "image": "https://nextonlinetools.com/assets/suggested-tools.png"
   },
   {
     "title": "Grammar Checker",
     "description": "Check and fix grammar mistakes online instantly.",
-    "link": "tools/grammar-checker.html",
+    "link": "https://nextonlinetools.com/tools/grammar-checker.html",
     "category": "Text",
-    "image": "../assets/suggested-tools.png"
+    "image": "https://nextonlinetools.com/assets/suggested-tools.png"
   },
   {
     "title": "Image Compressor",
     "description": "Compress images without losing quality.",
-    "link": "tools/image-compressor.html",
+    "link": "https://nextonlinetools.com/tools/image-compressor.html",
     "category": "Image",
-    "image": "../assets/online-tools.png"
+    "image": "https://nextonlinetools.com/assets/online-tools.png"
   },
   {
     "title": "Image to Word Converter",
     "description": "Convert images to editable Word documents.",
-    "link": "tools/image-to-word-converter.html",
+    "link": "https://nextonlinetools.com/tools/image-to-word-converter.html",
     "category": "Document",
-    "image": "../assets/suggested-tools.png"
+    "image": "https://nextonlinetools.com/assets/suggested-tools.png"
   },
   {
     "title": "Passport Photo Maker",
     "description": "Create passport-size photos instantly online.",
-    "link": "tools/passport-photo-maker.html",
+    "link": "https://nextonlinetools.com/tools/passport-photo-maker.html",
     "category": "Image",
-    "image": "../assets/suggested-tools.png"
+    "image": "https://nextonlinetools.com/assets/suggested-tools.png"
   },
   {
     "title": "PNG to JPG Converter",
     "description": "Convert PNG images to JPG format online.",
-    "link": "tools/png-to-jpg-converter.html",
+    "link": "https://nextonlinetools.com/tools/png-to-jpg-converter.html",
     "category": "Image",
-    "image": "../assets/suggested-tools.png"
+    "image": "https://nextonlinetools.com/assets/suggested-tools.png"
   },
   {
     "title": "QR Code Generator",
     "description": "Generate and scan QR codes for free.",
-    "link": "tools/qr-code-generator-create-free-qr-code-or-scan-r-code.html",
+    "link": "https://nextonlinetools.com/tools/qr-code-generator-create-free-qr-code-or-scan-r-code.html",
     "category": "Utility",
-    "image": "../assets/suggested-tools.png"
+    "image": "https://nextonlinetools.com/assets/suggested-tools.png"
   },
   {
     "title": "Speech to Text",
     "description": "Convert spoken words into text online.",
-    "link": "tools/speech-to-text.html",
+    "link": "https://nextonlinetools.com/tools/speech-to-text.html",
     "category": "Audio",
-    "image": "../assets/suggested-tools.png"
+    "image": "https://nextonlinetools.com/assets/suggested-tools.png"
   },
   {
     "title": "Text to Slug",
     "description": "Convert text into SEO-friendly slugs.",
-    "link": "tools/text-to-slug.html",
+    "link": "https://nextonlinetools.com/tools/text-to-slug.html",
     "category": "Text",
-    "image": "../assets/online-tools.png"
+    "image": "https://nextonlinetools.com/assets/online-tools.png"
   },
   {
     "title": "Unit Converter",
     "description": "Convert units like length, weight, and volume.",
-    "link": "tools/unit-converter.html",
+    "link": "https://nextonlinetools.com/tools/unit-converter.html",
     "category": "Utility",
-    "image": "../assets/suggested-tools.png"
+    "image": "https://nextonlinetools.com/assets/suggested-tools.png"
   },
   {
     "title": "WebP to JPG Converter",
     "description": "Convert WebP images into JPG format online.",
-    "link": "tools/webp-to-jpg.html",
+    "link": "https://nextonlinetools.com/tools/webp-to-jpg.html",
     "category": "Image",
-    "image": "../assets/suggested-tools.png"
+    "image": "https://nextonlinetools.com/assets/suggested-tools.png"
   },
   {
     "title": "YouTube Thumbnail Downloader",
