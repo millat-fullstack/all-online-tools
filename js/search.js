@@ -14,7 +14,7 @@ function initSearch() {
   let searchData = [...staticPages];
 
   // --- Load tools.json ---
-  const toolsPromise = fetch("https://nextonlinetools.com/json/tools.json")
+  const toolsPromise = fetch("/json/tools.json")
     .then(res => res.json())
     .then(tools => {
       tools.forEach(tool => {
@@ -28,7 +28,7 @@ function initSearch() {
     .catch(err => console.error("Tools JSON error:", err));
 
   // --- Load posts.json ---
-  const postsPromise = fetch("https://nextonlinetools.com/json/posts.json")
+  const postsPromise = fetch("/json/posts.json")
     .then(res => res.json())
     .then(posts => {
       posts.forEach(post => {
