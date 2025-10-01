@@ -29,7 +29,6 @@ body {
   padding: 40px 20px 30px;
   margin-bottom: 30px;
   background: #e4def3;
-  border-bottom: 1px solid #e5e5e5;
   color: #2A2340;
 }
 
@@ -49,7 +48,7 @@ body {
 }
 
 .top-btn:hover {
-  background: #7F4FDB;
+  background: #7B4FD6;
 }
 
 /* ===== Containers ===== */
@@ -249,7 +248,7 @@ button,
 
 button:hover,
 .btn:hover {
-  background: #7F4FDB;
+  background: #7B4FD6;
 }
 
 /* ===== Tools Grid ===== */
@@ -294,7 +293,7 @@ button:hover,
 }
 
 .tool-card a:hover {
-  background: #7F4FDB;
+  background: #7B4FD6;
 }
 
 .tool-card:hover {
@@ -376,7 +375,7 @@ button:hover,
 }
 
 .tools-article ol li::marker {
-  color: #7F4FDB;
+  color: #7B4FD6;
   font-weight: bold;
 }
 

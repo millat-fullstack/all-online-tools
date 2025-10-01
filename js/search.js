@@ -1,7 +1,8 @@
-// --- Static pages (like About, Contact) ---
+// --- Static pages ---
 const staticPages = [
   { title: "About Us", url: "about.html", description: "Learn more about Next Online Tools." },
   { title: "Contact", url: "contact.html", description: "Get in touch with us." },
+  { title: "Home", url: "index.html", description: "Back to homepage." }
 ];
 
 // --- Initialize Search ---
@@ -12,12 +13,9 @@ function initSearch() {
 
   let searchData = [...staticPages];
 
-  // --- 1. Load tools.json ---
-  const toolsPromise = fetch("./json/tools.json")
-    .then(res => {
-      if (!res.ok) throw new Error("Failed to load tools.json");
-      return res.json();
-    })
+  // --- Load tools.json ---
+  const toolsPromise = fetch("https://nextonlinetools.com/json/tools.json")
+    .then(res => res.json())
     .then(tools => {
       tools.forEach(tool => {
         searchData.push({
@@ -27,14 +25,11 @@ function initSearch() {
         });
       });
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error("Tools JSON error:", err));
 
-  // --- 2. Load posts.json ---
-  const postsPromise = fetch("./json/posts.json")
-    .then(res => {
-      if (!res.ok) throw new Error("Failed to load posts.json");
-      return res.json();
-    })
+  // --- Load posts.json ---
+  const postsPromise = fetch("https://nextonlinetools.com/json/posts.json")
+    .then(res => res.json())
     .then(posts => {
       posts.forEach(post => {
         searchData.push({
@@ -44,11 +39,10 @@ function initSearch() {
         });
       });
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error("Posts JSON error:", err));
 
-  // --- 3. Wait for both JSON files to finish ---
+  // --- Wait for both JSONs ---
   Promise.all([toolsPromise, postsPromise]).then(() => {
-    // --- Live search input ---
     searchBox.addEventListener("input", function () {
       const query = this.value.toLowerCase().trim();
       suggestionsBox.innerHTML = "";
@@ -79,7 +73,7 @@ function initSearch() {
       }
     });
 
-    // --- Close suggestions when clicking outside ---
+    // Close suggestions when clicking outside
     document.addEventListener("click", (e) => {
       if (!searchBox.contains(e.target) && !suggestionsBox.contains(e.target)) {
         suggestionsBox.innerHTML = "";
@@ -88,3 +82,6 @@ function initSearch() {
     });
   });
 }
+
+// --- Run after DOM loads ---
+document.addEventListener("DOMContentLoaded", initSearch);

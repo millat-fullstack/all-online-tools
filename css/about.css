@@ -14,7 +14,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 15px;
   font-weight: 700;
-  color: #8a56e6;
+  color: #9B6CE3;
   line-height: 1.2;
   text-align: center; /* Center all headings by default */
 }
@@ -39,7 +39,7 @@ p {
 
 /* ===== Buttons ===== */
 button, .btn {
-  background-color: #a17edc;
+  background-color: #9B6CE3;
   color: #fff;
   border: 1px solid #e8e0f5;
   padding: 10px 20px;
@@ -50,7 +50,7 @@ button, .btn {
 }
 
 button:hover, .btn:hover {
-  background-color: #8d6bcb;
+  background-color: #7B4FD6;
   transform: translateY(-2px);
 }
 
@@ -98,7 +98,7 @@ button:hover, .btn:hover {
 .vision-card .icon {
   font-size: 2rem;
   margin-bottom: 12px;
-  color: #8a56e6; /* Accent color */
+  color: #9B6CE3; /* Accent color */
 }
 
 .vision-card h3 {
@@ -124,13 +124,13 @@ footer {
 
 /* ===== Links ===== */
 a {
-  color: #a17edc;
+  color: #9B6CE3;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: #8d6bcb;
+  color: #7B4FD6;
 }
 
 /* ===== Inputs ===== */
@@ -146,7 +146,7 @@ input, textarea, select {
 
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: #a17edc;
+  border-color: #9B6CE3;
   box-shadow: 0 0 5px rgba(161, 126, 220, 0.4);
 }
 
@@ -168,7 +168,7 @@ input:focus, textarea:focus, select:focus {
 .ethics h2 {
   font-weight: 700;
   margin-bottom: 30px;
-  color: #8a56e6;
+  color: #9B6CE3;
 }
 
 .ethics-card {
