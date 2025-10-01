@@ -1,4 +1,4 @@
-fetch("../html/header.html")
+fetch("https://nextonlinetools.com/html/header.html")
   .then(res => res.text())
   .then(data => {
     document.getElementById("header").innerHTML = data;
@@ -6,21 +6,21 @@ fetch("../html/header.html")
   });
 
 // Load Footer
-fetch("../html/footer.html")
+fetch("https://nextonlinetools.com/html/footer.html")
   .then(res => res.text())
   .then(data => {
     document.getElementById("footer").innerHTML = data;
   });
 
 // Load Tools
-fetch("../html/tools.html")
+fetch("https://nextonlinetools.com/html/tools.html")
   .then(res => res.text())
   .then(data => {
     document.getElementById("tools").innerHTML = data;
   });
 
   // Load Tools
-fetch("../html/sidebar.html")
+fetch("https://nextonlinetools.com/html/sidebar.html")
   .then(res => res.text())
   .then(data => {
     document.getElementById("sidebar").innerHTML = data;
