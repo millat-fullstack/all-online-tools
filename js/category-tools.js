@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.title = `${category} Tools | Next Online Tools`;
 
   // Fetch tools.json (adjusted path for your folder structure)
-  fetch("../json/tools.json")
+  fetch("https://nextonlinetools.com/json/tools.json")
     .then(res => res.json())
     .then(tools => {
       const container = document.getElementById("tools-list");
