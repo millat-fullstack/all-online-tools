@@ -130,7 +130,7 @@ body {
   cursor: pointer;
   font-weight: 600;
   transition: background 0.3s ease;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 .sidebar-box button:hover {
   background: #7B4FD6;
