@@ -28,13 +28,15 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
-      background-color: #fafafa;
-      color: #333;
-      padding: 20px;
-    }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f8f6fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    line-height: 1.7;
+  }
 
     .tos-container {
       max-width: 900px;
@@ -43,6 +45,7 @@
       padding: 40px;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-top: 30px;
     }
 
     h1 {
@@ -105,8 +108,13 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
 </head>
 <body>
+
+  <header>
+  <div id="header"></div>
+  </header>
 
   <div class="tos-container">
     <h1>Terms of Service</h1>
@@ -169,9 +177,10 @@
     </p>
   </div>
 
-  <footer>
-    &copy; 2025 Next Online Tools. All Rights Reserved.
-  </footer>
+<div id="footer"></div>
+
+<script src="https://nextonlinetools.com/js/search.js"></script>
+<script src="https://nextonlinetools.com/js/include.js"></script>
 
 </body>
 </html>
