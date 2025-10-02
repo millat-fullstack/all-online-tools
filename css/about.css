@@ -4,34 +4,40 @@ body {
   background: #f8f6fb;
   margin: 0;
   padding: 0;
-  line-height: 1.6;
-  color: #2c2c2c;
+  line-height: 1.7;
+  color: #333;
   font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1 {
   margin: 0 0 15px;
   font-weight: 700;
   color: #9B6CE3;
-  line-height: 1.2;
   text-align: center; /* Center all headings by default */
+  font-size: 2rem;
 }
 
-h1 { font-size: 2.3rem; }
+h2, h3, h4, h5, h6 {
+  margin: 0 0 15px;
+  font-weight: 700;
+  color: #333;
+  text-align: center; /* Center all headings by default */
+  font-size: 1.7rem;
+}
+
 h1  {margin-top: 35px;}  /* Extra top margin for main title */
 
 p {
-  margin: 0 0 15px;
-  color: #2c2c2c;
-    font-size: 1.05em;
-    line-height: 1.7;
-        }
+margin: 0 0 15px;
+color: #333;
+font-size: 1.05em;
+}
 
 /* ===== Section Container ===== */
 .container {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center; /* Center all content by default */
@@ -57,20 +63,13 @@ button:hover, .btn:hover {
 /* ===== Vision Section ===== */
 .vision {
   text-align: center;
-  padding: 70px 20px;
-  background: #fff;
-}
-
-.vision h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  padding: 20px 20px;
 }
 
 .vision p {
   max-width: 750px;
   margin: 0 auto 45px;
   font-size: 1.05rem;
-  line-height: 1.7;
   color: #2c2c2c;
 }
 
@@ -110,7 +109,6 @@ button:hover, .btn:hover {
 .vision-card p {
   font-size: 0.95rem;
   color: #2c2c2c;
-  line-height: 1.5;
 }
 
 /* ===== Footer ===== */
@@ -168,7 +166,7 @@ input:focus, textarea:focus, select:focus {
 .ethics h2 {
   font-weight: 700;
   margin-bottom: 30px;
-  color: #9B6CE3;
+  color: #333;
 }
 
 .ethics-card {
@@ -188,7 +186,6 @@ input:focus, textarea:focus, select:focus {
   font-size: 0.95rem;
   color: #2c2c2c;
   margin-top: 10px;
-  line-height: 1.4;
 }
 
 /* ===== Responsive ===== */
