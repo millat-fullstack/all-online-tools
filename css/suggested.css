@@ -1,8 +1,7 @@
 /* Suggested Tools Section */
 
 #suggested-tools {
-  margin: 2rem 0;
-  padding: 1rem;
+  padding: 2.5rem 1rem 0.5rem;
 }
 
 .suggested-list {
@@ -36,7 +35,6 @@
 
 #suggested-tools h2 {
   text-align: center;
-  margin-bottom: 1rem;
   color: #2c2c2c;   /* matches your main text color */
   font-size: 1.5rem;
   font-weight: bold;
@@ -59,66 +57,6 @@
   color: #666;
   margin: 0;
 }
-
-/* ===== Tools Article ===== */
-.tools-article {
-    font-family: 'Inter', sans-serif;
-    background: #ffffff;
-    color: #2c2c2c;
-    padding: 60px 50px; /* top/bottom 40px, left/right 50px */
-    border-radius: 5px;
-    border: 1px solid #e8e0f5;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-
-    /* new additions */
-    max-width: 1100px;   /* limit width for readability */
-    margin: 50px auto;  /* center horizontally with space on top/bottom */
-}
-
-.tools-article h2 {
-    color: #9B6CE3;
-    font-size: 1.8em;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.tools-article h3 {
-    color: #7B4FD6;
-    margin-top: 25px;
-    margin-bottom: 12px;
-    font-size: 1.3em;
-}
-
-.tools-article p, 
-.tools-article li {
-    line-height: 1.7;
-    font-size: 1.05em;
-}
-
-.tools-article ul, 
-.tools-article ol {
-    margin: 15px 0 20px 25px;
-}
-
-.tools-article strong {
-    color: #2c2c2c;
-}
-
-.tools-article span {
-    display: inline-block;
-    margin-top: 10px;
-}
-
-.tools-article ul li::marker {
-    color: #9B6CE3;
-}
-
-.tools-article ol li::marker {
-    color: #7B4FD6;
-    font-weight: bold;
-}
-
-/* ===== Tools Article ===== */
 
 /* ===== Category Tools Container ===== */
 .tools-container {
