@@ -8,7 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
   <link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
-  <link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
+  <link rel="stylesheet" href="/css/suggested.css">
 
 <style>
 
@@ -18,7 +18,7 @@
   margin: 0;
   padding: 0;             /* no padding here, avoids header conflict */
   color: #2c2c2c;
-  line-height: 1.6;
+  line-height: 1.7;
   min-height: 100vh;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -27,10 +27,10 @@
 .tool-box {
   background: #fff;
   padding: 30px;
-  border-radius: 16px;
+  border-radius: 5px;
   max-width: 800px;
   width: 100%;
-  margin: 30px auto;      /* center block under header */
+  margin: 60px auto 10px;      /* center block under header */
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   text-align: center;
   box-sizing: border-box;
@@ -59,7 +59,7 @@ textarea {
   width: 100%;
   height: 200px;
   padding: 15px;
-  border-radius: 12px;
+  border-radius: 5px;
   border: 1px solid #e8e0f5;
   font-size: 1em;
   line-height: 1.5;
@@ -191,6 +191,14 @@ button:hover {
 </section>
 
 <script src="https://nextonlinetools.com/js/suggested.js"></script>
+
+<!-- Article Section -->
+<div id="tool-article"></div>
+
+<script src="/js/toolsarticle.js"></script>
+<script>
+  loadToolArticle("tool-article");
+</script>
 
 <div id="footer"></div>
 <script src="https://nextonlinetools.com/js/include.js"></script>
