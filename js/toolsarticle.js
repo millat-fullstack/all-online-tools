@@ -1,6 +1,8 @@
 const articleMap = {
   "image-to-text-converter.html": "/toolsarticle/imagetext.html",
   "qr-code-generator-create-free-qr-code-or-scan-qr-code.html": "/toolsarticle/qrcode.html",
+  "color-picker.html": "/toolsarticle/colorpicker.html",
+  "webp-to-jpg.html": "/toolsarticle/webpjpg.html",
 };
 
 function loadToolArticle(containerId) {
