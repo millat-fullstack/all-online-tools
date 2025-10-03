@@ -70,7 +70,7 @@ button:hover, .btn:hover {
   max-width: 750px;
   margin: 0 auto 45px;
   font-size: 1.05rem;
-  color: #2c2c2c;
+  color: #333;
 }
 
 .vision-grid {
@@ -108,7 +108,7 @@ button:hover, .btn:hover {
 
 .vision-card p {
   font-size: 0.95rem;
-  color: #2c2c2c;
+  color: #333;
 }
 
 /* ===== Footer ===== */
@@ -116,7 +116,7 @@ footer {
   background: #e4def3;
   padding: 40px 20px;
   text-align: center;
-  color: #2c2c2c;
+  color: #333;
   border-top: 1px solid #e8e0f5;
 }
 
@@ -175,7 +175,7 @@ input:focus, textarea:focus, select:focus {
   padding: 10px 20px;
   font-weight: 400;
   font-size: 1.05rem;
-  color: #2c2c2c;
+  color: #333;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   cursor: default;
   text-align: center;
@@ -184,7 +184,7 @@ input:focus, textarea:focus, select:focus {
 .ethics-card p {
   font-weight: 400;
   font-size: 0.95rem;
-  color: #2c2c2c;
+  color: #333;
   margin-top: 10px;
 }
 
