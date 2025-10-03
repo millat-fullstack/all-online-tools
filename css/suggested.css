@@ -1,7 +1,7 @@
 /* Suggested Tools Section */
 
 #suggested-tools {
-  padding: 2.5rem 1rem 0.5rem;
+  padding: 2rem 1rem 0.5rem;
 }
 
 .suggested-list {
@@ -36,9 +36,9 @@
 #suggested-tools h2 {
   text-align: center;
   color: #2c2c2c;   /* matches your main text color */
-  font-size: 1.5rem;
+  font-size: 2.1rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.6rem;
 }
 
 .suggested-card a {
