@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Update page title dynamically
   document.title = `${category} Tools | Next Online Tools`;
 
-  // Fetch tools.json
+  // Fetch tools.json (adjusted path for your folder structure)
   fetch("https://nextonlinetools.com/json/tools.json")
     .then(res => res.json())
     .then(tools => {
@@ -23,16 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
       if (filtered.length) {
         container.innerHTML = filtered
           .map(tool => {
-            // ✅ Link: Use as-is if already absolute, otherwise prepend /
+            // ✅ Fix tool link so it always points to /tools/ at root
             let link = tool.link;
-            if (!link.startsWith("http")) {
-              link = "/" + link.replace(/^\/+/, ""); // clean multiple slashes
+            if (!link.startsWith("/")) {
+              link = "/" + link;
             }
 
-            // ✅ Image: Same logic (support absolute + relative)
+            // ✅ Fix image path in case it's relative
             let image = tool.image;
-            if (!image.startsWith("http")) {
-              image = "/" + image.replace(/^\/+/, "");
+            if (!image.startsWith("/")) {
+              image = "/" + image;
             }
 
             return `
