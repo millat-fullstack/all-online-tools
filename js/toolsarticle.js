@@ -3,6 +3,8 @@ const articleMap = {
   "qr-code-generator-create-free-qr-code-or-scan-qr-code.html": "/toolsarticle/qrcode.html",
   "color-picker.html": "/toolsarticle/colorpicker.html",
   "webp-to-jpg.html": "/toolsarticle/webpjpg.html",
+  "pdf-to-jpg.html": "/toolsarticle/pdfjpg.html",
+  "extract-links.html": "/toolsarticle/extractlinks.html",
 };
 
 function loadToolArticle(containerId) {
