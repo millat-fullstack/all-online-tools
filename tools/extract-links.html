@@ -8,92 +8,138 @@
   <link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
 
   <style>
+    :root {
+      --primary: #9B6CE3;
+      --primary-hover: #7B4FD6;
+      --text-color: #333;
+      --bg-body: #f8f6fb;
+      --bg-card: #E8E0F5;
+      --footer-bg: #2A2340;
+    }
+
     body {
-  font-family: 'Inter', sans-serif;
-  background: #f8f6fb;
-  color: #2c2c2c;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;                 /* no padding here */
-  min-height: 100vh;
-  box-sizing: border-box;
-  position: relative;
-  overflow-x: hidden;
-  }
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-body);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
 
     .page-container {
-  padding: 20px;              /* move padding here */
-  display: flex;
-  flex-direction: column;
-  max-width: 800px;
-  margin: 0 auto;
-  margin-top: 30px;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: center;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0
-,0.1);
-}
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 30px;
+    }
+
+    .column {
+      flex: 1;
+      min-width: 320px;
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
     h1 {
-      color: #6b4de6;
+      width: 100%;
+      text-align: center;
+      color: var(--primary);
       margin-bottom: 10px;
     }
+
     h3 {
+      width: 100%;
+      text-align: center;
       color: #555;
-      margin-bottom: 10px;
       font-weight: normal;
-      font-size: 16px;
+      margin-bottom: 20px;
     }
 
     #inputBox {
       width: 100%;
-      min-height: 180px;
+      min-height: 250px;
       border: 1px solid #ddd;
       border-radius: 10px;
       padding: 12px;
       font-size: 14px;
-      margin-bottom: 20px;
-      text-align: left;
-      background: #fdfdfd;
+      background: #fff;
       overflow-y: auto;
     }
+
     #inputBox:empty:before {
       content: "Paste your hyperlinked text here (Ctrl+V)...";
       color: #aaa;
     }
 
-button {
-  display: inline-block;
-  padding: 8px 18px;              /* compact size */
-  margin: 10px 6px;
-  background: #8a56e6;            /* your primary color */
-  color: #fff;
-  border: none;
-  border-radius: 6px;             /* slightly rounded */
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  white-space: nowrap;            /* keeps text in one line */
-  width: auto;                    /* prevent full-width */
-  max-width: fit-content;
-  transition: background 0.25s;
-}
-    button:hover { background: #593ac7; }
+    button, select {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 8px 6px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.25s;
+    }
+
+    button:hover, select:hover {
+      background: var(--primary-hover);
+    }
+
+    .secondary-btn {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .secondary-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
 
     #output {
-      margin-top: 20px;
-      background: #f8f6fb;
-      border: 1px solid #e8e0f5;
+      background: #fff;
+      border: 1px solid #ddd;
       border-radius: 10px;
       padding: 15px;
       text-align: left;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      max-height: 300px;
+      min-height: 250px;
       overflow-y: auto;
+      font-size: 14px;
+    }
+
+    .output-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f9f8fc;
+      margin: 5px 0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    .output-item span {
+      word-break: break-all;
+      flex: 1;
+      margin-left: 8px;
+    }
+
+    .output-actions {
+      margin-top: 15px;
+      text-align: center;
     }
   </style>
 </head>
@@ -103,61 +149,124 @@ button {
 
   <div class="page-container">
     <h1>🔗 Extract Links Tool</h1>
-    <h3>Copy your hyperlinks, or copy cells from Google Sheets / Excel (with hyperlinks) and paste below.</h3>
+    <h3>Copy your hyperlinks or paste from Excel/Google Sheets with hyperlinks below.</h3>
 
-    <div id="inputBox" contenteditable="true"></div>
-<div style="text-align: center;">
-    <button onclick="extractLinks()">Extract Links</button>
-    <button onclick="copyLinks()">Copy Links</button>
-</div>
-    <div id="output"></div>
+    <!-- Input Column -->
+    <div class="column">
+      <div id="inputBox" contenteditable="true"></div>
+      <div style="text-align:center; margin-top:15px;">
+        <button onclick="extractLinks()">Extract Links</button>
+        <button class="secondary-btn" onclick="clearInput()">Clear</button>
+      </div>
+    </div>
+
+    <!-- Output Column -->
+    <div class="column">
+      <div class="output-actions">
+        <button class="secondary-btn" onclick="selectAllLinks()">Select All</button>
+        <button class="secondary-btn" onclick="removeSelected()">Remove Selected</button>
+        <select id="downloadType" onchange="downloadLinks(this.value)">
+          <option value="">Download as...</option>
+          <option value="csv">CSV</option>
+          <option value="excel">Excel</option>
+          <option value="word">Word</option>
+        </select>
+        <button onclick="copySelected()">Copy Selected</button>
+      </div>
+      <div id="output"></div>
+    </div>
   </div>
 
   <script>
+    let extractedLinks = [];
+
     function extractLinks() {
       const inputHTML = document.getElementById("inputBox").innerHTML;
       const parser = new DOMParser();
       const doc = parser.parseFromString(inputHTML, "text/html");
 
-      // Extract unique links
-      let links = [...doc.querySelectorAll("a")].map(a => a.href);
-      links = [...new Set(links)]; // remove duplicates
+      const links = [...new Set([...doc.querySelectorAll("a")].map(a => a.href))];
+      extractedLinks = links;
 
-      const output = document.getElementById("output");
-      output.textContent = links.length ? links.join("\n") : "No links found!";
+      displayLinks();
     }
 
-    function copyLinks() {
-      const text = document.getElementById("output").textContent;
-      if (text.trim() === "" || text === "No links found!") {
-        alert("No links to copy!");
+    function displayLinks() {
+      const output = document.getElementById("output");
+      if (!extractedLinks.length) {
+        output.innerHTML = "<p>No links found!</p>";
         return;
       }
-      navigator.clipboard.writeText(text);
-      alert("Links copied to clipboard!");
+
+      output.innerHTML = extractedLinks.map(link => `
+        <div class="output-item">
+          <input type="checkbox" class="link-checkbox">
+          <span>${link}</span>
+        </div>
+      `).join("");
+    }
+
+    function selectAllLinks() {
+      document.querySelectorAll('.link-checkbox').forEach(cb => cb.checked = true);
+    }
+
+    function removeSelected() {
+      const checkboxes = document.querySelectorAll('.link-checkbox');
+      extractedLinks = extractedLinks.filter((_, i) => !checkboxes[i].checked);
+      displayLinks();
+    }
+
+    function copySelected() {
+      const checkboxes = document.querySelectorAll('.link-checkbox');
+      const selected = extractedLinks.filter((_, i) => checkboxes[i]?.checked);
+      if (!selected.length) return alert("No links selected to copy!");
+      navigator.clipboard.writeText(selected.join("\n"));
+      alert(`${selected.length} selected link(s) copied!`);
+    }
+
+    function clearInput() {
+      document.getElementById("inputBox").innerHTML = "";
+      extractedLinks = [];
+      document.getElementById("output").innerHTML = "";
+    }
+
+    function downloadLinks(type) {
+      if (!type || !extractedLinks.length) return;
+
+      const content = extractedLinks.join("\n");
+      let mimeType, extension;
+
+      switch(type) {
+        case "csv": mimeType = "text/csv"; extension = ".csv"; break;
+        case "excel": mimeType = "application/vnd.ms-excel"; extension = ".xls"; break;
+        case "word": mimeType = "application/msword"; extension = ".doc"; break;
+      }
+
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `extracted_links${extension}`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      document.getElementById("downloadType").value = "";
     }
   </script>
 
-<!-- Article + Extra Sections -->
+  <!-- Suggested + Footer -->
+  <section id="suggested-tools">
+    <h2>Suggested Tools</h2>
+    <div class="suggested-list"></div>
+  </section>
 
-<section id="suggested-tools">
-  <h2>Suggested Tools</h2>
-  <div class="suggested-list"></div>
-</section>
-
-<script src="https://nextonlinetools.com/js/suggested.js"></script>
-
-<!-- Article Section -->
-<div id="tool-article"></div>
-
-<script src="/js/toolsarticle.js"></script>
-<script>
-  loadToolArticle("tool-article");
-</script>
-
-<div id="footer"></div>
-<script src="https://nextonlinetools.com/js/include.js"></script>
-<script src="https://nextonlinetools.com/js/search.js"></script>
+  <script src="https://nextonlinetools.com/js/suggested.js"></script>
+  <div id="tool-article"></div>
+  <script src="/js/toolsarticle.js"></script>
+  <script>loadToolArticle("tool-article");</script>
+  <div id="footer"></div>
+  <script src="https://nextonlinetools.com/js/include.js"></script>
+  <script src="https://nextonlinetools.com/js/search.js"></script>
 
 </body>
 </html>
