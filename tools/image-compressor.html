@@ -11,138 +11,225 @@
 
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: #fff;
-      text-align: center;
-      padding: 40px 20px;
+      font-family: 'Inter', sans-serif;
+      background: #f8f6fb;
+      color: #333;
+      margin: 0;
+      padding: 0;
       min-height: 100vh;
     }
+
+    .page-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    .column {
+      flex: 1;
+      min-width: 300px;
+      background: #E8E0F5;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 25px;
+      box-sizing: border-box;
+    }
+
     h1 {
-      color: #0ff;
+      color: #9B6CE3;
+      text-align: center;
       margin-bottom: 20px;
     }
-    p {
-      color: #aaa;
-      margin-bottom: 20px;
-    }
+
     .uploader {
-      background: rgba(20,20,40,0.95);
+      border: 2px dashed #9B6CE3;
+      border-radius: 12px;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,200,255,0.4);
-      max-width: 600px;
-      margin: 0 auto 30px;
-    }
-    input[type="file"] {
-      margin: 20px 0;
-      padding: 10px;
-    }
-    .btn {
-      padding: 12px 25px;
-      background: rgba(0,255,255,0.2);
-      color: #0ff;
-      border-radius: 10px;
-      font-weight: bold;
-      text-decoration: none;
+      text-align: center;
+      background: #fff;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: 0.3s;
+    }
+
+    .uploader:hover {
+      background: #f0ebff;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 22px;
+      background: #9B6CE3;
+      color: #fff;
       border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s;
+      margin-top: 15px;
     }
+
     .btn:hover {
-      background: rgba(0,255,255,0.4);
-      box-shadow: 0 0 15px rgba(0,200,255,0.5);
+      background: #7B4FD6;
     }
-    canvas {
+
+    #preview {
+      display: none;
+      max-width: 150px;
+      max-height: 120px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .progress-container {
+      margin-top: 20px;
+      width: 100%;
+      background: #ddd;
+      border-radius: 8px;
+      overflow: hidden;
       display: none;
     }
-    .output {
-      margin-top: 20px;
+
+    .progress-bar {
+      height: 10px;
+      background: #9B6CE3;
+      width: 0%;
+      transition: width 0.2s;
     }
+
+    .progress-text {
+      margin-top: 8px;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    .output {
+      text-align: center;
+    }
+
+    .output p {
+      margin-bottom: 10px;
+    }
+
     .output a {
       display: inline-block;
       margin-top: 10px;
+      color: #fff;
+      background: #9B6CE3;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s;
     }
-    h2 {
-      color: #0ff;
-      margin-top: 40px;
+
+    .output a:hover {
+      background: #7B4FD6;
     }
-    ul {
-      text-align: left;
-      max-width: 700px;
-      margin: 20px auto;
-      color: #ccc;
-    }
-    ul li {
-      margin-bottom: 10px;
-    }
+
   </style>
 </head>
 <body>
 
   <div id="header"></div>
 
-  <h1>Free Online Image Compressor</h1>
-  <p>Compress JPG and PNG images online to reduce file size without losing much quality. Perfect for SEO, students, freelancers, and anyone needing faster websites or smaller uploads.</p>
+  <h1>🖼️ Free Online Image Compressor</h1>
 
-  <div class="uploader">
-    <input type="file" id="upload" accept="image/png, image/jpeg"><br>
-    <button class="btn" onclick="compressImage()">Compress Image</button>
-    <canvas id="canvas"></canvas>
-    <div class="output" id="output"></div>
+  <div class="page-wrapper">
+    <!-- Input Column -->
+    <div class="column">
+      <div class="uploader" onclick="document.getElementById('upload').click()">
+        <p>Click or drag & drop image here<br>Or paste from clipboard</p>
+        <input type="file" id="upload" accept="image/png, image/jpeg" hidden>
+        <img id="preview" alt="Preview">
+      </div>
+
+      <button class="btn" onclick="compressImage()">Compress Image</button>
+
+      <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="progress-text" id="progressText"></div>
+    </div>
+
+    <!-- Output Column -->
+    <div class="column output" id="outputColumn">
+      <p>Compressed image and download options will appear here.</p>
+      <canvas id="canvas" style="display:none;"></canvas>
+      <div id="output"></div>
+    </div>
   </div>
 
-  <!-- SEO Guideline Section -->
-  <section style="max-width:900px; margin:50px auto; border-radius:12px; line-height:1.7; font-size:1.05rem;">
-    <h2>How to Use Image Compressor Online</h2>
-    <p>
-      Upload your JPG or PNG file and click compress. Our online image compressor will reduce image size instantly while keeping good quality. This tool is SEO-friendly, fast, and secure — no files are stored. Use it to compress jpg online, reduce image size, and make your website or projects faster.
-    </p>
-  </section>
-
-  <!-- Benefits Section -->
-  <section class="benefits">
-    <h2>Benefits of Using This Image Compressor</h2>
-    <ul>
-      <li>✅ Reduce image size without losing much quality.</li>
-      <li>✅ Free and secure – no signup required.</li>
-      <li>✅ Speeds up websites for SEO ranking boost.</li>
-      <li>✅ Saves storage space for students & freelancers.</li>
-      <li>✅ Works directly in your browser – no software needed.</li>
-    </ul>
-  </section>
-
   <script>
-    function compressImage() {
-      const fileInput = document.getElementById('upload');
-      const canvas = document.getElementById('canvas');
-      const output = document.getElementById('output');
+    const uploadInput = document.getElementById('upload');
+    const preview = document.getElementById('preview');
+    const canvas = document.getElementById('canvas');
+    const output = document.getElementById('output');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
 
-      if (!fileInput.files.length) {
+    // Preview uploaded image
+    uploadInput.addEventListener('change', e => {
+      if (e.target.files[0]) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = event => {
+          preview.src = event.target.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Compress Image Function
+    function compressImage() {
+      const file = uploadInput.files[0];
+      if (!file) {
         alert("Please upload an image first.");
         return;
       }
 
-      const file = fileInput.files[0];
-      const reader = new FileReader();
+      progressContainer.style.display = "block";
+      progressText.textContent = "Processing: 0%";
+      progressBar.style.width = "0%";
 
+      // Simulate progress (5 seconds minimum)
+      let progress = 0;
+      const progressInterval = setInterval(() => {
+        if (progress < 100) {
+          progress += 2;
+          progressBar.style.width = progress + "%";
+          progressText.textContent = "Processing: " + progress + "%";
+        }
+      }, 100);
+
+      const reader = new FileReader();
       reader.onload = function(event) {
         const img = new Image();
         img.onload = function() {
           const ctx = canvas.getContext("2d");
-          const width = img.width * 0.7; // 70% size
+          const width = img.width * 0.7;
           const height = img.height * 0.7;
           canvas.width = width;
           canvas.height = height;
           ctx.drawImage(img, 0, 0, width, height);
 
           canvas.toBlob(function(blob) {
+            clearInterval(progressInterval);
+            progressBar.style.width = "100%";
+            progressText.textContent = "✅ Completed 100%";
+
             const newFile = URL.createObjectURL(blob);
             output.innerHTML = `
               <p>Compressed Successfully 🎉</p>
-              <a href="${newFile}" download="compressed-${file.name}" class="btn">Download Image</a>
+              <a href="${newFile}" download="compressed-${file.name}">Download Image</a>
             `;
-          }, file.type, 0.7); // 70% quality
+          }, file.type, 0.7);
         }
         img.src = event.target.result;
       }
@@ -150,61 +237,16 @@
     }
   </script>
 
-  <section style="max-width:900px; margin:50px auto; background:#111; color:#fff; padding:40px; border-radius:12px; line-height:1.7; font-size:1.05rem;">
-  
-  <h2 style="color:#0ff; margin-bottom:15px;">Compress JPG and PNG Images Online for Free</h2>
-  <p>
-    Our <strong>online image compressor</strong> allows you to easily reduce the size of your JPG and PNG files without sacrificing quality. 
-    Whether you are a student, freelancer, or website owner, this <strong>free image compression tool</strong> helps optimize pictures for SEO, 
-    faster website loading, and better sharing on social platforms. Upload your images, compress them in seconds, and download instantly.
-  </p>
+  <!-- Suggested + Footer -->
+  <section id="suggested-tools">
+    <h2>Suggested Tools</h2>
+    <div class="suggested-list"></div>
+  </section>
 
-  <h2 style="color:#0ff; margin-top:25px; margin-bottom:15px;">Why Use an Online Image Compressor?</h2>
-  <p>
-    Large image files slow down websites, reduce user experience, and negatively impact search engine rankings. 
-    By using a reliable <strong>JPG and PNG image compressor</strong>, you can maintain high visual quality while 
-    significantly reducing file size. This is especially important for bloggers, eCommerce store owners, and digital marketers 
-    who rely on fast-loading pages for SEO performance and audience engagement.
-  </p>
-
-  <h2 style="color:#0ff; margin-top:25px; margin-bottom:15px;">Benefits for SEO and Website Speed</h2>
-  <p>
-    Search engines like Google prioritize websites that load quickly. Heavy images can increase page load time, 
-    resulting in higher bounce rates and lower rankings. Using our <strong>free online image compressor</strong> ensures 
-    your images are optimized for web performance. Compressed JPG and PNG files improve Core Web Vitals, 
-    boost mobile responsiveness, and provide a seamless user experience.
-  </p>
-
-  <h2 style="color:#0ff; margin-top:25px; margin-bottom:15px;">Perfect Tool for Students and Freelancers</h2>
-  <p>
-    Students often need to upload assignments, presentations, or projects where file size limits apply. 
-    Freelancers in fields like design, writing, and digital marketing also benefit from <strong>fast image compression</strong> 
-    to deliver high-quality work efficiently. Our tool is easy to use, requires no installation, and keeps your files secure 
-    while saving valuable storage space.
-  </p>
-
-  <h2 style="color:#0ff; margin-top:25px; margin-bottom:15px;">Fast, Secure, and Easy-to-Use</h2>
-  <p>
-    With just a few clicks, you can upload images, compress them instantly, and download the results without any loss of clarity. 
-    The entire process is secure, and your files are never stored on the server. 
-    Whether you are optimizing for SEO, academic use, or freelance projects, our <strong>online image compressor</strong> 
-    is the simplest way to reduce image size while preserving quality.
-  </p>
-
-</section>
-
-<!-- Extra Sections -->
-
-<section id="suggested-tools">
-  <h2>Suggested Tools</h2>
-  <div class="suggested-list"></div>
-</section>
-
-<script src="https://nextonlinetools.com/js/suggested.js"></script>
-
-<div id="footer"></div>
-<script src="https://nextonlinetools.com/js/include.js"></script>
-<script src="https://nextonlinetools.com/js/search.js"></script>
+  <script src="https://nextonlinetools.com/js/suggested.js"></script>
+  <div id="footer"></div>
+  <script src="https://nextonlinetools.com/js/include.js"></script>
+  <script src="https://nextonlinetools.com/js/search.js"></script>
 
 </body>
 </html>

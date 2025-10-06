@@ -1,0 +1,1040 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Smart Image Resizer Pro — Next Online Tools</title>
+
+<link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
+<link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
+
+<style>
+:root{
+  --primary: #9B6CE3;
+  --primary-hover: #7B4FD6;
+  --text: #333;
+  --bg: #f8f6fb;
+  --card: #E8E0F5;
+  --footer: #2A2340;
+}
+
+/* Basic layout */
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.container{
+  max-width:1250px;
+  margin:32px auto;
+  padding:18px;
+  box-sizing:border-box;
+}
+h1{ text-align:center; color:var(--primary); margin:8px 0 20px 0; }
+
+/* Grid layout */
+.tool {
+  display:grid;
+  grid-template-columns: 420px 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+/* Panels */
+.panel {
+  background:var(--card);
+  border-radius:12px;
+  padding:16px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.06);
+}
+.left-panel{ min-height:520px; }
+.right-panel{ min-height:520px; display:flex; flex-direction:column; align-items:center; }
+
+/* Upload area */
+.upload {
+  background:#fff;
+  border-radius:10px;
+  padding:14px;
+  border:2px dashed rgba(155,108,227,0.25);
+  text-align:center;
+  cursor:pointer;
+}
+.upload:hover{ box-shadow:0 6px 18px rgba(155,108,227,0.08); background:#fbf8ff; }
+.upload input{ display:none; }
+
+/* meta */
+.meta {
+  background:#fff;
+  border-radius:8px;
+  padding:10px;
+  margin-top:12px;
+  font-size:0.94rem;
+}
+.meta div{ margin:6px 0; }
+
+/* controls */
+.controls { margin-top:12px; display:flex; flex-direction:column; gap:10px; }
+label { font-weight:700; display:block; margin-bottom:6px; color:var(--text); font-size:0.9rem; }
+.row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+
+/* inputs */
+input[type=number], input[type=text]{
+  padding:8px 10px; border-radius:8px; border:1px solid #ddd; background:#fff; width:140px; box-sizing:border-box;
+}
+select { padding:8px 10px; border-radius:8px; border:1px solid #ddd; background:#fff; }
+
+/* buttons */
+.btn { background:var(--primary); color:#fff; border:none; border-radius:9px; padding:9px 12px; cursor:pointer; font-weight:800; }
+.btn:hover{ background:var(--primary-hover); }
+.btn-border { background:transparent; border:2px solid var(--primary); color:var(--primary); padding:8px 10px; border-radius:9px; cursor:pointer; font-weight:800; }
+.btn-border:hover{ background:var(--primary); color:#fff; }
+
+/* presets dropdown grouped */
+.preset-group { position:relative; display:inline-block; }
+.preset-btn { background:#fff; border:1px solid #ddd; padding:8px 10px; border-radius:8px; cursor:pointer; font-weight:700; }
+.preset-btn:hover { border-color:var(--primary); background:#faf6ff; }
+.preset-menu { display:none; position:absolute; left:0; top:40px; background:#fff; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,.08); width:260px; z-index:60; }
+.preset-menu .category { padding:10px; border-bottom:1px solid #f0eef8; }
+.preset-menu .category h4 { margin:0 0 6px 0; font-size:0.92rem; color:var(--primary); }
+.preset-item { padding:6px 10px; cursor:pointer; border-radius:6px; margin-bottom:6px; font-weight:600; }
+.preset-item:hover { background:#f4f1fb; }
+
+/* preview frame */
+.preview-wrap { background:#fff; padding:12px; border-radius:10px; border:1px solid #eae6f8; width:100%; max-width:920px; box-sizing:border-box; }
+.frame {
+  width: 840px; height: 472px; /* default preview window for 16:9 */
+  background:#f6f6f9; border-radius:8px; position:relative; overflow:hidden; margin:8px auto;
+  display:flex; align-items:center; justify-content:center;
+}
+.frame .canvas-like { position:absolute; inset:0; background:transparent; }
+.frame .image-el {
+  position:absolute; top:0; left:0; will-change:transform; user-select:none; -webkit-user-drag:none; transition:transform 0.02s linear;
+  transform-origin: 0 0;
+}
+.frame .crop {
+  position:absolute; border:2px dashed rgba(0,0,0,0.15); box-sizing:border-box; z-index:40; display:none;
+  background: linear-gradient(0deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02));
+}
+.frame .guide-grid { position:absolute; inset:0; pointer-events:none; display:none; z-index:45; }
+.frame .guide-grid .line { position:absolute; background: rgba(0,0,0,0.06); }
+
+/* handles for free-transform (image-level) */
+.handle {
+  position:absolute; width:12px; height:12px; background:#fff; border:2px solid var(--primary); border-radius:3px; z-index:60; display:none;
+}
+.handle.br { right:8px; bottom:8px; cursor:se-resize; }
+.handle.bl { left:8px; bottom:8px; cursor:sw-resize; }
+.handle.tl { left:8px; top:8px; cursor:nw-resize; }
+.handle.tr { right:8px; top:8px; cursor:ne-resize; }
+.rotate-handle { position:absolute; right:50%; top:-30px; transform:translateX(50%); width:14px; height:14px; border-radius:50%; background:var(--primary); cursor:pointer; display:none; z-index:70; }
+
+/* UI small text */
+.small { font-size:0.86rem; color:#555; }
+
+/* bottom toolbar */
+.toolbar { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; align-items:center; }
+
+/* status */
+.status { margin-top:8px; font-size:0.9rem; color:#333; }
+
+/* responsive */
+@media (max-width:1100px) {
+  .tool { grid-template-columns: 1fr; }
+  .frame { width:100%; height:320px; }
+  .preview-wrap { padding:8px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📏 Smart Image Resizer Pro</h1>
+
+  <div class="tool">
+    <!-- LEFT: controls -->
+    <div class="panel left-panel">
+      <div class="upload" id="uploadZone">
+        <div style="font-weight:800; color:var(--primary)">Click / Drag & Drop / Paste Image (Ctrl+V)</div>
+        <div class="small" style="margin-top:6px">Supported: JPG, PNG, GIF. (PNG optimization may convert to JPEG)</div>
+        <input type="file" id="fileInput" accept="image/*">
+      </div>
+
+      <div class="meta" id="metaBox" style="display:none;">
+        <div><strong>Name:</strong> <span id="metaName"></span></div>
+        <div><strong>Type:</strong> <span id="metaType"></span></div>
+        <div><strong>Original size:</strong> <span id="metaSize"></span></div>
+        <div><strong>Original dims:</strong> <span id="metaDims"></span></div>
+        <div><strong>Live estimate:</strong> <span id="metaEstimate">—</span></div>
+      </div>
+
+      <div class="controls">
+        <label>Output Size (px)</label>
+        <div class="row">
+          <input type="number" id="outW" placeholder="Width" />
+          <input type="number" id="outH" placeholder="Height" />
+          <button class="btn" id="applyBtn">Apply</button>
+          <button class="btn-border" id="resetBtn">Reset</button>
+        </div>
+
+        <label>Quick Presets</label>
+        <div class="row">
+          <div class="preset-group">
+            <div class="preset-btn" id="presetTrigger">Social Presets ▼</div>
+            <div class="preset-menu" id="presetMenu">
+              <!-- categories will be appended here by JS -->
+            </div>
+          </div>
+        </div>
+
+        <label>Transform & Crop</label>
+        <div class="row">
+          <button class="btn-border" id="toggleFree">Free Transform (Image)</button>
+          <button class="btn-border" id="toggleCrop">Crop Frame</button>
+        </div>
+
+        <label>Zoom / Scale</label>
+        <div class="row">
+          <input type="range" id="zoomSlider" min="10" max="400" value="100">
+          <input type="number" id="scaleInput" style="width:80px" value="100"> %
+          <button class="btn-border" id="fitBtn">Fit</button>
+        </div>
+
+        <label>Rotate & Flip</label>
+        <div class="row">
+          <button class="btn" id="rot90">Rotate 90°</button>
+          <button class="btn" id="rot180">Rotate 180°</button>
+          <button class="btn-border" id="flipH">Flip H</button>
+          <button class="btn-border" id="flipV">Flip V</button>
+        </div>
+
+        <label>Image Optimization (target KB)</label>
+        <div class="row">
+          <input type="number" id="targetKB" placeholder="e.g. 150" />
+          <button class="btn" id="optimizeBtn">Optimize</button>
+          <button class="btn-border" id="autoOptBtn">Auto</button>
+        </div>
+
+        <label>History & Export</label>
+        <div class="row">
+          <button class="btn-border" id="undoBtn">Undo</button>
+          <button class="btn-border" id="redoBtn">Redo</button>
+        </div>
+
+        <div class="toolbar">
+          <button class="btn" id="downloadBtn">Download</button>
+          <button class="btn-border" id="copyBtn">Copy</button>
+        </div>
+
+        <div class="status" id="status">No image loaded.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: preview -->
+    <div class="panel right-panel">
+      <div class="preview-wrap">
+        <div class="frame" id="frame">
+          <div class="canvas-like"></div>
+          <img id="imageEl" class="image-el" draggable="false" style="display:none;" />
+          <div class="crop" id="cropEl" style="display:none;"></div>
+          <div class="guide-grid" id="guideGrid" style="display:none;"></div>
+
+          <!-- free-transform handles -->
+          <div class="handle tl" id="h_tl"></div>
+          <div class="handle tr" id="h_tr"></div>
+          <div class="handle bl" id="h_bl"></div>
+          <div class="handle br" id="h_br"></div>
+          <div class="rotate-handle" id="rotateHandle" title="Rotate"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px; font-weight:700;">Preview size: <span id="previewLabel">—</span></div>
+      <div class="small" id="previewHint" style="margin-top:8px">Use Free Transform to edit the image directly (drag image to move; use corners to scale; rotate with handle). Toggle Crop to move crop frame instead.</div>
+    </div>
+  </div>
+</div>
+
+<!-- working canvas for export -->
+<canvas id="workCanvas" style="display:none;"></canvas>
+
+<script>
+/* ============================
+   State & Elements
+   ============================ */
+const fileInput = document.getElementById('fileInput');
+const uploadZone = document.getElementById('uploadZone');
+const metaBox = document.getElementById('metaBox');
+const metaName = document.getElementById('metaName');
+const metaType = document.getElementById('metaType');
+const metaSize = document.getElementById('metaSize');
+const metaDims = document.getElementById('metaDims');
+const metaEstimate = document.getElementById('metaEstimate');
+
+const outW = document.getElementById('outW');
+const outH = document.getElementById('outH');
+const applyBtn = document.getElementById('applyBtn');
+const resetBtn = document.getElementById('resetBtn');
+
+const presetTrigger = document.getElementById('presetTrigger');
+const presetMenu = document.getElementById('presetMenu');
+
+const toggleFree = document.getElementById('toggleFree');
+const toggleCrop = document.getElementById('toggleCrop');
+
+const zoomSlider = document.getElementById('zoomSlider');
+const scaleInput = document.getElementById('scaleInput');
+const fitBtn = document.getElementById('fitBtn');
+
+const rot90 = document.getElementById('rot90');
+const rot180 = document.getElementById('rot180');
+const flipH = document.getElementById('flipH');
+const flipV = document.getElementById('flipV');
+
+const targetKB = document.getElementById('targetKB');
+const optimizeBtn = document.getElementById('optimizeBtn');
+const autoOptBtn = document.getElementById('autoOptBtn');
+
+const undoBtn = document.getElementById('undoBtn');
+const redoBtn = document.getElementById('redoBtn');
+
+const downloadBtn = document.getElementById('downloadBtn');
+const copyBtn = document.getElementById('copyBtn');
+
+const statusEl = document.getElementById('status');
+
+const frame = document.getElementById('frame');
+const imageEl = document.getElementById('imageEl');
+const cropEl = document.getElementById('cropEl');
+const guideGrid = document.getElementById('guideGrid');
+const workCanvas = document.getElementById('workCanvas');
+
+const handles = {
+  tl: document.getElementById('h_tl'),
+  tr: document.getElementById('h_tr'),
+  bl: document.getElementById('h_bl'),
+  br: document.getElementById('h_br'),
+  rotate: document.getElementById('rotateHandle')
+};
+
+let loadedFile = null;
+let imgDataURL = null;
+let imgNaturalW = 0, imgNaturalH = 0, imgType = '';
+let outputW = 840, outputH = 472; // default output
+let freeTransformMode = false;
+let cropMode = false;
+
+/* Transform state on image:
+   tx,ty = translation (image top-left) in output pixel coordinates
+   scale = image scale relative to natural pixels (1 => natural size)
+   rotate = degrees clockwise
+   flipH, flipV = booleans
+*/
+let state = {
+  tx: 0, ty: 0, scale: 1, rotate: 0, flipH: false, flipV: false,
+  crop: { x: 0, y: 0, w: outputW, h: outputH }, // crop in output coordinates
+  outputW, outputH
+};
+
+// history stacks for undo/redo
+let history = [], future = [];
+const pushHistory = (label='change') => {
+  history.push(JSON.stringify(state));
+  if (history.length > 60) history.shift();
+  future = []; // clear redo
+  updateStatus();
+};
+const undo = () => {
+  if (!history.length) return;
+  future.push(JSON.stringify(state));
+  const last = history.pop();
+  state = JSON.parse(last);
+  applyStateToUI();
+  updateStatus('Undo');
+};
+const redo = () => {
+  if (!future.length) return;
+  history.push(JSON.stringify(state));
+  const next = future.pop();
+  state = JSON.parse(next);
+  applyStateToUI();
+  updateStatus('Redo');
+};
+
+/* ============================
+   Helpers
+   ============================ */
+const fmtBytes = (b) => {
+  if (!b && b !== 0) return '—';
+  if (b < 1024) return b + ' B';
+  if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
+  return (b/1048576).toFixed(2) + ' MB';
+};
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+
+const setStatus = (t) => { statusEl.textContent = t; };
+
+/* ============================
+   Presets (grouped)
+   ============================ */
+const PRESETS = {
+  Facebook: [
+    {name:'Page Cover', w:820, h:360},
+    {name:'Post', w:1080, h:1080},
+    {name:'Ad (1200×628)', w:1200, h:628}
+  ],
+  Instagram: [
+    {name:'Square Post', w:1080, h:1080},
+    {name:'Portrait', w:1080, h:1350},
+    {name:'Story', w:1080, h:1920}
+  ],
+  Twitter: [
+    {name:'Header', w:1500, h:500},
+    {name:'Post', w:1200, h:675}
+  ],
+  YouTube: [
+    {name:'Thumbnail', w:1280, h:720},
+    {name:'Channel Art', w:2560, h:1440}
+  ],
+  LinkedIn: [
+    {name:'Cover', w:1584, h:396},
+    {name:'Post', w:1200, h:627}
+  ],
+  Pinterest: [
+    {name:'Pin', w:1000, h:1500}
+  ]
+};
+
+function buildPresetMenu(){
+  presetMenu.innerHTML = '';
+  for (const cat of Object.keys(PRESETS)){
+    const div = document.createElement('div');
+    div.className = 'category';
+    const h = document.createElement('h4'); h.textContent = cat;
+    div.appendChild(h);
+    PRESETS[cat].forEach(p=>{
+      const item = document.createElement('div');
+      item.className = 'preset-item';
+      item.textContent = `${p.name} — ${p.w} × ${p.h} px`;
+      item.dataset.w = p.w; item.dataset.h = p.h;
+      item.addEventListener('click', ()=> {
+        outW.value = p.w; outH.value = p.h;
+        applyOutputSize();
+        presetMenu.style.display = 'none';
+      });
+      div.appendChild(item);
+    });
+    presetMenu.appendChild(div);
+  }
+}
+buildPresetMenu();
+presetTrigger.addEventListener('click', ()=> {
+  presetMenu.style.display = presetMenu.style.display === 'block' ? 'none' : 'block';
+});
+document.addEventListener('click', (e)=> {
+  if (!presetMenu.contains(e.target) && e.target !== presetTrigger) presetMenu.style.display = 'none';
+});
+
+/* ============================
+   File load & UI updates
+   ============================ */
+uploadZone.addEventListener('click', ()=> fileInput.click());
+fileInput.addEventListener('change', (e)=>{
+  if (e.target.files && e.target.files[0]) loadFile(e.target.files[0]);
+});
+uploadZone.addEventListener('dragover', (e)=>{ e.preventDefault(); uploadZone.style.boxShadow='0 6px 18px rgba(155,108,227,0.12)'; });
+uploadZone.addEventListener('dragleave', ()=> uploadZone.style.boxShadow='none');
+uploadZone.addEventListener('drop', (e)=> {
+  e.preventDefault(); uploadZone.style.boxShadow='none';
+  if (e.dataTransfer?.files?.[0]) loadFile(e.dataTransfer.files[0]);
+});
+// paste image
+document.addEventListener('paste', (e)=>{
+  const items = e.clipboardData?.items || [];
+  for (const it of items){
+    if (it.type && it.type.startsWith('image/')){
+      const f = it.getAsFile();
+      loadFile(f);
+      break;
+    }
+  }
+});
+
+async function loadFile(file){
+  loadedFile = file;
+  imgType = file.type || 'image/png';
+  setStatus('Loading image...');
+  const dataURL = await fileToDataURL(file);
+  imgDataURL = dataURL;
+  const img = new Image();
+  img.onload = ()=>{
+    imgNaturalW = img.naturalWidth; imgNaturalH = img.naturalHeight;
+    // default output size -> natural size (but not too huge)
+    outputW = Math.min(3840, imgNaturalW);
+    outputH = Math.min(2160, imgNaturalH);
+    outW.value = outputW; outH.value = outputH;
+    // reset transform state
+    state = {
+      tx: 0, ty: 0, scale: 1, rotate: 0, flipH: false, flipV: false,
+      crop: { x: 0, y: 0, w: outputW, h: outputH },
+      outputW, outputH
+    };
+    imageEl.src = dataURL; imageEl.style.display = 'block';
+    metaBox.style.display = 'block';
+    metaName.textContent = file.name;
+    metaSize.textContent = fmtBytes(file.size);
+    metaType.textContent = file.type || 'image';
+    metaDims.textContent = imgNaturalW + ' × ' + imgNaturalH;
+    metaEstimate.textContent = '—';
+    pushHistory('load');
+    updatePreview();
+    setStatus('Image loaded');
+  };
+  img.onerror = ()=> setStatus('Failed to load image');
+  img.src = dataURL;
+}
+function fileToDataURL(file){
+  return new Promise((res,rej)=>{
+    const r = new FileReader();
+    r.onload = ()=> res(r.result);
+    r.onerror = e=> rej(e);
+    r.readAsDataURL(file);
+  });
+}
+
+/* ============================
+   Preview rendering & UI sync
+   ============================ */
+function applyStateToUI(){
+  outW.value = state.outputW; outH.value = state.outputH;
+  // update scale UI
+  scaleInput.value = Math.round(state.scale * 100);
+  zoomSlider.value = Math.round(state.scale * 100);
+  updatePreview();
+}
+function applyOutputSize(){
+  const w = parseInt(outW.value), h = parseInt(outH.value);
+  if (!w || !h) return alert('Enter valid width and height');
+  state.outputW = w; state.outputH = h;
+  state.crop = { x:0, y:0, w:w, h:h }; // reset crop area to full
+  updatePreview();
+  pushHistory('resize-output');
+}
+
+applyBtn.addEventListener('click', applyOutputSize);
+resetBtn.addEventListener('click', ()=>{
+  if (!loadedFile) return;
+  outW.value = imgNaturalW; outH.value = imgNaturalH;
+  state = {
+    tx:0, ty:0, scale:1, rotate:0, flipH:false, flipV:false,
+    crop: { x:0, y:0, w: imgNaturalW, h: imgNaturalH },
+    outputW: imgNaturalW, outputH: imgNaturalH
+  };
+  applyStateToUI();
+  pushHistory('reset');
+  setStatus('Reset');
+});
+
+/* compute previewScale mapping output coords to frame client px */
+function computePreviewScale(){
+  const frameRect = frame.getBoundingClientRect();
+  const availW = frameRect.width, availH = frameRect.height;
+  const sx = availW / state.outputW;
+  const sy = availH / state.outputH;
+  return Math.min(1, Math.min(sx, sy));
+}
+
+/* render preview by applying CSS transform to imageEl and positioning crop */
+function updatePreview(){
+  if (!imageEl.src) return;
+  const previewScale = computePreviewScale();
+  const displayW = imgNaturalW * state.scale * previewScale;
+  const displayH = imgNaturalH * state.scale * previewScale;
+  // position in frame: compute top-left pixel in frame for output (center output area)
+  const frameRect = frame.getBoundingClientRect();
+  const offsLeft = (frameRect.width - state.outputW * previewScale) / 2;
+  const offsTop  = (frameRect.height - state.outputH * previewScale) / 2;
+  // image translation (state.tx, state.ty) are in output coordinate pixels -> convert to preview px
+  const left = offsLeft + state.tx * previewScale;
+  const top  = offsTop  + state.ty * previewScale;
+  // apply CSS transform
+  const flipScaleX = state.flipH ? -1 : 1;
+  const flipScaleY = state.flipV ? -1 : 1;
+  // rotation must be applied around top-left; translate + rotate + scale + flip
+  // We'll compute transform matrix via translate(left, top) then rotate then scale.
+  imageEl.style.width = displayW + 'px';
+  imageEl.style.height = displayH + 'px';
+  imageEl.style.transform = `translate(${left}px, ${top}px) rotate(${state.rotate}deg) scale(${flipScaleX}, ${flipScaleY})`;
+  // crop element
+  const crop = state.crop;
+  cropEl.style.display = cropMode ? 'block' : 'none';
+  if (cropMode){
+    cropEl.style.left = (offsLeft + crop.x*previewScale) + 'px';
+    cropEl.style.top  = (offsTop  + crop.y*previewScale) + 'px';
+    cropEl.style.width = (crop.w * previewScale) + 'px';
+    cropEl.style.height = (crop.h * previewScale) + 'px';
+  }
+  // grid/golden ratio guides toggled by class on guideGrid
+  // update preview label
+  document.getElementById('previewLabel').textContent = state.outputW + ' × ' + state.outputH + ' px';
+  // estimate size asynchronously
+  estimateSize();
+  // show handles if freeTransformMode
+  for (const k in handles) handles[k].style.display = freeTransformMode ? 'block' : 'none';
+}
+
+/* ============================
+   Free transform: drag/scale/rotate on image (image-level)
+   ============================ */
+let pointerDown = false, pointerMode = null, start = null;
+
+function clientToOutputCoords(clientX, clientY){
+  const frameRect = frame.getBoundingClientRect();
+  const previewScale = computePreviewScale();
+  const offsLeft = (frameRect.width - state.outputW * previewScale) / 2;
+  const offsTop  = (frameRect.height - state.outputH * previewScale) / 2;
+  return {
+    x: (clientX - frameRect.left - offsLeft) / previewScale,
+    y: (clientY - frameRect.top  - offsTop ) / previewScale
+  };
+}
+
+frame.addEventListener('pointerdown', (e)=>{
+  if (!imageEl.src) return;
+  const target = e.target;
+  e.preventDefault();
+  // if cropMode and clicked inside crop, start crop dragging/resizing (handled elsewhere)
+  if (cropMode && cropEl.contains(e.target)) return;
+  if (freeTransformMode){
+    // if clicked on handle -> start resize
+    if (target.classList.contains('handle') || target.classList.contains('rotate-handle')){
+      pointerMode = target === handles.rotate ? 'rotate' : 'resize';
+    } else {
+      pointerMode = 'drag';
+    }
+    pointerDown = true;
+    start = { x: e.clientX, y: e.clientY, ...JSON.parse(JSON.stringify(state)) };
+    frame.setPointerCapture(e.pointerId);
+  }
+});
+frame.addEventListener('pointermove', (e)=>{
+  if (!pointerDown || !freeTransformMode) return;
+  const dx = e.clientX - start.x;
+  const dy = e.clientY - start.y;
+  if (pointerMode === 'drag'){
+    // translate in output coords
+    state.tx = start.tx + dx / computePreviewScale();
+    state.ty = start.ty + dy / computePreviewScale();
+  } else if (pointerMode === 'resize'){
+    // simple scale change based on drag direction (uses diagonal)
+    const delta = (dx + dy) / 300; // tuned sensitivity
+    const newScale = Math.max(0.05, start.scale * (1 + delta));
+    state.scale = newScale;
+    scaleInput.value = Math.round(state.scale * 100);
+    zoomSlider.value = Math.round(state.scale * 100);
+  } else if (pointerMode === 'rotate'){
+    // compute rotation delta by angle from center of image
+    const rect = frame.getBoundingClientRect();
+    const center = { x: rect.left + rect.width/2, y: rect.top + rect.height/2 };
+    const a1 = Math.atan2(start.y - center.y, start.x - center.x);
+    const a2 = Math.atan2(e.clientY - center.y, e.clientX - center.x);
+    const deg = (a2 - a1) * 180 / Math.PI;
+    state.rotate = start.rotate + deg;
+  }
+  updatePreview();
+});
+frame.addEventListener('pointerup', (e)=>{
+  if (pointerDown && freeTransformMode){
+    pushHistory('transform');
+  }
+  pointerDown = false; pointerMode = null;
+});
+
+/* Handles pointer down on rotate handle separately */
+handles.rotate.addEventListener('pointerdown', (e)=>{
+  e.stopPropagation();
+  pointerMode = 'rotate'; pointerDown = true;
+  start = { x:e.clientX, y:e.clientY, rotate: state.rotate };
+  frame.setPointerCapture(e.pointerId);
+});
+
+/* ============================
+   Crop frame dragging/resizing
+   ============================ */
+let cropDrag = false, cropResize = false, cropStart = null, cropHandle = null;
+cropEl.addEventListener('pointerdown', (e)=>{
+  e.stopPropagation(); e.preventDefault();
+  if (!cropMode) return;
+  // determine if near border/corner to resize
+  const rect = cropEl.getBoundingClientRect();
+  const margin = 12;
+  const isLeft = Math.abs(e.clientX - rect.left) < margin;
+  const isRight = Math.abs(e.clientX - rect.right) < margin;
+  const isTop = Math.abs(e.clientY - rect.top) < margin;
+  const isBottom = Math.abs(e.clientY - rect.bottom) < margin;
+  if ((isLeft && isTop) || (isRight && isBottom) || (isRight && isTop) || (isLeft && isBottom)){
+    cropResize = true; cropHandle = {left:isLeft, right:isRight, top:isTop, bottom:isBottom};
+  } else {
+    cropDrag = true;
+  }
+  cropStart = { x:e.clientX, y:e.clientY, crop: JSON.parse(JSON.stringify(state.crop)) };
+  frame.setPointerCapture(e.pointerId);
+});
+frame.addEventListener('pointermove', (e)=>{
+  if (!cropMode || (!cropDrag && !cropResize)) return;
+  const deltaX = (e.clientX - cropStart.x) / computePreviewScale();
+  const deltaY = (e.clientY - cropStart.y) / computePreviewScale();
+  const c = cropStart.crop;
+  if (cropDrag){
+    state.crop.x = clamp(c.x + deltaX, 0, state.outputW - c.w);
+    state.crop.y = clamp(c.y + deltaY, 0, state.outputH - c.h);
+  } else if (cropResize){
+    // modify sides based on handle booleans
+    const newCrop = {...c};
+    if (cropHandle.right) newCrop.w = clamp(c.w + deltaX, 20, state.outputW - c.x);
+    if (cropHandle.bottom) newCrop.h = clamp(c.h + deltaY, 20, state.outputH - c.y);
+    if (cropHandle.left){
+      const nx = clamp(c.x + deltaX, 0, c.x + c.w - 20);
+      newCrop.w = c.w - (nx - c.x);
+      newCrop.x = nx;
+    }
+    if (cropHandle.top){
+      const ny = clamp(c.y + deltaY, 0, c.y + c.h - 20);
+      newCrop.h = c.h - (ny - c.y);
+      newCrop.y = ny;
+    }
+    state.crop = newCrop;
+  }
+  updatePreview();
+});
+frame.addEventListener('pointerup', (e)=> {
+  if (cropDrag || cropResize) {
+    pushHistory('crop');
+  }
+  cropDrag = cropResize = false; cropHandle = null;
+});
+
+/* ============================
+   Zoom slider & scale input (smooth animation)
+   ============================ */
+let zoomAnim = null;
+function animateZoom(targetPercent){
+  if (zoomAnim) cancelAnimationFrame(zoomAnim);
+  const step = ()=>{
+    const cur = state.scale * 100;
+    const diff = targetPercent - cur;
+    const delta = diff * 0.18;
+    if (Math.abs(diff) < 0.4){
+      state.scale = targetPercent / 100;
+      scaleInput.value = Math.round(state.scale*100);
+      zoomSlider.value = Math.round(state.scale*100);
+      updatePreview();
+      return;
+    }
+    state.scale = (cur + delta) / 100;
+    scaleInput.value = Math.round(state.scale*100);
+    zoomSlider.value = Math.round(state.scale*100);
+    updatePreview();
+    zoomAnim = requestAnimationFrame(step);
+  };
+  step();
+}
+zoomSlider.addEventListener('input', ()=> { animateZoom(Number(zoomSlider.value)); });
+scaleInput.addEventListener('change', ()=> { const v = Number(scaleInput.value) || 100; animateZoom(v); });
+
+fitBtn.addEventListener('click', ()=>{
+  // fit to output area: choose scale so image covers output (cover)
+  const wScale = state.outputW / imgNaturalW;
+  const hScale = state.outputH / imgNaturalH;
+  const target = Math.max(wScale, hScale) * 100;
+  animateZoom(target);
+});
+
+/* ============================
+   Rotate / Flip
+   ============================ */
+rot90.addEventListener('click', ()=> { state.rotate = (state.rotate + 90) % 360; pushHistory('rotate'); updatePreview(); });
+rot180.addEventListener('click', ()=> { state.rotate = (state.rotate + 180) % 360; pushHistory('rotate'); updatePreview(); });
+flipH.addEventListener('click', ()=> { state.flipH = !state.flipH; pushHistory('flip'); updatePreview(); });
+flipV.addEventListener('click', ()=> { state.flipV = !state.flipV; pushHistory('flip'); updatePreview(); });
+
+/* ============================
+   Toggle modes: free transform & crop
+   ============================ */
+toggleFree.addEventListener('click', ()=> {
+  freeTransformMode = !freeTransformMode;
+  toggleFree.textContent = freeTransformMode ? 'Free Transform: ON' : 'Free Transform (Image)';
+  if (freeTransformMode) { cropMode = false; toggleCrop.textContent = 'Crop Frame'; }
+  updatePreview();
+});
+toggleCrop.addEventListener('click', ()=> {
+  cropMode = !cropMode;
+  toggleCrop.textContent = cropMode ? 'Crop: ON' : 'Crop Frame';
+  if (cropMode) { freeTransformMode = false; toggleFree.textContent = 'Free Transform (Image)'; }
+  updatePreview();
+});
+
+/* ============================
+   Estimate output size live
+   ============================ */
+let estimateTimer = null;
+async function estimateSize(){
+  if (!imageEl.src) return;
+  metaEstimate.textContent = 'Estimating...';
+  if (estimateTimer) clearTimeout(estimateTimer);
+  estimateTimer = setTimeout(async ()=>{
+    const blob = await exportCanvasBlob({mime: imgType.includes('png') ? 'image/png' : 'image/jpeg', quality:0.92});
+    metaEstimate.textContent = fmtBytes(blob.size);
+  }, 300);
+}
+
+/* ============================
+   Export: draw to working canvas according to state & crop
+   ============================ */
+function computeSourceRect(){
+  // Determine which rectangle from original image will be drawn to output canvas
+  // state.scale maps original image pixels -> output pixels: outputPixel = origPixel * state.scale (ignoring rotation)
+  // state.tx, state.ty are offsets of image top-left in output coords
+  // For rotation we will draw via canvas transforms (handle rotation separately)
+  // We will draw original image with drawImage(sourceX, sourceY, sourceW, sourceH, 0,0, outputW, outputH)
+  // To simplify, we will generate the final image by drawing original into temporary canvas with transforms similar to preview.
+  return; // not used; we will use canvas transforms instead
+}
+
+async function exportCanvasBlob({mime='image/jpeg', quality=0.92} = {}){
+  if (!imageEl.src) return null;
+  // prepare canvas sized to crop or full output
+  const exportW = Math.round(state.crop.w);
+  const exportH = Math.round(state.crop.h);
+  const canvas = workCanvas;
+  canvas.width = exportW;
+  canvas.height = exportH;
+  const ctx = canvas.getContext('2d');
+  ctx.save();
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+
+  // center transformations: we need to map how original image pixels map to output coords
+  // Step: translate to align output coordinate origin with desired crop origin in output space
+  // We will reconstruct the transform used in preview but apply it to original image drawn on canvas
+  // Compute relationship: output pixel = ( (orig_pixel * state.scale) + state.tx, state.ty ) + frame offsets
+  // So to map canvas pixel (x,y) to original pixel:
+  // orig_x = (x + crop_x - tx) / scale
+  // We'll draw by using drawImage with sx,sy,sw,sh computed per-pixel
+  // Simpler approach: create an intermediate canvas of originalImage scaled by state.scale and transformed (rotate/flip),
+  // then copy the crop rectangle from that to final canvas.
+  const tmpW = Math.ceil(imgNaturalW * state.scale);
+  const tmpH = Math.ceil(imgNaturalH * state.scale);
+  const tmp = document.createElement('canvas');
+  tmp.width = tmpW;
+  tmp.height = tmpH;
+  const tctx = tmp.getContext('2d');
+  tctx.imageSmoothingEnabled = true;
+  tctx.imageSmoothingQuality = 'high';
+
+  // Apply rotation & flip while drawing to tmp so tmp contains transformed/scaled original
+  tctx.save();
+  // move origin to center for rotation
+  tctx.translate(tmpW/2, tmpH/2);
+  tctx.rotate(state.rotate * Math.PI / 180);
+  const sx = state.flipH ? -1 : 1;
+  const sy = state.flipV ? -1 : 1;
+  tctx.scale(sx, sy);
+  // draw image centered
+  tctx.drawImage(originalImage, - (imgNaturalW*state.scale)/2, - (imgNaturalH*state.scale)/2, imgNaturalW*state.scale, imgNaturalH*state.scale);
+  tctx.restore();
+
+  // compute crop position relative to transformed tmp
+  // After transform, the top-left of image in output space corresponds to state.tx/state.ty.
+  // We want the crop rect in output coords: state.crop (x,y,w,h)
+  // To map to pixels on tmp (which are in scaled+rotated image coordinates), compute:
+  // tmpCropX = ( - state.tx ) + state.crop.x
+  // but note: this is complex with rotation; our rotation occurs around image center when drawing to tmp.
+  // To keep approach robust, we will draw the transformed tmp to a larger canvas centered and then sample.
+  // We'll use drawImage with appropriate offsets:
+  // compute the position where top-left of tmp image should be placed in output coordinate system:
+  // top-left-of-image-in-output = { x: state.tx, y: state.ty } (in output pixel coords)
+  // So in the final output canvas, to draw the transformed image so it aligns:
+  // draw tmp at (state.tx * -1, state.ty * -1) ??? To avoid further complexity, we will compute the source region on tmp:
+  // srcX_on_tmp = clamp( Math.round( (0 - state.tx) ), 0, tmpW )
+  // srcY_on_tmp = clamp( Math.round( (0 - state.ty) ), 0, tmpH )
+
+  // compute where the output (crop) area sits on tmp:
+  const srcX = Math.round(clamp( - state.tx, 0, tmpW ));
+  const srcY = Math.round(clamp( - state.ty, 0, tmpH ));
+  const srcW = Math.round(clamp(state.crop.w, 0, tmpW - srcX));
+  const srcH = Math.round(clamp(state.crop.h, 0, tmpH - srcY));
+
+  // If rotation created parts out of bounds, adjust accordingly
+  // Finally draw slice from tmp to final canvas (scale to full size output)
+  ctx.clearRect(0,0, exportW, exportH);
+  // If srcW/H cover less, drawImage will scale portion to canvas
+  try{
+    ctx.drawImage(tmp, srcX, srcY, srcW, srcH, 0, 0, exportW, exportH);
+  } catch (err) {
+    // fallback: draw original image scaled and positioned according to transform without rotation
+    ctx.save();
+    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,exportW,exportH);
+    // draw original scaled with no rotation for fallback
+    const sx2 = ( - state.tx ) / state.scale;
+    const sy2 = ( - state.ty ) / state.scale;
+    const sW2 = exportW / state.scale;
+    const sH2 = exportH / state.scale;
+    ctx.drawImage(originalImage, sx2, sy2, sW2, sH2, 0, 0, exportW, exportH);
+    ctx.restore();
+  }
+
+  return await new Promise(res => workCanvas.toBlob(b => res(b), mime, quality));
+}
+
+/* ============================
+   Download & Copy
+   ============================ */
+downloadBtn.addEventListener('click', async ()=>{
+  if (!imageEl.src) return alert('Upload an image first');
+  setStatus('Preparing image for download...');
+  const mime = imgType.includes('png') ? 'image/png' : 'image/jpeg';
+  const blob = await exportCanvasBlob({ mime, quality: 0.92 });
+  if (!blob) { setStatus('Export failed'); return; }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url;
+  const ext = mime.includes('png') ? 'png' : 'jpg';
+  a.download = `resized-${(loadedFile?.name || 'image').replace(/\.[^/.]+$/, '')}.${ext}`;
+  a.click();
+  URL.revokeObjectURL(url);
+  setStatus('Downloaded — ' + fmtBytes(blob.size));
+  metaEstimate.textContent = fmtBytes(blob.size);
+});
+
+copyBtn.addEventListener('click', async ()=>{
+  if (!imageEl.src) return alert('Upload an image first');
+  setStatus('Copying image to clipboard...');
+  const blob = await exportCanvasBlob({ mime:'image/png', quality:0.92 });
+  try {
+    await navigator.clipboard.write([ new ClipboardItem({ [blob.type]: blob }) ]);
+    setStatus('Image copied to clipboard!');
+  } catch (err) {
+    // fallback: open in new tab
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+    setStatus('Clipboard not allowed; opened in new tab.');
+  }
+});
+
+/* ============================
+   Optimization (binary-ish search)
+   ============================ */
+optimizeBtn.addEventListener('click', async ()=>{
+  if (!imageEl.src) return alert('Upload an image first');
+  const target = Number(targetKB.value);
+  if (!target || target <= 0) return alert('Enter valid target KB');
+  setStatus('Optimizing to ' + target + ' KB — this may take a few seconds');
+  // use jpeg output for optimization
+  const mime = 'image/jpeg';
+  const targetBytes = target * 1024;
+  let lo = 0.08, hi = 0.95, bestBlob = null, bestQ = hi;
+  for (let i=0;i<9;i++){
+    const q = (lo+hi)/2;
+    setStatus(`Pass ${i+1}: testing quality ${q.toFixed(2)}`);
+    const blob = await exportCanvasBlob({ mime, quality: q });
+    if (!blob) break;
+    const s = blob.size;
+    bestBlob = blob; bestQ = q;
+    if (s > targetBytes) {
+      hi = q;
+    } else {
+      lo = q;
+    }
+    if (Math.abs(s - targetBytes) / targetBytes < 0.06) break;
+  }
+  if (!bestBlob) { setStatus('Optimization failed'); return; }
+  const url = URL.createObjectURL(bestBlob);
+  const a = document.createElement('a'); a.href = url;
+  a.download = `optimized-${(loadedFile?.name || 'image').replace(/\.[^/.]+$/, '')}.jpg`;
+  a.click();
+  URL.revokeObjectURL(url);
+  setStatus(`Optimized: ${fmtBytes(bestBlob.size)} (q=${bestQ.toFixed(2)})`);
+  metaEstimate.textContent = fmtBytes(bestBlob.size);
+  pushHistory('optimize');
+});
+
+// Auto optimize (balanced)
+autoOptBtn.addEventListener('click', ()=>{
+  if (!imageEl.src) return alert('Upload an image first');
+  const origKB = loadedFile ? loadedFile.size / 1024 : 500;
+  const target = Math.round(Math.max(80, Math.min(1200, origKB * 0.35)));
+  targetKB.value = target;
+  optimizeBtn.click();
+});
+
+/* ============================
+   Undo / Redo
+   ============================ */
+undoBtn.addEventListener('click', undo);
+redoBtn.addEventListener('click', redo);
+
+/* ============================
+   Utility: estimate size quickly for metaEstimate (JPEG path)
+   ============================ */
+async function estimateSizeQuick(){
+  if (!imageEl.src) return;
+  const blob = await exportCanvasBlob({ mime:'image/jpeg', quality:0.88 });
+  return blob ? blob.size : 0;
+}
+async function estimateSize(){
+  if (!imageEl.src) return;
+  // debounce by 200ms
+  if (window._estimateTimeout) clearTimeout(window._estimateTimeout);
+  window._estimateTimeout = setTimeout(async ()=>{
+    const s = await estimateSizeQuick();
+    metaEstimate.textContent = s ? fmtBytes(s) : '—';
+  }, 220);
+}
+
+/* ============================
+   Utility: pushing history when user finishes actions
+   ============================ */
+// push state every 800ms of inactivity or manually done above where needed
+let idleTimer = null;
+const schedulePush = ()=>{
+  if (idleTimer) clearTimeout(idleTimer);
+  idleTimer = setTimeout(()=> { pushHistory('idle'); }, 800);
+};
+['pointerup','pointerdown','click'].forEach(ev => frame.addEventListener(ev, schedulePush));
+
+/* ============================
+   Init: helper functions
+   ============================ */
+function updateStatus(){
+  statusEl.textContent = `History: ${history.length} | Redo: ${future.length}`;
+}
+
+/* ============================
+   Expose a global originalImage for internal use
+   ============================ */
+let originalImage = new Image();
+Object.defineProperty(window, 'originalImage', { get: ()=> originalImage, set: (v)=> originalImage = v });
+
+/* When imageEl loads, update originalImage reference for drawing */
+imageEl.addEventListener('load', ()=> {
+  originalImage = new Image();
+  originalImage.src = imageEl.src;
+});
+
+/* initial */
+setStatus('Ready — upload an image to start.');
+
+</script>
+
+<!-- Suggested + footer -->
+<section style="max-width:1250px; margin:18px auto 80px;">
+  <div id="suggested-tools"><h2 style="color:var(--primary);">Suggested Tools</h2><div class="suggested-list"></div></div>
+</section>
+
+<script src="https://nextonlinetools.com/js/suggested.js"></script>
+<div id="footer" style="height:80px; background:var(--footer); margin-top:18px;"></div>
+<script src="https://nextonlinetools.com/js/include.js"></script>
+<script src="https://nextonlinetools.com/js/search.js"></script>
+</body>
+</html>
