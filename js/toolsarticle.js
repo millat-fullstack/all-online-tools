@@ -4,7 +4,7 @@ const articleMap = {
   "color-picker.html": "/toolsarticle/colorpicker.html",
   "webp-to-jpg.html": "/toolsarticle/webpjpg.html",
   "pdf-to-jpg.html": "/toolsarticle/pdfjpg.html",
-  "extract-links.html": "/toolsarticle/extractlinks.html",
+  "link-extractor.html": "/toolsarticle/extractlinks.html",
   "image-resizer.html": "/toolsarticle/imageresizer.html",
 };
 

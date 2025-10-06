@@ -3,141 +3,215 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image to Word Converter</title>
+  <title>🖼️ Image to Text Converter | Next Online Tools</title>
+
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
   <link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
-  <link rel="stylesheet" href="/css/suggested.css">
+  <link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
 
-<style>
+  <style>
+    :root {
+      --primary: #9B6CE3;
+      --primary-hover: #7B4FD6;
+      --text-color: #333;
+      --bg-body: #f8f6fb;
+      --bg-card: #E8E0F5;
+      --footer-bg: #2A2340;
+    }
 
-  body {
-  font-family: 'Inter', sans-serif;
-  background: #f8f6fb;    /* match your UI body background */
-  margin: 0;
-  padding: 0;             /* no padding here, avoids header conflict */
-  color: #2c2c2c;
-  line-height: 1.7;
-  min-height: 100vh;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-body);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
 
-.tool-box {
-  background: #fff;
-  padding: 30px;
-  border-radius: 5px;
-  max-width: 800px;
-  width: 100%;
-  margin: 60px auto 10px;      /* center block under header */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  text-align: center;
-  box-sizing: border-box;
-}
+    .tool-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 30px;
+    }
 
-h1 {
-  color: #6b4de6;
-  margin-bottom: 20px;
-}
+    .column {
+      flex: 1;
+      min-width: 340px;
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-.upload-zone {
-  border: 2px dashed #a17edc;
-  border-radius: 12px;
-  padding: 40px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  background: #f8f6fb;
-  transition: 0.3s;
-}
+    h1 {
+      width: 100%;
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
 
-.upload-zone:hover {
-  background: #f0ebfa;
-}
+    h3 {
+      width: 100%;
+      text-align: center;
+      color: #555;
+      font-weight: normal;
+      margin-bottom: 20px;
+    }
 
-textarea {
-  width: 100%;
-  height: 200px;
-  padding: 15px;
-  border-radius: 5px;
-  border: 1px solid #e8e0f5;
-  font-size: 1em;
-  line-height: 1.5;
-  margin-top: 20px;
-  resize: vertical;
-}
+    .upload-zone {
+      border: 2px dashed var(--primary);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      background: #fff;
+      transition: 0.3s;
+      text-align: center;
+    }
 
-button {
-  display: inline-block;
-  margin-top: 15px;
-  background: #6b4de6;
-  color: #fff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.95em;
-  transition: 0.3s;
-  white-space: nowrap;
-}
+    .upload-zone:hover {
+      background: #f3ecfa;
+    }
 
-button:hover {
-  background: #593ac7;
-}
+    #preview {
+      max-width: 100%;
+      max-height: 240px;
+      display: none;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 5px;
+      margin-top: 10px;
+    }
 
-.note {
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: #666;
-}
-</style>
+    textarea {
+      width: 100%;
+      height: 250px;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      line-height: 1.6;
+      background: #fff;
+      resize: vertical;
+    }
 
+    button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 18px;
+      margin: 8px 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: var(--primary-hover);
+    }
+
+    .note {
+      font-size: 0.9em;
+      color: #666;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* Progress bar */
+    .progress-container {
+      width: 100%;
+      height: 12px;
+      background: #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .progress-bar {
+      height: 12px;
+      width: 0%;
+      background: var(--primary);
+      transition: width 0.2s ease-in-out;
+    }
+
+    .progress-text {
+      text-align: center;
+      font-size: 13px;
+      margin-top: 6px;
+      color: var(--primary);
+      font-weight: 600;
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 <div id="header"></div>
-  <div class="tool-box">
-    <h1>🖼️ Image to Word Converter</h1>
 
+<div class="tool-container">
+  <h1>🖼️ Image to Text Converter</h1>
+  <h3>Extract text instantly from images using advanced OCR technology.</h3>
+
+  <!-- Left Column -->
+  <div class="column">
     <div class="upload-zone" id="dropZone">
       <p>Click or drag & drop image here<br>Or paste screenshot (Ctrl+V)</p>
       <input type="file" id="fileInput" accept="image/*" hidden>
     </div>
 
-    <!-- Preview Image -->
-    <div id="preview-container" style="text-align:center; margin:15px 0;">
-      <img id="preview" src="" alt="" style="max-width: 100%; max-height: 250px; display: none; border: 1px solid #ddd; border-radius: 8px; padding: 5px;">
+    <div id="preview-container" style="text-align:center;">
+      <img id="preview" src="" alt="Preview Image">
     </div>
 
-    <textarea id="output" placeholder="Extracted text will appear here..."></textarea>
-    <br>
-    <button onclick="downloadWord()">Download as Word</button>
-    <button onclick="copyText()">📋 Copy Text</button>
-
-    <div class="note">Supports: JPG, PNG, screenshots (paste directly)</div>
+    <div class="progress-container" id="progressContainer">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-text" id="progressText">Processing: 0%</div>
   </div>
+
+  <!-- Right Column -->
+  <div class="column">
+    <textarea id="output" placeholder="Extracted text will appear here..."></textarea>
+    <div style="text-align:center;">
+      <button onclick="downloadWord()">Download as Word</button>
+      <button onclick="copyText()">📋 Copy Text</button>
+    </div>
+    <div class="note">Supports: JPG, PNG, and screenshots (paste directly)</div>
+  </div>
+</div>
 
 <script>
   const dropZone = document.getElementById("dropZone");
   const fileInput = document.getElementById("fileInput");
   const output = document.getElementById("output");
   const preview = document.getElementById("preview");
+  const progressContainer = document.getElementById("progressContainer");
+  const progressBar = document.getElementById("progressBar");
+  const progressText = document.getElementById("progressText");
 
-  // Click upload
   dropZone.addEventListener("click", () => fileInput.click());
-
-  // Handle file upload
   fileInput.addEventListener("change", e => {
     if (e.target.files[0]) processImage(e.target.files[0]);
   });
 
-  // Drag & drop
   dropZone.addEventListener("dragover", e => e.preventDefault());
   dropZone.addEventListener("drop", e => {
     e.preventDefault();
     if (e.dataTransfer.files[0]) processImage(e.dataTransfer.files[0]);
   });
 
-  // Paste image
   document.addEventListener("paste", e => {
     const items = e.clipboardData.items;
     for (let item of items) {
@@ -148,9 +222,8 @@ button:hover {
     }
   });
 
-  // OCR Processing + Preview
   async function processImage(file) {
-    // Show preview
+    // Preview image
     const reader = new FileReader();
     reader.onload = function(e) {
       preview.src = e.target.result;
@@ -158,19 +231,40 @@ button:hover {
     };
     reader.readAsDataURL(file);
 
-    // OCR
-    output.value = "⏳ Processing image...";
-    const { data: { text } } = await Tesseract.recognize(file, 'eng');
-    output.value = text.trim();
+    output.value = "⏳ Processing image, please wait...";
+    progressContainer.style.display = "block";
+    progressText.style.display = "block";
+    progressBar.style.width = "0%";
+    progressText.textContent = "Processing: 0%";
+
+    await Tesseract.recognize(file, 'eng', {
+      logger: m => {
+        if (m.status === "recognizing text") {
+          const progress = Math.round(m.progress * 100);
+          progressBar.style.width = progress + "%";
+          progressText.textContent = `Processing: ${progress}%`;
+        }
+      }
+    }).then(({ data: { text } }) => {
+      output.value = text.trim() || "No readable text found.";
+      progressBar.style.width = "100%";
+      progressText.textContent = "✅ Completed (100%)";
+      setTimeout(() => {
+        progressContainer.style.display = "none";
+        progressText.style.display = "none";
+      }, 1500);
+    });
   }
 
-  // Download as Word
   function downloadWord() {
+    if (!output.value.trim()) {
+      alert("No text to download!");
+      return;
+    }
     const blob = new Blob(['\ufeff', output.value], { type: 'application/msword' });
-    saveAs(blob, "extracted.doc");
+    saveAs(blob, "extracted_text.doc");
   }
 
-  // Copy text to clipboard
   function copyText() {
     if (!output.value.trim()) {
       alert("No text to copy!");
@@ -182,23 +276,16 @@ button:hover {
   }
 </script>
 
-<!-- Article + Extra Sections -->
-
+<!-- Suggested Tools + Footer -->
 <section id="suggested-tools">
   <h2>Suggested Tools</h2>
   <div class="suggested-list"></div>
 </section>
 
 <script src="https://nextonlinetools.com/js/suggested.js"></script>
-
-<!-- Article Section -->
 <div id="tool-article"></div>
-
 <script src="/js/toolsarticle.js"></script>
-<script>
-  loadToolArticle("tool-article");
-</script>
-
+<script>loadToolArticle("tool-article");</script>
 <div id="footer"></div>
 <script src="https://nextonlinetools.com/js/include.js"></script>
 <script src="https://nextonlinetools.com/js/search.js"></script>
