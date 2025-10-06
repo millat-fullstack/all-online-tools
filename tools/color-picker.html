@@ -1,333 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Color Picker | All Online Tools</title>
-  <link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
-  <link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
-  
-  <style>
-  body {
-    font-family: 'Inter', sans-serif;
-    background: #f8f6fb;
-    color: #2c2c2c;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-  }
-
-  .page-container {
-    padding: 40px;
-    max-width: 900px;
-    margin: 50px auto;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    text-align: center;
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  h1 { color: #6b4de6; }
-
-.upload-zone {
-  border: 2px dashed #a17edc;
-  border-radius: 12px;
-  padding: 30px;
-  margin: 20px auto;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎨 Color Picker Tool</title>
+<link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
+<link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
+<style>
+body {
   background: #f8f6fb;
-  cursor: pointer;
-  max-width: 700px; /* increased from 500px */
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
-
-  input[type="color"] {
-    border: 1px solid #e8e0f5;
-    width: 120px;
-    height: 120px;
-    border-radius: 10px;
-    margin: 20px auto;
-    display: block;
-    cursor: pointer;
-  }
-
-canvas {
-  margin-top: 20px;
-  width: 100%; /* makes the canvas display larger while keeping original resolution */
-  max-width: 100%;
-  border: 1px solid #ddd;
+.page-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+.page-container h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.page-container p {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+.tool-layout {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.picker-left {
+  flex: 1 1 55%;
+  min-width: 320px;
+  background: #E8E0F5;
+  padding: 20px;
   border-radius: 12px;
-  display: none;
-  cursor: crosshair;
-  image-rendering: pixelated;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
-
-#magnifier {
-  position: absolute;
-  width: 140px;
-  height: 140px;
-  border: 2px solid #6b4de6;
+.upload-zone {
+  border: 2px dashed #9B6CE3;
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.2s;
+  margin-bottom: 15px;
+  background: #fff;
+}
+.upload-zone:hover {
+  border-color: #7B4FD6;
+  background: #f4f0fa;
+}
+canvas#canvas {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  object-fit: contain;
+  max-height: 600px;
+}
+canvas#magnifier {
+  position: fixed;
+  border: 3px solid #333;
   border-radius: 50%;
   display: none;
+  z-index: 999;
   pointer-events: none;
   background: #fff;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  z-index: 1000;
-  image-rendering: pixelated;
 }
+.picker-right {
+  flex: 1 1 40%;
+  min-width: 250px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.picker-right h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.color-preview {
+  height: 120px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 20px;
+}
+.codes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.code {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f1f1f1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.code button {
+  background: #9B6CE3;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.code button:hover {
+  background: #7B4FD6;
+}
+
+/* Manual picker circle */
+#manualPickerCircle {
+  position: relative;
+  margin-top: 15px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #b08cf1, #9B6CE3);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15),
+              0 3px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 0;
+}
+#manualPickerCircle:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3),
+              0 5px 12px rgba(0,0,0,0.25);
+}
+#manualPickerCircle::before {
+  content: "🎨";
+  font-size: 20px;
+  color: white;
+}
+
+/* Tooltip */
+#manualPickerCircle::after {
+  content: "Click to choose color";
+  position: absolute;
+  top: -35px;
+  right: 0;
+  background: #333;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  opacity: 0;
+  transform: translateY(5px);
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+#manualPickerCircle:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media(max-width:900px) {
   .tool-layout {
-    display: flex;
-    gap: 50px;
-    margin-top: 20px;
+    flex-direction: column;
   }
-
-  .picker-left, .picker-right { flex: 1; }
-
-  .codes { margin-top: 20px; text-align: left; }
-  .code {
-    background: #f8f6fb;
-    border: 1px solid #e8e0f5;
-    border-radius: 8px;
-    padding: 12px 20px;
-    margin: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'Courier New', monospace;
-    font-size: 1.1em;
-    box-sizing: border-box;
-    margin-left: 40px;
-  }
-
-  button {
-    padding: 6px 18px;
-    background: #6b4de6;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  button:hover { background: #593ac7; }
-  </style>
+}
+</style>
 </head>
-
 <body>
-  <div id="header"></div>
-
-  <div class="page-container">
-    <h1>🎨 Color Picker Tool</h1>
-    <p>Upload, paste, or drag & drop an image. Hover to preview, click to pick a color.</p>
-
-    <div class="tool-layout">
-      <!-- Left Side -->
-      <div class="picker-left">
-        <div class="upload-zone" id="dropZone">
-          <p>Click or drag & drop image here<br>Or paste screenshot (Ctrl+V)</p>
-          <input type="file" id="imageInput" accept="image/*" hidden>
-        </div>
-        <input type="color" id="colorPicker" value="#a17edc">
-        <canvas id="canvas"></canvas>
-        <canvas id="magnifier" width="140" height="140"></canvas>
-      </div>
-
-      <!-- Right Side -->
-      <div class="picker-right">
-        <h3>Picked Color</h3>
-        <div class="codes">
-          <div class="code">
-            <span id="hexCode">HEX: #a17edc</span>
-            <button onclick="copyText('hexCode')">Copy</button>
-          </div>
-          <div class="code">
-            <span id="rgbCode">RGB: 161, 126, 220</span>
-            <button onclick="copyText('rgbCode')">Copy</button>
-          </div>
-          <div class="code">
-            <span id="hslCode">HSL: 270, 50%, 67%</span>
-            <button onclick="copyText('hslCode')">Copy</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id="header"></div>
+    
+<div class="page-container">
+<h1>🎨 Color Picker Tool</h1>
+<p>Upload, paste, or drag & drop an image. Hover to preview. Click to pick color.</p>
+<div class="tool-layout">
+<div class="picker-left">
+  <div class="upload-zone" id="dropZone">
+    <p>Click or drag & drop image here<br>Or paste screenshot (Ctrl+V)</p>
+    <input type="file" id="imageInput" accept="image/*" hidden>
   </div>
+  <canvas id="canvas"></canvas>
+  <canvas id="magnifier" width="250" height="250"></canvas>
+</div>
+
+<div class="picker-right">
+  <h3>Picked Color</h3>
+  <div class="color-preview" id="colorPreview" style="background: #9B6CE3;">#9B6CE3</div>
+  <div class="codes">
+    <div class="code"><span id="hexCode">HEX: #9B6CE3</span><button onclick="copyText('hexCode')">Copy</button></div>
+    <div class="code"><span id="rgbCode">RGB: 155, 108, 227</span><button onclick="copyText('rgbCode')">Copy</button></div>
+    <div class="code"><span id="hslCode">HSL: 265, 61%, 66%</span><button onclick="copyText('hslCode')">Copy</button></div>
+  </div>
+
+  <!-- Manual Picker Circle -->
+  <div id="manualPickerCircle" title="Manual Color Picker">
+    <input type="color" id="colorPicker" value="#9B6CE3" style="opacity:0;width:100%;height:100%;cursor:pointer;">
+  </div>
+</div>
+</div>
+</div>
 
 <script>
 const picker = document.getElementById("colorPicker");
 const hexCode = document.getElementById("hexCode");
 const rgbCode = document.getElementById("rgbCode");
 const hslCode = document.getElementById("hslCode");
-
+const colorPreview = document.getElementById("colorPreview");
 const dropZone = document.getElementById("dropZone");
 const imageInput = document.getElementById("imageInput");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-
 const magnifier = document.getElementById("magnifier");
 const mtx = magnifier.getContext("2d");
 
-// Upload
-dropZone.addEventListener("click", () => imageInput.click());
-imageInput.addEventListener("change", e => { 
-  if (e.target.files[0]) loadImage(e.target.files[0]); 
-});
+let imageLoaded = false, picked = false, imgObj = null;
 
-// Drag & Drop
-dropZone.addEventListener("dragover", e => e.preventDefault());
-dropZone.addEventListener("drop", e => {
+// Upload / Drag / Paste
+dropZone.addEventListener("click", ()=>imageInput.click());
+imageInput.addEventListener("change", e=>{ if(e.target.files[0]) loadImage(e.target.files[0]); });
+dropZone.addEventListener("dragover", e=>e.preventDefault());
+dropZone.addEventListener("drop", e=>{
   e.preventDefault();
-  if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
+  if(e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
 });
-
-// Paste
-document.addEventListener("paste", e => {
+document.addEventListener("paste", e=>{
   const items = e.clipboardData.items;
-  for (let item of items) {
-    if (item.type.startsWith("image/")) loadImage(item.getAsFile());
+  for(let item of items){
+    if(item.type.startsWith("image/")) loadImage(item.getAsFile());
   }
 });
 
-function loadImage(file) {
+function loadImage(file){
   const img = new Image();
-  img.onload = function() {
-    // Resize canvas to fit image, max width 800px for easier color picking
-    const maxWidth = 800;
+  img.onload = function(){
+    imgObj = img;
+    imageLoaded = true;
+
+    // Maintain aspect ratio and full image fit
+    const maxWidth = canvas.clientWidth;
     const maxHeight = 600;
     let width = img.width;
     let height = img.height;
 
-    if (width > maxWidth) {
-      const ratio = maxWidth / width;
-      width = maxWidth;
-      height = height * ratio;
-    }
-    if (height > maxHeight) {
-      const ratio = maxHeight / height;
-      height = maxHeight;
-      width = width * ratio;
-    }
+    const ratio = Math.min(maxWidth / width, maxHeight / height, 1);
+    width *= ratio;
+    height *= ratio;
 
     canvas.width = width;
     canvas.height = height;
+    ctx.clearRect(0, 0, width, height);
     ctx.drawImage(img, 0, 0, width, height);
-    canvas.style.display = "block";
 
-    canvas.addEventListener("mousemove", showMagnifier);
-    canvas.addEventListener("mouseleave", () => magnifier.style.display = "none");
-    canvas.addEventListener("click", pickFromImage);
+    canvas.addEventListener("mousemove", updateMagnifier);
+    canvas.addEventListener("mouseleave", ()=>magnifier.style.display="none");
+    canvas.addEventListener("click", pickColor);
   };
   img.src = URL.createObjectURL(file);
 }
 
-function showMagnifier(e) {
+// Magnifier
+function updateMagnifier(e){
+  if(!imageLoaded || picked) return;
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
   const scaleY = canvas.height / rect.height;
   const x = Math.floor((e.clientX - rect.left) * scaleX);
   const y = Math.floor((e.clientY - rect.top) * scaleY);
 
-  const zoom = 10;
+  const zoom = 15;
   const size = magnifier.width / zoom;
 
   mtx.clearRect(0, 0, magnifier.width, magnifier.height);
   mtx.imageSmoothingEnabled = false;
-  mtx.drawImage(canvas, x - size/2, y - size/2, size, size, 0, 0, magnifier.width, magnifier.height);
+  mtx.drawImage(canvas, x-size/2, y-size/2, size, size, 0, 0, magnifier.width, magnifier.height);
 
-  // Crosshair
+  const pixel = ctx.getImageData(x, y, 1, 1).data;
+  mtx.fillStyle = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
+  mtx.fillRect(magnifier.width/2-10, magnifier.height/2-10, 20, 20);
+
   mtx.strokeStyle = "red";
-  mtx.lineWidth = 1;
+  mtx.lineWidth = 2;
   mtx.beginPath();
   mtx.moveTo(magnifier.width/2, 0);
   mtx.lineTo(magnifier.width/2, magnifier.height);
-  mtx.stroke();
-  mtx.beginPath();
   mtx.moveTo(0, magnifier.height/2);
   mtx.lineTo(magnifier.width, magnifier.height/2);
   mtx.stroke();
 
+  const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
+  updateCodes(hex);
+
   magnifier.style.display = "block";
-
-  // Offset slightly right + down, but keep inside viewport
-  const offset = 15;
-  let left = e.clientX + offset;
-  let top = e.clientY + offset;
-
-  if (left + magnifier.width > window.innerWidth) {
-    left = e.clientX - magnifier.width - offset;
-  }
-  if (top + magnifier.height > window.innerHeight) {
-    top = e.clientY - magnifier.height - offset;
-  }
-
+  let left = e.clientX + 20, top = e.clientY + 20;
+  if(left + magnifier.width > window.innerWidth) left = e.clientX - magnifier.width - 20;
+  if(top + magnifier.height > window.innerHeight) top = e.clientY - magnifier.height - 20;
   magnifier.style.left = `${left}px`;
   magnifier.style.top = `${top}px`;
 }
 
-function pickFromImage(e) {
+function pickColor(e){
+  picked = true;
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
   const scaleY = canvas.height / rect.height;
   const x = Math.floor((e.clientX - rect.left) * scaleX);
   const y = Math.floor((e.clientY - rect.top) * scaleY);
-
   const pixel = ctx.getImageData(x, y, 1, 1).data;
   const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
   picker.value = hex;
   updateCodes(hex);
 }
 
-picker.addEventListener("input", () => updateCodes(picker.value));
+picker.addEventListener("input", ()=>{ picked = true; updateCodes(picker.value); });
 
-function updateCodes(hex) {
+function updateCodes(hex){
   hexCode.textContent = "HEX: " + hex.toUpperCase();
-  let rgb = hexToRgb(hex);
+  const rgb = hexToRgb(hex);
   rgbCode.textContent = `RGB: ${rgb.r}, ${rgb.g}, ${rgb.b}`;
-  let hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+  const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
   hslCode.textContent = `HSL: ${hsl.h}, ${hsl.s}%, ${hsl.l}%`;
+  colorPreview.style.background = hex;
+  colorPreview.textContent = hex.toUpperCase();
 }
 
-function rgbToHex(r,g,b){return"#"+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);}
-function hexToRgb(hex){let r=parseInt(hex.slice(1,3),16);let g=parseInt(hex.slice(3,5),16);let b=parseInt(hex.slice(5,7),16);return{r,g,b};}
+function rgbToHex(r,g,b){ return "#"+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1); }
+function hexToRgb(hex){
+  let r = parseInt(hex.slice(1,3),16);
+  let g = parseInt(hex.slice(3,5),16);
+  let b = parseInt(hex.slice(5,7),16);
+  return {r,g,b};
+}
 function rgbToHsl(r,g,b){
-  r/=255;g/=255;b/=255;
-  let max=Math.max(r,g,b),min=Math.min(r,g,b);
-  let h,s,l=(max+min)/2;
-  if(max===min){h=s=0;}else{
-    let d=max-min;
+  r/=255; g/=255; b/=255;
+  const max=Math.max(r,g,b), min=Math.min(r,g,b);
+  let h=0,s=0,l=(max+min)/2;
+  if(max!==min){
+    const d=max-min;
     s=l>0.5?d/(2-max-min):d/(max+min);
-    switch(max){case r:h=(g-b)/d+(g<b?6:0);break;
-    case g:h=(b-r)/d+2;break;
-    case b:h=(r-g)/d+4;break;}
+    switch(max){
+      case r:h=(g-b)/d+(g<b?6:0);break;
+      case g:h=(b-r)/d+2;break;
+      case b:h=(r-g)/d+4;break;
+    }
     h/=6;
   }
-  return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};
+  return {h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};
 }
-
 function copyText(id){
   const text=document.getElementById(id).textContent.split(": ")[1];
   navigator.clipboard.writeText(text);
   alert("Copied: "+text);
 }
+
+updateCodes(picker.value);
 </script>
 
-
-<!-- Article + Extra Sections -->
-
+<!-- Suggested + Article Section -->
 <section id="suggested-tools">
   <h2>Suggested Tools</h2>
   <div class="suggested-list"></div>
 </section>
-
 <script src="https://nextonlinetools.com/js/suggested.js"></script>
 
-<!-- Article Section -->
 <div id="tool-article"></div>
-
 <script src="/js/toolsarticle.js"></script>
-<script>
-  loadToolArticle("tool-article");
-</script>
+<script>loadToolArticle("tool-article");</script>
 
 <div id="footer"></div>
 <script src="https://nextonlinetools.com/js/include.js"></script>
