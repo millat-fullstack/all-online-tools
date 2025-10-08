@@ -3,179 +3,305 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Image Converter & Editor | JPG ⇄ PNG, Crop, Rotate, Resize</title>
-  <meta name="description" content="Convert JPG to PNG and PNG to JPG, crop, rotate, and resize images online. Fast client-side image editor — no uploads, secure and free." />
-  <meta name="keywords" content="jpg to png, png to jpg, image converter, crop image online, rotate image, resize image, image editor online" />
-    <link rel="stylesheet" href="../css/home.css">
-  <link rel="stylesheet" href="../css/suggested.css">
-
+  <title>Image Converter & Editor | JPG ⇄ PNG — Upgraded UI</title>
+  <meta name="description" content="Convert JPG to PNG and PNG to JPG, crop and rotate images online. Fast client-side image editor — no uploads, secure and free." />
+  <link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
+<link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
   <style>
-    /* Futuristic neon theme matching your site */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-    font-family: 'Inter', sans-serif;
-    background: #f8f6fb;
-    color: #2c2c2c;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-  }
-    .wrap {
-      max-width: 1050px;
-      margin: 0 auto;
-      background: rgba(20,20,40,0.95);
-      padding: 22px;
-      border-radius: 14px;
-      box-shadow: 0 0 20px rgba(0,200,255,0.12);
+    /* Global & palette */
+    :root{
+      --primary:#9B6CE3;
+      --primary-hover:#7B4FD6;
+      --text:#333;
+      --body-bg:#f8f6fb;
+      --card-bg:#E8E0F5;
+      --muted:#6b6b6b;
+      --white:#fff;
+      --danger:#e05454;
     }
-    h1 { color:#0ff; font-size:1.6rem; text-align:center; margin-bottom:6px; }
-    p.lead { color:#aac; text-align:center; margin-bottom:18px; }
+    body{
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--body-bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
 
-    .top-row { display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; margin-bottom:14px; }
-    input[type=file] { background:#0b0b13; color:#0ff; border-radius:10px; padding:10px; border:1px solid rgba(0,255,255,0.06); }
-    .controls { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:12px; }
-    select, input[type=number], button { padding:10px 12px; border-radius:10px; border:none; background:rgba(0,255,255,0.10); color:#0ff; font-weight:700; cursor:pointer; }
-    select:hover, button:hover, input[type=number]:hover { background:rgba(0,255,255,0.28); box-shadow:0 0 8px rgba(0,200,255,0.12); }
+    /* container */
+    .page-container{
+      overflow: hidden;
+      max-width:1200px;
+      margin:0 auto;
+      background:var(--card-bg);
+      border-radius:14px;
+      padding:20px;
+      box-shadow:0 8px 30px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
 
-    .editor {
+    h1{ font-size:1.7rem; color:var(--primary); text-align:center; margin-bottom:8px; margin-top: 40px; }
+    p.lead{ text-align:center; color:var(--muted); margin-bottom:18px }
+
+    /* Editor grid - 2 columns (input / output) */
+    .editor-grid{
       display:grid;
-      grid-template-columns: 1fr 320px;
+      grid-template-columns: 1fr 380px;
       gap:18px;
       align-items:start;
     }
-    @media(max-width:900px) { .editor { grid-template-columns: 1fr; } }
+    @media(max-width:980px){
+      .editor-grid{ grid-template-columns: 1fr; }
+    }
 
-    .canvas-wrap {
-      background:#05050a;
+    /* Left column (input + canvas) */
+    .left-card{
+      background: #fff;
       border-radius:10px;
-      padding:12px;
-      border:1px solid rgba(0,255,255,0.04);
+      padding:14px;
+      border:1px solid rgba(0,0,0,0.04);
+    }
+
+    /* file and controls row */
+    .file-row{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:flex-start;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .file-input{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    input[type=file]{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.06);
+      background: #fff;
+      color:var(--text);
+      cursor:pointer;
+      font-weight:600;
+    }
+    .controls{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    /* Solid primary action buttons (important) */
+    .btn {
+      border: none;
+      background: var(--primary);
+      color: var(--white);
+      padding:9px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+      box-shadow: 0 6px 18px rgba(155,108,227,0.12);
+      transition: background .15s ease, transform .06s ease;
+    }
+    .btn:hover{ background:var(--primary-hover); transform:translateY(-1px); }
+    .btn:active{ transform:translateY(0); }
+
+    /* Sub-buttons: bordered style */
+    .btn-sub{
+      background: transparent;
+      color: var(--text);
+      border: 2px solid rgba(51,51,51,0.08);
+      padding:8px 10px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .btn-sub:hover{ border-color: rgba(155,108,227,0.35); color:var(--primary); }
+
+    /* Canvas wrapper */
+    .canvas-wrap{
+      margin-top:6px;
+      background:#111;
+      border-radius:8px;
+      padding:10px;
+      border: 1px solid rgba(0,0,0,0.06);
       text-align:center;
     }
-    canvas { max-width:100%; height:auto; border-radius:6px; background:#000; cursor:crosshair; display:block; margin: 0 auto; }
-
-    .sidebar {
-      background: rgba(10,10,20,0.6);
-      padding:12px;
-      border-radius:10px;
-      border:1px solid rgba(0,255,255,0.04);
+    canvas{
+      max-width:100%;
+      height:auto;
+      display:block;
+      border-radius:6px;
+      background:#000;
+      margin:0 auto;
+      cursor:crosshair;
     }
-    .field { margin-bottom:10px; color:#ccc; font-size:0.95rem; }
-    .field label { display:block; color:#0ff; font-weight:700; margin-bottom:6px; }
-    .small { font-size:0.85rem; color:#99b; margin-top:6px; }
 
-    .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; justify-content:center; }
-    .btn { padding:10px 12px; border-radius:8px; background:rgba(0,255,255,0.12); color:#0ff; border:none; font-weight:700; cursor:pointer; }
-    .btn:hover { background:rgba(0,255,255,0.3); box-shadow:0 0 8px rgba(0,200,255,0.2); }
-
-    .note { color:#99b; text-align:center; margin-top:12px; }
-    .info-section { margin-top:20px; background: rgba(10,10,20,0.6); padding:16px; border-radius:10px; }
-    .info-section h2 { color:#0ff; margin-bottom:8px; }
-    .info-section p, .info-section ul { color:#ccc; line-height:1.6; }
-    .info-section ul { padding-left:18px; }
-    .status { color:#aaf; text-align:center; margin-top:8px; font-weight:700; }
-
-    /* Crop rectangle visual */
-    .crop-rect {
-      position: absolute;
-      border: 2px dashed rgba(0,255,255,0.6);
-      background: rgba(0,255,255,0.06);
+    /* crop rectangle overlay */
+    .crop-rect{
+      position:absolute;
+      border:2px dashed rgba(155,108,227,0.9);
+      background: rgba(155,108,227,0.08);
       pointer-events:none;
+      border-radius:6px;
+      display:none;
     }
-    .rel { position: relative; display:inline-block; }
+    .canvas-holder{ position: relative; display:block; }
+
+    /* right column (output / info) */
+    .right-card{
+      background:#fff;
+      border-radius:10px;
+      padding:14px;
+      border:1px solid rgba(0,0,0,0.04);
+      height:min-content;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .field label{ display:block; font-weight:700; color:var(--primary); margin-bottom:8px; }
+    .small{ font-size:0.9rem; color:var(--muted) }
+
+    .meta{
+      font-size:0.95rem;
+      color:#444;
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+      padding:10px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.03);
+    }
+
+    select, input[type=number], input[type=text]{
+      width:100%;
+      padding:8px 10px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.06);
+      background: #fff;
+      color:var(--text);
+      font-weight:600;
+    }
+
+    /* progress area */
+    .progress-wrap{
+      margin-top:6px;
+    }
+    .progress-bar{
+      height:12px;
+      background: rgba(0,0,0,0.06);
+      border-radius:8px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,0.04);
+    }
+    .progress-fill{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+      transition: width .15s linear;
+    }
+    .progress-label{
+      margin-top:6px;
+      font-weight:700;
+      font-size:0.9rem;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    /* small helpers */
+    .muted{ color:var(--muted) }
+    .actions-row{ display:flex; gap:8px; flex-wrap:wrap }
+    .note{ font-size:0.92rem; color:var(--muted); margin-top:8px; text-align:left }
   </style>
 </head>
 <body>
-  <div id="header"></div>
-  <div class="wrap">
-    <h1>Image Converter & Editor — JPG ⇄ PNG</h1>
-    <p class="lead">Convert images between JPG and PNG, crop (drag), rotate, resize, and download — fully client-side and secure.</p>
+      <header>
+      <div id="header"></div>
+      </header>
 
-    <div class="top-row">
-      <input id="fileInput" type="file" accept="image/jpeg,image/png" />
-      <div class="controls">
-        <select id="outputFormat" title="Choose output format">
-          <option value="image/jpeg">Download as JPG (JPEG)</option>
-          <option value="image/png">Download as PNG</option>
-        </select>
+            <h1> PNG to JPG Converter </h1>
+      <p class="lead"> Convert any png image to jpg. Secure — everything runs inside your browser.</p>
 
-        <button id="rotateLeft" class="btn">⟲ Rotate Left</button>
-        <button id="rotateRight" class="btn">⟳ Rotate Right</button>
-      </div>
-    </div>
+  <div class="page-container">
 
-    <div class="editor">
-      <div>
-        <div class="canvas-wrap rel" id="canvasContainer">
-          <canvas id="imageCanvas"></canvas>
-          <!-- crop rectangle overlay -->
-          <div id="cropRect" class="crop-rect" style="display:none;"></div>
-        </div>
+    <div class="editor-grid">
+      <!-- LEFT: Input + Canvas -->
+      <div class="left-card">
+        <div class="file-row">
+          <div class="file-input">
+            <input id="fileInput" type="file" accept="image/jpeg,image/png" />
+          </div>
 
-        <div class="actions" style="margin-top:12px;">
-          <button id="enableCrop" class="btn">Start Crop (Draw)</button>
-          <button id="applyCrop" class="btn">Apply Crop</button>
-          <button id="resetCrop" class="btn">Reset Crop</button>
-        </div>
-
-        <div class="actions" style="margin-top:10px;">
-          <label class="field" style="display:flex; gap:8px; align-items:center; justify-content:center;">
-            <span style="color:#0ff; font-weight:700;">Resize:</span>
-            <input id="resizeWidth" type="number" placeholder="width px" style="width:120px; padding:8px; border-radius:8px; background:#0b0b13; color:#0ff; border:1px solid rgba(0,255,255,0.04);" />
-            <input id="resizeHeight" type="number" placeholder="height px" style="width:120px; padding:8px; border-radius:8px; background:#0b0b13; color:#0ff; border:1px solid rgba(0,255,255,0.04);" />
-            <button id="applyResize" class="btn">Apply</button>
-          </label>
-        </div>
-
-        <div class="note">Tip: Use Crop to select an area by dragging over the image. Apply crop then choose output format and download.</div>
-      </div>
-
-      <aside class="sidebar">
-        <div class="field"><label>Preview / Tools</label>
-          <div style="color:#aac; font-size:0.95rem;">Loaded image info:</div>
-          <div id="imgInfo" style="margin-top:8px; color:#ccc;">No image loaded</div>
-        </div>
-
-        <div class="field"><label>JPEG Quality (if JPG)</label>
-          <input id="jpegQuality" type="number" min="10" max="100" value="85" style="width:100%; padding:8px; border-radius:8px; background:#0b0b13; color:#0ff; border:1px solid rgba(0,255,255,0.04);" />
-          <div class="small">Enter 10–100. Used only when outputting JPG.</div>
-        </div>
-
-        <div class="field"><label>Actions</label>
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button id="downloadBtn" class="btn">Download</button>
-            <button id="resetBtn" class="btn">Reset</button>
-            <button id="fitBtn" class="btn">Fit to Canvas</button>
+          <div class="controls">
+            <select id="outputFormat" title="Choose output format" style="font-weight:700">
+              <option value="image/jpeg">Download as JPG (JPEG)</option>
+              <option value="image/png">Download as PNG</option>
+            </select>
+            <button id="rotateLeft" class="btn">⟲ Rotate Left</button>
+            <button id="rotateRight" class="btn">⟳ Rotate Right</button>
+            <button id="resetBtn" class="btn-sub">Reset</button>
           </div>
         </div>
 
-        <div id="status" class="status">Status: Ready</div>
+        <div class="canvas-wrap">
+          <div id="canvasContainer" class="canvas-holder">
+            <canvas id="imageCanvas"></canvas>
+            <div id="cropRect" class="crop-rect"></div>
+          </div>
+
+          <div style="margin-top:10px" class="actions-row">
+            <button id="enableCrop" class="btn">Start Crop (Draw)</button>
+            <button id="applyCrop" class="btn">Apply Crop</button>
+            <button id="resetCrop" class="btn-sub">Reset Crop</button>
+          </div>
+
+          <div class="note">Tip: Click "Start Crop", drag over the image to select an area, then click "Apply Crop".</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Output / Info -->
+      <aside class="right-card">
+        <div class="field">
+          <label>Preview / Tools</label>
+          <div class="meta" id="imgInfo">No image loaded</div>
+        </div>
+
+        <div class="field">
+          <label>JPEG Quality (only for JPG)</label>
+          <input id="jpegQuality" type="number" min="10" max="100" value="85" />
+          <div class="small">Enter 10–100. Used only when outputting JPG.</div>
+        </div>
+
+        <div class="field">
+          <label>Actions</label>
+          <div class="actions-row">
+            <button id="downloadBtn" class="btn">Convert & Download</button>
+            <button id="downloadQuick" class="btn-sub" title="Download current visible canvas quickly (no enforced processing time)">Quick Download</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Processing</label>
+          <div class="progress-wrap">
+            <div class="progress-bar" aria-hidden="true"><div id="progressFill" class="progress-fill"></div></div>
+            <div class="progress-label"><span id="progressText">Idle</span><span id="progressPct">0%</span></div>
+          </div>
+          <div class="small">All conversions happen client-side. The progress bar simulates processing and ensures a minimum processing time for UX.</div>
+        </div>
+
+        <div class="field">
+          <label>Notes</label>
+          <div class="small">Removed Resize and Fit features to streamline conversion workflow. Use crop & rotate for composition. Everything is local to your browser.</div>
+        </div>
+
+        <div id="status" class="small" style="margin-top:6px; color:var(--muted)">Status: Ready</div>
       </aside>
     </div>
-
-    <!-- SEO guideline & benefits -->
-    <section class="info-section" style="margin-top:18px;">
-      <h2>How to Use the Image Converter & Editor</h2>
-      <p>
-        Upload a JPG or PNG image. Use the crop tool to drag-select an area and apply the crop. Rotate left or right as needed. To resize, input your desired width and height (px) and click <strong>Apply</strong>. Choose the output format (JPG or PNG) and — if JPG — set quality. Click <strong>Download</strong> to save the converted image. Everything runs locally in your browser: no files are uploaded to a server.
-      </p>
-    </section>
-
-    <section class="info-section" style="margin-top:12px;">
-      <h2>Top 5 Benefits</h2>
-      <ul>
-        <li><strong>Privacy-first:</strong> All processing happens on your device — no uploads or third-party storage.</li>
-        <li><strong>Flexible conversion:</strong> Convert between JPG and PNG easily for web or print use.</li>
-        <li><strong>Quick editing:</strong> Crop, rotate, and resize without installing software.</li>
-        <li><strong>Control quality:</strong> Choose JPEG quality for smaller files or higher fidelity.</li>
-        <li><strong>Free & browser-based:</strong> Works on desktop and modern mobile browsers.</li>
-      </ul>
-    </section>
-
   </div>
 
   <script>
-    // Elements
+    // Elements & state
     const fileInput = document.getElementById('fileInput');
     const canvas = document.getElementById('imageCanvas');
     const ctx = canvas.getContext('2d');
@@ -183,7 +309,6 @@ body {
     const statusEl = document.getElementById('status');
     const outputFormat = document.getElementById('outputFormat');
     const jpegQuality = document.getElementById('jpegQuality');
-
     const rotateLeftBtn = document.getElementById('rotateLeft');
     const rotateRightBtn = document.getElementById('rotateRight');
     const enableCropBtn = document.getElementById('enableCrop');
@@ -191,12 +316,12 @@ body {
     const resetCropBtn = document.getElementById('resetCrop');
     const cropRectEl = document.getElementById('cropRect');
     const canvasContainer = document.getElementById('canvasContainer');
-    const applyResizeBtn = document.getElementById('applyResize');
-    const resizeWInput = document.getElementById('resizeWidth');
-    const resizeHInput = document.getElementById('resizeHeight');
     const downloadBtn = document.getElementById('downloadBtn');
+    const downloadQuickBtn = document.getElementById('downloadQuick');
     const resetBtn = document.getElementById('resetBtn');
-    const fitBtn = document.getElementById('fitBtn');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const progressPct = document.getElementById('progressPct');
 
     let img = new Image();
     let imgLoaded = false;
@@ -205,23 +330,35 @@ body {
     let cropStart = null;
     let cropRect = null; // {x,y,w,h} in canvas coords
     let naturalW = 0, naturalH = 0;
+    let loadedFileName = '';
 
     // Helpers
     function setStatus(s) { statusEl.textContent = 'Status: ' + s; }
     function updateImgInfo() {
       if (!imgLoaded) { imgInfo.innerHTML = 'No image loaded'; return; }
       imgInfo.innerHTML = `
-        Name: ${loadedFileName || 'uploaded image'} <br>
-        Natural: ${naturalW} × ${naturalH} px <br>
-        Display: ${canvas.width} × ${canvas.height} px <br>
-        Angle: ${currentAngle}°
+        <strong>Name:</strong> ${loadedFileName || 'uploaded image'}<br>
+        <strong>Natural:</strong> ${naturalW} × ${naturalH} px<br>
+        <strong>Display:</strong> ${canvas.width} × ${canvas.height} px<br>
+        <strong>Angle:</strong> ${currentAngle}°
       `;
-      resizeWInput.value = canvas.width;
-      resizeHInput.value = canvas.height;
     }
 
-    // Load file
-    let loadedFileName = '';
+    // Initial blank canvas
+    function emptyCanvas(){
+      canvas.width = 800;
+      canvas.height = 460;
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#222';
+      ctx.fillRect(12,12,canvas.width-24,canvas.height-24);
+      ctx.fillStyle = '#999';
+      ctx.font = '16px Inter, system-ui, sans-serif';
+      ctx.fillText('No image loaded. Upload JPG or PNG to begin.', 24, 44);
+    }
+    emptyCanvas();
+
+    // File load
     fileInput.addEventListener('change', (e) => {
       const f = e.target.files && e.target.files[0];
       if (!f) return;
@@ -236,7 +373,9 @@ body {
           cropRect = null;
           cropMode = false;
           cropRectEl.style.display = 'none';
-          canvas.width = Math.min(1000, img.naturalWidth); // limit display size for layout
+          // limit display width to fit layout while preserving aspect
+          const maxDisplayWidth = 1000;
+          canvas.width = Math.min(maxDisplayWidth, img.naturalWidth);
           canvas.height = Math.round(canvas.width * img.naturalHeight / img.naturalWidth);
           drawImageToCanvas();
           imgLoaded = true;
@@ -248,27 +387,19 @@ body {
       reader.readAsDataURL(f);
     });
 
-    function clearCanvas() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-    }
+    // Draw image to canvas (respect rotation)
+    function clearCanvas(){ ctx.clearRect(0,0,canvas.width,canvas.height); }
 
-    function drawImageToCanvas() {
+    function drawImageToCanvas(){
       clearCanvas();
-      // Save and translate for possible rotation
       ctx.save();
-      // translate to center for rotation
       const cx = canvas.width/2, cy = canvas.height/2;
       ctx.translate(cx, cy);
       ctx.rotate(currentAngle * Math.PI / 180);
-      // calculate draw size after rotation: draw image centered
-      // For simplicity, scale image to fit canvas bounding box
+      // draw scaled to canvas dims centered
       const w = canvas.width, h = canvas.height;
-      // draw with image centered (x,y are -w/2, -h/2)
-      // But if rotated by 90 or 270, swapping dims necessary for proper aspect:
-      // We'll draw image scaled to canvas size ignoring rotation shape for simplicity and UX.
       ctx.drawImage(img, -w/2, -h/2, w, h);
       ctx.restore();
-      // If cropRect exists, show overlay rect as absolute div positioned over canvas
       renderCropOverlay();
     }
 
@@ -286,18 +417,16 @@ body {
       updateImgInfo();
     });
 
-    // Crop interaction: draw a rectangle overlay with mouse
+    // Crop mode toggle
     enableCropBtn.addEventListener('click', () => {
       if (!imgLoaded) return alert('Load an image first');
       cropMode = !cropMode;
       enableCropBtn.textContent = cropMode ? 'Drawing: Click+Drag' : 'Start Crop (Draw)';
       setStatus(cropMode ? 'Crop mode enabled — drag to select area' : 'Crop mode disabled');
-      if (!cropMode) {
-        cropStart = null;
-      }
+      if (!cropMode) cropStart = null;
     });
 
-    // Mouse events on canvasContainer to draw selection
+    // Canvas mouse interactions
     canvasContainer.addEventListener('mousedown', (e) => {
       if (!cropMode || !imgLoaded) return;
       const rect = canvas.getBoundingClientRect();
@@ -305,11 +434,12 @@ body {
       const y = e.clientY - rect.top;
       cropStart = { x, y };
       cropRectEl.style.display = 'block';
-      cropRectEl.style.left = x + 'px';
-      cropRectEl.style.top = y + 'px';
+      cropRectEl.style.left = (x + rect.left - rect.left) + 'px';
+      cropRectEl.style.top = (y + rect.top - rect.top) + 'px';
       cropRectEl.style.width = '0px';
       cropRectEl.style.height = '0px';
     });
+
     window.addEventListener('mousemove', (e) => {
       if (!cropMode || !cropStart) return;
       const rect = canvas.getBoundingClientRect();
@@ -319,15 +449,12 @@ body {
       const sy = clamp(Math.min(y, cropStart.y), 0, rect.height);
       const w = Math.abs(x - cropStart.x);
       const h = Math.abs(y - cropStart.y);
-      cropRectEl.style.left = (rect.left + sx - rect.left) + 'px'; // simplified
-      cropRectEl.style.top = (rect.top + sy - rect.top) + 'px';
-      // But because cropRectEl is absolutely positioned relative to page, position relative to container:
       const containerRect = canvasContainer.getBoundingClientRect();
-      cropRectEl.style.left = (sx + containerRect.left - containerRect.left) + 'px';
-      cropRectEl.style.top = (sy + containerRect.top - containerRect.top) + 'px';
+      cropRectEl.style.left = (sx) + 'px';
+      cropRectEl.style.top = (sy) + 'px';
       cropRectEl.style.width = w + 'px';
       cropRectEl.style.height = h + 'px';
-      // store in canvas coordinates:
+      // store in canvas coordinates
       cropRect = {
         x: Math.round(sx * canvas.width / rect.width),
         y: Math.round(sy * canvas.height / rect.height),
@@ -335,19 +462,19 @@ body {
         h: Math.round(h * canvas.height / rect.height)
       };
     });
+
     window.addEventListener('mouseup', (e) => {
       if (!cropMode || !cropStart) return;
       cropStart = null;
       setStatus('Selection ready — click Apply Crop to crop');
     });
 
-    function renderCropOverlay() {
+    function renderCropOverlay(){
       if (!cropRect) {
         cropRectEl.style.display = 'none';
         return;
       }
       const rect = canvas.getBoundingClientRect();
-      const containerRect = canvasContainer.getBoundingClientRect();
       const left = (cropRect.x / canvas.width) * rect.width;
       const top = (cropRect.y / canvas.height) * rect.height;
       const w = (cropRect.w / canvas.width) * rect.width;
@@ -359,19 +486,16 @@ body {
       cropRectEl.style.height = h + 'px';
     }
 
-    // Apply Crop
+    // Apply crop
     applyCropBtn.addEventListener('click', () => {
       if (!imgLoaded) return alert('Load an image first');
       if (!cropRect) return alert('No crop area selected');
-      // create temporary canvas with cropped area
       const tmp = document.createElement('canvas');
       tmp.width = cropRect.w;
       tmp.height = cropRect.h;
       const tctx = tmp.getContext('2d');
-      // Draw current canvas pixels onto tmp (respect rotation already drawn)
-      // We'll draw the current visible canvas region:
+      // draw the current visible region from canvas
       tctx.drawImage(canvas, cropRect.x, cropRect.y, cropRect.w, cropRect.h, 0, 0, cropRect.w, cropRect.h);
-      // replace img with cropped data
       img = new Image();
       img.onload = () => {
         naturalW = img.naturalWidth;
@@ -395,112 +519,145 @@ body {
       cropMode = false;
       enableCropBtn.textContent = 'Start Crop (Draw)';
       setStatus('Crop reset');
-      drawImageToCanvas();
+      if (imgLoaded) drawImageToCanvas(); else emptyCanvas();
     });
 
-    // Resize
-    applyResizeBtn.addEventListener('click', () => {
-      if (!imgLoaded) return alert('Load an image first');
-      const w = parseInt(resizeWInput.value);
-      const h = parseInt(resizeHInput.value);
-      if (!w || !h) return alert('Enter valid width and height');
-      const tmp = document.createElement('canvas');
-      tmp.width = w;
-      tmp.height = h;
-      const tctx = tmp.getContext('2d');
-      // draw current canvas content scaled to new size
-      tctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, w, h);
-      img = new Image();
-      img.onload = () => {
-        naturalW = img.naturalWidth;
-        naturalH = img.naturalHeight;
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        currentAngle = 0;
-        cropRect = null;
-        cropRectEl.style.display = 'none';
-        drawImageToCanvas();
-        setStatus('Resize applied');
-        updateImgInfo();
-      };
-      img.src = tmp.toDataURL();
-      imgLoaded = true;
+    // Reset tool (reload)
+    resetBtn.addEventListener('click', () => {
+      location.reload();
     });
 
-    // Download current image on canvas in selected format
-    downloadBtn.addEventListener('click', () => {
+    // UTIL: clamp
+    function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+
+    // Download helpers: toBlob -> Promise
+    function canvasToBlobPromise(format, quality){
+      return new Promise((resolve) => {
+        canvas.toBlob((blob) => resolve(blob), format, quality);
+      });
+    }
+
+    // Simulated processing with minimum duration (ms)
+    async function simulatedProcessing(minMs = 5000){
+      const start = Date.now();
+      progressText.textContent = 'Processing...';
+      progressPct.textContent = '0%';
+      progressFill.style.width = '0%';
+
+      // increment visually based on elapsed
+      return new Promise((resolve) => {
+        const stepMs = 100;
+        const tick = () => {
+          const elapsed = Date.now() - start;
+          const frac = Math.min(1, elapsed / minMs);
+          const pct = Math.round(frac * 100);
+          progressFill.style.width = pct + '%';
+          progressPct.textContent = pct + '%';
+          if (frac < 1) {
+            setTimeout(tick, stepMs);
+          } else {
+            // small final delay to make UX smoother
+            setTimeout(() => {
+              progressText.textContent = 'Finalizing...';
+              setTimeout(() => {
+                progressText.textContent = 'Completed';
+                resolve();
+              }, 300);
+            }, 150);
+          }
+        };
+        tick();
+      });
+    }
+
+    function disableUIWhileProcessing(disabled){
+      const allBtns = document.querySelectorAll('.btn, .btn-sub, select, input');
+      allBtns.forEach(el => {
+        // keep file input enabled? disable to avoid mid-process changes
+        el.disabled = disabled;
+      });
+    }
+
+    // Convert & Download (with enforced processing time min 5s)
+    downloadBtn.addEventListener('click', async () => {
       if (!imgLoaded) return alert('Load an image first');
+      disableUIWhileProcessing(true);
+      setStatus('Starting conversion');
+      // start generating blob immediately to avoid waiting on toBlob at the end
       const fmt = outputFormat.value;
       const quality = Math.max(0.1, Math.min(1, (parseInt(jpegQuality.value || 85) / 100)));
-      canvas.toBlob((blob) => {
-        if (!blob) return alert('Export failed');
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        const ext = fmt === 'image/png' ? 'png' : 'jpg';
-        a.href = url;
-        a.download = `converted.${ext}`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-        setStatus('Downloaded');
-      }, fmt, fmt === 'image/jpeg' ? quality : undefined);
+      const blobPromise = canvasToBlobPromise(fmt, fmt === 'image/jpeg' ? quality : undefined);
+
+      // run simulated progress (min 5 seconds)
+      await simulatedProcessing(5000);
+
+      const blob = await blobPromise;
+      if (!blob) {
+        alert('Export failed');
+        disableUIWhileProcessing(false);
+        setStatus('Export failed');
+        return;
+      }
+      // trigger download
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const ext = fmt === 'image/png' ? 'png' : 'jpg';
+      a.href = url;
+      a.download = `converted.${ext}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      setStatus('Downloaded');
+      // leave progress showing completed for a moment
+      setTimeout(() => {
+        progressText.textContent = 'Idle';
+        progressPct.textContent = '0%';
+        progressFill.style.width = '0%';
+        disableUIWhileProcessing(false);
+      }, 700);
     });
 
-    // Reset tool (reload original)
-    resetBtn.addEventListener('click', () => {
-      location.reload(); // quick reset
+    // Quick Download (no enforced processing time)
+    downloadQuickBtn.addEventListener('click', async () => {
+      if (!imgLoaded) return alert('Load an image first');
+      setStatus('Exporting (quick)...');
+      const fmt = outputFormat.value;
+      const quality = Math.max(0.1, Math.min(1, (parseInt(jpegQuality.value || 85) / 100)));
+      const blob = await canvasToBlobPromise(fmt, fmt === 'image/jpeg' ? quality : undefined);
+      if (!blob) return alert('Export failed');
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const ext = fmt === 'image/png' ? 'png' : 'jpg';
+      a.href = url;
+      a.download = `converted.${ext}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      setStatus('Downloaded (quick)');
     });
 
-    // Fit to canvas (scale preview to natural if small)
-    fitBtn.addEventListener('click', () => {
-      if (!imgLoaded) return;
-      // set canvas to natural dims but limited width for layout
-      canvas.width = Math.min(1000, naturalW);
-      canvas.height = Math.round(canvas.width * naturalH / naturalW);
-      drawImageToCanvas();
-      updateImgInfo();
-      setStatus('Fitted to natural size (clamped)');
-    });
-
-    // Utility clamp
-    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-
-    // Initial draw fallback
-    function emptyCanvas() {
-      canvas.width = 600;
-      canvas.height = 360;
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle = '#222';
-      ctx.fillRect(10,10,canvas.width-20,canvas.height-20);
-      ctx.fillStyle = '#0ff';
-      ctx.font = '16px Segoe UI';
-      ctx.fillText('No image loaded. Upload JPG or PNG to begin.', 20, 40);
-    }
-    emptyCanvas();
-
-    // Keep overlay positioned correctly on resize
+    // Keep overlay positioned on resize
     window.addEventListener('resize', () => {
       if (imgLoaded) drawImageToCanvas();
     });
-
-    // Update image when canvas is ready
-    // (drawImageToCanvas already called after load)
   </script>
 
-<!-- Extra Sections -->
-
+<!-- Suggested + Article Section -->
 <section id="suggested-tools">
   <h2>Suggested Tools</h2>
   <div class="suggested-list"></div>
 </section>
+<script src="https://nextonlinetools.com/js/suggested.js"></script>
 
-<script src="../js/suggested.js"></script>
+<div id="tool-article"></div>
+<script src="/js/toolsarticle.js"></script>
+<script>loadToolArticle("tool-article");</script>
 
-
-  <div id="footer"></div>
-<script src="../js/include.js"></script>
+<div id="footer"></div>
+<script src="https://nextonlinetools.com/js/include.js"></script>
+<script src="https://nextonlinetools.com/js/search.js"></script>
 
 </body>
 </html>
