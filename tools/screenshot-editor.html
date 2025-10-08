@@ -3,17 +3,18 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Pro Screenshot Editor — Fabric.js</title>
-<meta name="description" content="Screenshot editor with Fabric.js: upload, draw, text, arrow, highlight, erase, paste, undo/redo, download." />
+<title>Screenshot Editor Pro — Next Tools Online</title>
+<meta name="description" content="Screenshot editor that help to edit any screenshot: upload, draw, text, arrow, highlight, erase, paste, download." />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+  <link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
+  <link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
 <style>
   :root{--primary:#9B6CE3;--bg:#F6F6FB;--card:#fff;--text:#222}
   *{box-sizing:border-box}
-  body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; margin:0; background:var(--bg); color:var(--text); padding:18px}
+  body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background:var(--bg); color:var(--text)}
   .wrap{max-width:1200px;margin:0 auto}
-  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-  h1{font-size:1.15rem;color:var(--primary);margin:0}
+  h1{font-size:2.2rem; color:#333;margin:0; margin-top: 40px; text-align: center; margin-bottom: 20px; font-weight: 800;}
   .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
   /* icon-only buttons */
   .icon-btn { width:44px; height:40px; padding:0; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; border:none; cursor:pointer; background:var(--primary); color:#fff; }
@@ -42,9 +43,11 @@
 </style>
 </head>
 <body>
+
+    <div id="header"></div>
+
 <div class="wrap">
-  <header>
-    <h1>🖼️ Pro Screenshot Editor</h1>
+    <h1>🖼️ Screenshot Editor Pro</h1>
     <div class="toolbar" role="toolbar" aria-label="Editor toolbar">
       <!-- Upload (label with text) -->
       <label class="label-btn secondary" title="Upload image">
@@ -72,7 +75,6 @@
       <!-- download button keep text -->
       <button id="downloadBtn" class="label-btn" title="Download"><i class="ri-download-2-line"></i> Download</button>
     </div>
-  </header>
 
   <div class="stage">
     <div class="left">
@@ -99,82 +101,6 @@
     </div>
   </div>
 </div>
-
-<!-- Your article content (kept as provided) -->
-<link rel="stylesheet" href="/toolsarticle/article.css">
-<section class="article-section" style="margin-top:28px">
-  <div class="article-container">
-    <h2>Screenshot Editor – Edit Screenshots Online Instantly</h2>
-    <p>
-      The <strong>Screenshot Editor</strong> is a powerful online tool that lets you edit, crop, annotate, and enhance your screenshots 
-      directly from your browser. Whether you need to highlight important details, blur sensitive information, or add notes, 
-      this tool makes screenshot editing simple, fast, and professional.
-    </p>
-
-    <h3>What is a Screenshot Editor?</h3>
-    <p>
-      A <strong>Screenshot Editor</strong> allows you to modify your screenshots without installing any software. 
-      You can upload any screenshot, make quick edits such as cropping, drawing, adding text, or applying shapes, 
-      and download the final image instantly. It’s perfect for creating tutorials, reports, presentations, or social media visuals.
-    </p>
-
-    <h3>Why Use a Screenshot Editor?</h3>
-    <p>
-      Editing screenshots helps you communicate more effectively. 
-      Instead of uploading plain images, you can highlight important areas, annotate key points, 
-      and remove unwanted parts — all in seconds. 
-      The <strong>screenshot editor</strong> is ideal for teachers, developers, marketers, designers, and anyone who frequently works with visuals.
-    </p>
-
-    <h3>Benefits of Using a Screenshot Editor</h3>
-    <ul>
-      <li>Edit screenshots directly in your browser — no app needed</li>
-      <li>Crop, rotate, and resize screenshots easily</li>
-      <li>Add text, arrows, highlights, and shapes</li>
-      <li>Blur or hide sensitive information quickly</li>
-      <li>Save and download edited images instantly</li>
-    </ul>
-
-    <h3>How to Edit a Screenshot?</h3>
-    <p>
-      Using the <strong>Screenshot Editor</strong> is quick and straightforward:
-    </p>
-    <ul>
-      <li>Upload your screenshot or paste it directly into the tool</li>
-      <li>Use editing options to crop, draw, add text, or blur sections</li>
-      <li>Preview your changes in real time</li>
-      <li>Click “Download” to save your edited screenshot</li>
-    </ul>
-    <p>
-      The tool works on all devices and browsers, making it accessible anywhere without installation or account signup.
-    </p>
-
-    <h3>Use Cases of Screenshot Editing</h3>
-    <p>
-      The <strong>Screenshot Editor</strong> is useful for a variety of tasks:
-    </p>
-    <ul>
-      <li>Creating tutorials or guides with highlighted steps</li>
-      <li>Reporting bugs with marked details for developers</li>
-      <li>Blurring confidential or private information before sharing</li>
-      <li>Designing visual explanations for presentations and documents</li>
-    </ul>
-
-    <h3>Tips for Best Results</h3>
-    <p>
-      Keep your annotations clear and concise for better readability. 
-      Use consistent colors for highlighting or drawing, and avoid over-editing for a clean professional look. 
-      Always export images in optimal formats like JPG or PNG for quality retention.
-    </p>
-
-    <h3>Final Thoughts</h3>
-    <p>
-      The <strong>Screenshot Editor</strong> is the easiest way to edit screenshots online without complex software. 
-      Whether for documentation, design, or communication, it gives you all the essential tools in one place. 
-      Upload your screenshot, make edits, and download your final image instantly — simple, fast, and efficient.
-    </p>
-  </div>
-</section>
 
 <!-- Fabric.js -->
 <script src="https://cdn.jsdelivr.net/npm/fabric@5.3.0/dist/fabric.min.js"></script>
@@ -526,5 +452,22 @@ canvasWrap.addEventListener('drop', e => {
   }
 });
 </script>
+
+
+<!-- Suggested + Article Section -->
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
+<script src="https://nextonlinetools.com/js/suggested.js"></script>
+
+<div id="tool-article"></div>
+<script src="/js/toolsarticle.js"></script>
+<script>loadToolArticle("tool-article");</script>
+
+<div id="footer"></div>
+<script src="https://nextonlinetools.com/js/include.js"></script>
+<script src="https://nextonlinetools.com/js/search.js"></script>
+
 </body>
 </html>
