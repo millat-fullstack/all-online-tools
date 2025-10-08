@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pro Screenshot Editor — Fabric.js</title>
+<link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
+<link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+<style>
+:root{--primary:#9B6CE3;--bg:#F6F6FB;--card:#fff;--text:#222}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;margin:0;background:var(--bg);color:var(--text);padding:18px}
+.wrap{max-width:1200px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+h1{font-size:1.1rem;color:var(--primary);margin:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,.tool-input{padding:8px;border-radius:8px;border:none;background:var(--primary);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all 0.2s}
+.tool-btn.secondary{background:#fff;color:var(--primary);border:1px solid rgba(155,108,227,0.18)}
+button:hover{transform:scale(1.05);background:#8c5be1}
+.canvas-container{background:#fff;border-radius:10px;padding:12px;border:1px solid rgba(0,0,0,0.06)}
+canvas{width:100%;height:auto;border-radius:6px}
+.stage{display:flex;gap:12px}
+.left{flex:1;min-width:400px}
+.right{width:320px}
+.panel{background:#fff;padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)}
+.panel h3{margin:0 0 8px 0;font-size:0.95rem}
+.field{display:flex;gap:8px;align-items:center;margin:8px 0}
+.field label{width:80px;font-size:0.9rem;color:#444}
+.field input[type="number"],.field input[type="color"]{flex:1;padding:6px;border:1px solid #ddd;border-radius:6px}
+.small{font-size:0.9rem;padding:6px 8px}
+.danger{background:#ff6b6b}
+.muted{color:#666;font-size:0.9rem}
+button i{font-size:18px}
+button[title]{position:relative}
+button[title]:hover::after{
+  content:attr(title);
+  position:absolute;
+  bottom:-28px;
+  background:#000;color:#fff;font-size:12px;padding:3px 8px;
+  border-radius:4px;white-space:nowrap;opacity:0.9;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🖼️ Pro Screenshot Editor</h1>
+    <div class="toolbar">
+      <label class="tool-input small tool-btn secondary" title="Upload image">
+        <i class="ri-upload-2-line"></i> Upload
+        <input id="fileInput" type="file" accept="image/*" hidden>
+      </label>
+      <button id="undoBtn" class="tool-btn secondary"><i class="ri-arrow-go-back-line"></i> Undo</button>
+      <button id="redoBtn" class="tool-btn secondary"><i class="ri-arrow-go-forward-line"></i> Redo</button>
+
+      <button id="selectBtn" title="Select"><i class="ri-cursor-line"></i></button>
+      <button id="drawBtn" title="Brush"><i class="ri-pencil-line"></i></button>
+      <button id="highlightBtn" title="Highlight"><i class="ri-mark-pen-line"></i></button>
+      <button id="textBtn" title="Text"><i class="ri-text"></i></button>
+      <button id="rectBtn" title="Rectangle"><i class="ri-shape-line"></i></button>
+      <button id="circleBtn" title="Circle"><i class="ri-checkbox-blank-circle-line"></i></button>
+      <button id="arrowBtn" title="Arrow"><i class="ri-arrow-right-line"></i></button>
+      <button id="eraserBtn" title="Eraser"><i class="ri-eraser-line"></i></button>
+      <button id="clearBtn" title="Clear all drawings" class="tool-btn secondary"><i class="ri-delete-bin-line"></i></button>
+      <button id="downloadBtn" class="tool-input small"><i class="ri-download-2-line"></i> Download</button>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div class="left">
+      <div class="canvas-container">
+        <canvas id="c" width="1000" height="600"></canvas>
+      </div>
+      <div style="margin-top:8px" class="muted">Hover tools to see name. Eraser removes specific edits, not image.</div>
+    </div>
+
+    <div class="right">
+      <div class="panel">
+        <h3>🖌 Brush Control</h3>
+        <div class="field"><label>Size</label><input id="brushSize" type="number" value="4"></div>
+        <div class="field"><label>Color</label><input id="mainColor" type="color" value="#9B6CE3"></div>
+        <hr style="margin:10px 0">
+        <h3>🎚 Object Control</h3>
+        <div class="field"><label>Stroke</label><input id="propStroke" type="number" value="2"></div>
+        <div class="field"><label>Font</label><input id="propFont" type="number" value="20"></div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button id="deleteBtn" class="small tool-input danger"><i class="ri-delete-bin-6-line"></i> Delete</button>
+          <button id="bringFront" class="small tool-input secondary" title="Bring front"><i class="ri-arrow-up-line"></i></button>
+          <button id="sendBack" class="small tool-input secondary" title="Send back"><i class="ri-arrow-down-line"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fabric@5.3.0/dist/fabric.min.js"></script>
+<script>
+const canvas = new fabric.Canvas('c', { selection: false, preserveObjectStacking: true });
+let currentTool = 'select', undoStack=[], redoStack=[], backgroundImage=null;
+
+function snapshot(){undoStack.push(JSON.stringify(canvas.toDatalessJSON())); if(undoStack.length>50) undoStack.shift(); redoStack=[];}
+function restoreFrom(json){canvas.loadFromJSON(json,()=>canvas.renderAll());}
+function hexToRgba(hex,a){const h=hex.replace('#','');const bigint=parseInt(h,16);const r=(bigint>>16)&255,g=(bigint>>8)&255,b=bigint&255;return `rgba(${r},${g},${b},${a})`;}
+
+document.getElementById('fileInput').addEventListener('change', e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    fabric.Image.fromURL(ev.target.result,img=>{
+      const ratio=Math.min(1000/img.width,600/img.height,1);
+      img.scale(ratio);
+      canvas.clear();
+      backgroundImage=img;
+      canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+      canvas.setWidth(img.width*ratio);
+      canvas.setHeight(img.height*ratio);
+      snapshot();
+    });
+  };
+  reader.readAsDataURL(file);
+});
+
+function setTool(t){
+  currentTool=t;
+  canvas.isDrawingMode=(t==='draw'||t==='highlight');
+  if(t==='draw'){
+    canvas.freeDrawingBrush=new fabric.PencilBrush(canvas);
+    canvas.freeDrawingBrush.width=parseInt(brushSize.value)||4;
+    canvas.freeDrawingBrush.color=document.getElementById('mainColor').value;
+  } else if(t==='highlight'){
+    canvas.freeDrawingBrush=new fabric.PencilBrush(canvas);
+    canvas.freeDrawingBrush.width=Math.max(8,parseInt(brushSize.value)||12);
+    canvas.freeDrawingBrush.color=hexToRgba(document.getElementById('mainColor').value,0.25);
+  }
+  canvas.selection=(t==='select');
+  document.querySelectorAll('.toolbar button').forEach(b=>b.style.opacity='1');
+  const btn=document.getElementById(t+'Btn'); if(btn) btn.style.opacity='0.7';
+}
+Object.keys({select:1,draw:1,highlight:1,text:1,rect:1,circle:1,arrow:1,eraser:1})
+  .forEach(t=>document.getElementById(t+'Btn').onclick=()=>setTool(t));
+
+// Drawing logic
+let isDown=false,startX,startY,temp;
+canvas.on('mouse:down',o=>{
+  const p=canvas.getPointer(o.e); startX=p.x; startY=p.y; isDown=true;
+  if(currentTool==='rect'){temp=new fabric.Rect({left:p.x,top:p.y,width:0,height:0,stroke:mainColor.value,strokeWidth:2,fill:'transparent'});canvas.add(temp);}
+  if(currentTool==='circle'){temp=new fabric.Ellipse({left:p.x,top:p.y,rx:0,ry:0,stroke:mainColor.value,strokeWidth:2,fill:'transparent'});canvas.add(temp);}
+  if(currentTool==='arrow'){temp=new fabric.Line([p.x,p.y,p.x,p.y],{stroke:mainColor.value,strokeWidth:parseInt(brushSize.value)||4});canvas.add(temp);}
+  if(currentTool==='text'){const t=new fabric.IText('Text',{left:p.x,top:p.y,fontSize:parseInt(propFont.value)||22,fill:mainColor.value});canvas.add(t).setActiveObject(t);t.enterEditing();t.selectAll();snapshot();}
+  if(currentTool==='eraser'){const target=canvas.findTarget(o.e); if(target && target!==backgroundImage) canvas.remove(target);}
+});
+canvas.on('mouse:move',o=>{
+  if(!isDown||!temp) return; const p=canvas.getPointer(o.e);
+  if(currentTool==='rect'){temp.set({width:Math.abs(p.x-startX),height:Math.abs(p.y-startY),left:Math.min(startX,p.x),top:Math.min(startY,p.y)});}
+  if(currentTool==='circle'){temp.set({rx:Math.abs(p.x-startX)/2,ry:Math.abs(p.y-startY)/2,left:(startX+p.x)/2,top:(startY+p.y)/2});}
+  if(currentTool==='arrow'){temp.set({x2:p.x,y2:p.y});}
+  canvas.renderAll();
+});
+canvas.on('mouse:up',()=>{if(temp){temp.set({selectable:true});snapshot();}isDown=false;temp=null;});
+canvas.on('path:created',snapshot);
+
+// Unified color + size control
+const mainColor=document.getElementById('mainColor'), brushSize=document.getElementById('brushSize');
+mainColor.onchange=()=>{
+  if(canvas.freeDrawingBrush) canvas.freeDrawingBrush.color=mainColor.value;
+  const obj=canvas.getActiveObject();
+  if(obj){obj.set('fill',mainColor.value);obj.set('stroke',mainColor.value);canvas.renderAll();}
+};
+brushSize.onchange=()=>{if(canvas.freeDrawingBrush) canvas.freeDrawingBrush.width=parseInt(brushSize.value)||4;}
+
+// Object Control
+const propStroke=document.getElementById('propStroke'), propFont=document.getElementById('propFont');
+canvas.on('selection:created',updateControls);
+canvas.on('selection:updated',updateControls);
+function updateControls(){
+  const obj=canvas.getActiveObject(); if(!obj) return;
+  if(obj.strokeWidth) propStroke.value=obj.strokeWidth;
+  if(obj.fontSize) propFont.value=obj.fontSize;
+}
+propStroke.onchange=()=>{const obj=canvas.getActiveObject();if(obj){obj.set('strokeWidth',parseInt(propStroke.value)||1);canvas.renderAll();snapshot();}};
+propFont.onchange=()=>{const obj=canvas.getActiveObject();if(obj&&obj.type==='i-text'){obj.set('fontSize',parseInt(propFont.value)||16);canvas.renderAll();snapshot();}};
+
+document.getElementById('deleteBtn').onclick=()=>{const obj=canvas.getActiveObject();if(obj&&obj!==backgroundImage){canvas.remove(obj);snapshot();}};
+document.getElementById('bringFront').onclick=()=>{const obj=canvas.getActiveObject();if(obj)obj.bringToFront();canvas.renderAll();};
+document.getElementById('sendBack').onclick=()=>{const obj=canvas.getActiveObject();if(obj&&obj!==backgroundImage)obj.sendToBack();canvas.renderAll();};
+
+document.getElementById('clearBtn').onclick=()=>{
+  if(confirm('Clear all added edits (keep image)?')){
+    const toKeep=backgroundImage;
+    canvas.getObjects().forEach(o=>{if(o!==toKeep)canvas.remove(o);});
+    canvas.renderAll(); snapshot();
+  }
+};
+
+// Undo/Redo + Download
+document.getElementById('undoBtn').onclick=()=>{if(undoStack.length){redoStack.push(JSON.stringify(canvas.toDatalessJSON()));restoreFrom(undoStack.pop());}};
+document.getElementById('redoBtn').onclick=()=>{if(redoStack.length){undoStack.push(JSON.stringify(canvas.toDatalessJSON()));restoreFrom(redoStack.pop());}};
+document.getElementById('downloadBtn').onclick=()=>{
+  const url=canvas.toDataURL({format:'png'});
+  const a=document.createElement('a');a.href=url;a.download='edited.png';a.click();
+};
+setTool('select');
+</script>
+
+<!-- Suggested + Article Section -->
+<section id="suggested-tools">
+  <h2>Suggested Tools</h2>
+  <div class="suggested-list"></div>
+</section>
+<script src="https://nextonlinetools.com/js/suggested.js"></script>
+
+<div id="tool-article"></div>
+<script src="/js/toolsarticle.js"></script>
+<script>loadToolArticle("tool-article");</script>
+
+<div id="footer"></div>
+<script src="https://nextonlinetools.com/js/include.js"></script>
+<script src="https://nextonlinetools.com/js/search.js"></script>
+
+</body>
+</html>
