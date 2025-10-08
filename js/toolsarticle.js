@@ -6,6 +6,7 @@ const articleMap = {
   "pdf-to-jpg.html": "/toolsarticle/pdfjpg.html",
   "link-extractor.html": "/toolsarticle/extractlinks.html",
   "image-resizer.html": "/toolsarticle/imageresizer.html",
+  "screenshot-editor.html": "/toolsarticle/screenshot.html",
   "png-to-jpg-converter.html": "/toolsarticle/pngjpg.html"
 };
 
