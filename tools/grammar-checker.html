@@ -1,298 +1,712 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced Grammar Checker | All Online Tools</title>
-<meta name="description" content="Free grammar checker and text enhancer. Paste text or upload document, check grammar, readability, errors, and convert text to uppercase, lowercase, title case, or headings. Add links easily.">
-  <link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
-  <link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
-
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Grammar Checker | Next Online Tools</title>
+<link rel="stylesheet" href="https://nextonlinetools.com/css/home.css">
+<link rel="stylesheet" href="https://nextonlinetools.com/css/suggested.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 <style>
-  
-  body {
-  font-family: 'Inter', sans-serif;
-  background: #f8f6fb;
-  color: #2c2c2c;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;                 /* no padding here */
-  min-height: 100vh;
-  box-sizing: border-box;
-  position: relative;
-  overflow-x: hidden;
+:root{
+  --bg:#f6f7fb; --card:#fff; --primary:#6b46c1; --accent:#7b5cf0; --text:#111827; --muted:#6b7280; --err-underline:#e22;
 }
-
-.page-container {
-  padding: 20px;              /* move padding here */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 800px;
-  margin: 0 auto;
-  margin-top: 30px;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: center;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0
-,0.1);
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:var(--bg);color:var(--text)}
+.app{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.title{font-size:40px;color:var(--primary);font-weight:700; margin-top: 30px; text-align: center;}
+.page-container{display:grid;grid-template-columns:1fr 360px;gap:16px;margin-top:6px; padding:20px 70px 10px 70px; }
+.card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 8px 30px rgba(12,12,20,0.06);border:1px solid rgba(0,0,0,0.03)}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.icon-btn{width:40px;height:36px;border-radius:8px;border:none;background:var(--primary);color:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.icon-btn.secondary{background:#fff;color:var(--primary);border:1px solid rgba(124,58,237,0.12)}
+.btn{padding:8px 12px;border-radius:8px;border:none;background:var(--primary);color:#fff;cursor:pointer;font-weight:600}
+.btn.secondary{background:#fff;color:var(--primary);border:1px solid rgba(124,58,237,0.12)}
+.btn.processing{display:inline-flex;gap:8px;align-items:center;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.spinner{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.editor{min-height:420px;border-radius:10px;border:1px solid rgba(9,10,11,0.04);padding:14px;background:transparent;overflow:auto;line-height:1.6;font-size:16px}
+.editor:focus{outline:2px solid rgba(124,58,237,0.08);background:#fff}
+.note{font-size:13px;color:var(--muted)}
+.underline-err{
+  text-decoration-line: underline; text-decoration-style: wavy; text-decoration-color: var(--err-underline); text-underline-offset:3px;
+  cursor:pointer; background: rgba(226,34,34,0.02); border-radius:3px; padding:0 2px;
 }
-  h1 {
-    text-align: center;
-    color: #a17edc;
-    margin-bottom: 20px;
-    font-size: 26px;
-    font-weight: 600;
-    margin-top: 30px;
-  }
-
-  textarea {
-    width: 100%;
-    height: 220px;
-    margin: 10px 0;
-    padding: 12px;
-    box-sizing: border-box;
-    border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-  }
-  input[type="file"] {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    width: 100%;
-  }
-  button {
-    margin: 5px 5px 5px 0;
-    padding: 10px 15px;
-    background: #f8f6fb;
-    color: #a17edc;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  button:hover {
-    background: #f8f6fb;
-    box-shadow: 0 0 8px rgba(0,200,255,0.5);
-  }
-  .primary-btn {
-    display: block;
-    width: 100%;
-    padding: 14px;
-    margin: 15px 0;
-    font-size: 1.1rem;
-    background: #f8f6fb;
-  }
-  .results {
-    margin-top: 20px;
-    background: #f8f6fb;
-    padding: 15px;
-    border-radius: 10px;
-    color: #a17edc;
-    text-align: left;
-    width: 100%;
-    box-sizing: border-box;
-    max-height: 400px;
-    max-width: 300px;
-    overflow-y: auto;
-    font-size: 0.95rem;
-    line-height: 1.4; 
-  }
-  .highlight {
-    background: rgba(255,0,0,0.3);
-    padding: 2px 4px;
-    border-radius: 3px;
-  }
+.tooltip{position:fixed; display:none; z-index:9999; min-width:200px; max-width:360px; background:#fff;border-radius:8px;padding:10px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 30px rgba(11,12,13,0.08);font-size:14px}
+.tooltip .sug{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.tooltip .sug button{padding:6px 8px;border-radius:8px;border:none;background:var(--primary);color:#fff;cursor:pointer;font-weight:600}
+.tooltip .ignore{padding:6px 8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:#fff;color:var(--muted);cursor:pointer}
+.overview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.badge{padding:6px 10px;border-radius:999px;background:rgba(9,10,11,0.04);cursor:pointer;border:1px solid transparent;transition:all .12s}
+.badge:hover{transform:translateY(-2px)}
+.badge.active{background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;border-color:rgba(0,0,0,0.04)}
+.suggestions-list{margin-top:10px;max-height:520px;overflow:auto}
+.suggestion-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.03);margin-bottom:8px;background:#fff}
+.s-left{flex:1}
+.s-context{font-size:13px;color:var(--text);margin-bottom:8px}
+.s-actions{display:flex;flex-direction:column;gap:8px}
+.chip{padding:6px 8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;cursor:pointer;font-size:13px}
+.progress-modal{position:fixed;inset:0;background:rgba(8,8,10,0.45);display:flex;align-items:center;justify-content:center;z-index:12000;opacity:0;pointer-events:none;transition:opacity .12s}
+.progress-modal.show{opacity:1;pointer-events:auto}
+.progress-card{width:520px;max-width:92%;background:#fff;padding:18px;border-radius:12px;box-shadow:0 12px 40px rgba(10,10,20,0.18)}
+.progress-bar{height:10px;background:#eee;border-radius:8px;overflow:hidden;margin-top:12px}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .25s}
+.toast{position:fixed;right:20px;bottom:20px;background:#111;color:#fff;padding:10px 14px;border-radius:10px;opacity:0;transition:opacity .18s;z-index:14000}
+.toast.show{opacity:1}
+.footer-note{font-size:13px;color:var(--muted);margin-top:8px}
+@media (max-width:980px){.page-container{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
   <div id="header"></div>
+  <div class="app">
+      <div>
+        <div class="title">Grammar Checker</div>
+      </div>
+    </div>
 
-<h1>Advanced Grammar Checker & Text Tools</h1>
+    <div class="page-container">
+      <div class="card">
+        <div class="toolbar">
+          <button class="icon-btn secondary" id="btnPaste" title="Paste"><i class="ri-clipboard-line"></i></button>
+          <button class="icon-btn" id="btnUpload" title="Upload (.txt)"><i class="ri-upload-2-line"></i></button>
+          <button class="icon-btn" id="btnBold" title="Bold"><i class="ri-bold"></i></button>
+          <button class="icon-btn" id="btnItalic" title="Italic"><i class="ri-italic"></i></button>
+          <button class="icon-btn" id="btnBullet" title="Bullets"><i class="ri-list-unordered"></i></button>
+          <button class="icon-btn" id="btnNumber" title="Numbering"><i class="ri-list-ordered"></i></button>
+          <div style="flex:1"></div>
+          <button class="btn" id="checkBtn">Check Grammar</button>
+          <button class="btn secondary" id="acceptAllBtn">Accept all</button>
+          <button class="btn secondary" id="clearIgnoresBtn">Clear ignores</button>
+        </div>
 
-<div class="page-container">
-  <h3>Paste Your Text</h3>
+        <div id="editor" class="editor" contenteditable="true" spellcheck="true" aria-label="Editor">
+Yesterday I goes to the park with my cousin, we was playing football but the ball gone to the lake. Then we runned fast to get it back but it was too much far. After that, we sit under a tree and eat some chips which was tasting really nice. My cousin don’t like sharing but today he share with me because he was feeling happy.
+        </div>
 
-  <textarea id="textInput" placeholder="Paste text here..."></textarea>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+          <div class="note">Tip: Accept suggestions one-by-one to observe the automatic recheck loop.</div>
+          <div class="note">Words: <span id="wordCount">0</span> • Sentences: <span id="sentCount">0</span></div>
+        </div>
 
-  <!-- Grammar button under textarea -->
-  <button class="primary-btn" onclick="analyzeText()">Check Grammar</button>
+        <input type="file" id="fileInput" accept=".txt" style="margin-top:10px">
+      </div>
 
-  <h3>Upload Document (.txt)</h3>
-  <input type="file" id="fileInput" accept=".txt">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-weight:700;color:var(--primary)">Suggestions</div>
+            <div class="note" id="suggestCount">0 issues</div>
+          </div>
+          <div class="suggestions-list" id="suggestList" style="margin-top:10px">
+            <div class="note">Click <strong>Check Grammar</strong> to analyze. This local checker is heuristic-based.</div>
+          </div>
+        </div>
 
-  <div>
-    <button onclick="convertUpper()">UPPERCASE</button>
-    <button onclick="convertLower()">lowercase</button>
-    <button onclick="convertTitle()">Title Case</button>
-    <button onclick="headingFormat('h1')">H1</button>
-    <button onclick="headingFormat('h2')">H2</button>
-    <button onclick="headingFormat('h3')">H3</button>
-    <button onclick="boldText()">Bold</button>
-    <button onclick="italicText()">Italic</button>
-    <button onclick="addLink()">Link</button>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-weight:700;color:var(--primary)">Overview (Inspection)</div>
+            <div class="note">Click a category to highlight items</div>
+          </div>
+          <div id="overviewCounts" class="overview" style="margin-top:10px"></div>
+          <div id="overviewList" style="margin-top:10px"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tooltip" class="tooltip" role="dialog" aria-hidden="true"></div>
+
+    <div id="progressModal" class="progress-modal" aria-hidden="true">
+      <div class="progress-card">
+        <div id="progressTitle" style="font-weight:700;color:var(--primary)">Working...</div>
+        <div id="progressDetail" style="margin-top:6px;color:var(--muted)">Preparing</div>
+        <div class="progress-bar" style="margin-top:10px"><div id="progressFill" class="progress-fill"></div></div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast">✅ All grammar issues fixed!</div>
   </div>
-
-  <div class="results" id="results"></div>
-  <div style="margin-top:10px;">
-    <button onclick="copyText()">Copy Corrected Text</button>
-    <button onclick="downloadText()">Download Text</button>
-  </div>
-</div>
 
 <script>
-const textInput = document.getElementById('textInput');
-const fileInput = document.getElementById('fileInput');
-const results = document.getElementById('results');
+/*
+  Local heuristic grammar checker with continuous multi-pass recheck loop.
+  Runs fully in the browser, suitable for local testing (VS Code Live Server).
+  NOT a replacement for a large language model — but does repeated passes and common fixes.
+*/
 
-// Load text from uploaded file
-fileInput.addEventListener('change', e => {
-  const file = e.target.files[0];
-  if(file && file.type === "text/plain") {
-    const reader = new FileReader();
-    reader.onload = e => { textInput.value = e.target.result; };
-    reader.readAsText(file);
-  } else {
-    alert("Please upload a valid .txt file.");
+const editor = document.getElementById('editor');
+const checkBtn = document.getElementById('checkBtn');
+const acceptAllBtn = document.getElementById('acceptAllBtn');
+const suggestList = document.getElementById('suggestList');
+const suggestCount = document.getElementById('suggestCount');
+const overviewCounts = document.getElementById('overviewCounts');
+const overviewList = document.getElementById('overviewList');
+const tooltip = document.getElementById('tooltip');
+const fileInput = document.getElementById('fileInput');
+const progressModal = document.getElementById('progressModal');
+const progressFill = document.getElementById('progressFill');
+const progressDetail = document.getElementById('progressDetail');
+const toast = document.getElementById('toast');
+const wordCountEl = document.getElementById('wordCount');
+const sentCountEl = document.getElementById('sentCount');
+const clearIgnoresBtn = document.getElementById('clearIgnoresBtn');
+
+let firstCheckDone = false;
+let latestMatches = [];
+let ignoredRuleIds = new Set();
+const RECHECK_MS = 1200;  // 1.2s recheck time
+const FIRST_CHECK_MS = 4000;
+const MAX_PASSES = 12;
+
+/* Category list (user requested set) */
+const CATEGORY_LIST = [
+  "Subject-verb agreement errors",
+  "Tense errors",
+  "Pronoun errors",
+  "Sentence fragments",
+  "Run-on sentences",
+  "Comma splices",
+  "Misplaced modifiers",
+  "Parallelism errors",
+  "Preposition errors",
+  "Article errors",
+  "Double negatives",
+  "Word form errors",
+  "Spelling errors",
+  "Punctuation errors",
+  "Capitalization errors"
+];
+
+/* ====== Small spelling corrections map (common) ====== */
+const SPELL_MAP = {
+  "dont":"don't", "dont":"don't", "sunami":"tsunami", "runned":"ran", "goes":"went", "gone":"went",
+  "sit":"sat", "eat":"ate", "share":"shared" /*note: context-sensitive, heuristics will choose*/,
+  "to much":"too much"
+};
+
+/* irregular verbs mapping for some common mistakes (limited) */
+const IRREGULARS = {
+  "go":"went","goes":"went","gone":"gone","run":"ran","runned":"ran","runed":"ran","eat":"ate","sit":"sat",
+  "be":"was","is":"was","are":"were","was":"were","were":"were","have":"had","has":"had","do":"did","does":"did"
+};
+
+/* UTIL: stats */
+function updateStats(text){ const words = text.trim().split(/\s+/).filter(Boolean).length || 0; const sentences = (text.match(/[.!?]+/g) || []).length || (text.trim().length?1:0); wordCountEl.textContent = words; sentCountEl.textContent = sentences; }
+
+/* TEXT NODE utilities (same robust approach as earlier) */
+function getTextNodeIndexMap(root){
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+  const nodes=[]; let cur; let idx=0;
+  while(cur = walker.nextNode()){ nodes.push({node:cur, start:idx, end: idx + cur.nodeValue.length}); idx += cur.nodeValue.length; }
+  return nodes;
+}
+function locateRangeInTextNodes(root, start, length){
+  const map = getTextNodeIndexMap(root); const end = start + length;
+  let startNode=null, startOffset=0, endNode=null, endOffset=0;
+  for(const t of map){
+    if(start >= t.start && start <= t.end){ startNode = t.node; startOffset = start - t.start; }
+    if(end >= t.start && end <= t.end){ endNode = t.node; endOffset = end - t.start; break; }
   }
+  if(!endNode && map.length){ const last = map[map.length-1]; endNode = last.node; endOffset = last.end - last.start; }
+  return { startNode, startOffset, endNode, endOffset };
+}
+function wrapRangeInRoot(root, start, length, className, dataAttrs = {}){
+  const loc = locateRangeInTextNodes(root, start, length);
+  if(!loc.startNode || !loc.endNode) return null;
+  const range = document.createRange();
+  try{ range.setStart(loc.startNode, loc.startOffset); range.setEnd(loc.endNode, loc.endOffset); }catch(e){ return null; }
+  const frag = range.extractContents(); const span = document.createElement('span'); if(className) span.className = className;
+  for(const k in dataAttrs) span.dataset[k] = dataAttrs[k];
+  span.appendChild(frag); range.insertNode(span); return span;
+}
+function removeUnderlines(root){
+  const spans = root.querySelectorAll('span.underline-err');
+  spans.forEach(s=>{
+    const parent = s.parentNode;
+    while(s.firstChild) parent.insertBefore(s.firstChild, s);
+    parent.removeChild(s);
+  });
+}
+function replaceTextInRoot(root, start, length, replacement){
+  const loc = locateRangeInTextNodes(root, start, length);
+  if(!loc.startNode || !loc.endNode) return false;
+  const range = document.createRange();
+  try{ range.setStart(loc.startNode, loc.startOffset); range.setEnd(loc.endNode, loc.endOffset);}catch(e){return false;}
+  range.deleteContents();
+  if(replacement && replacement.length) range.insertNode(document.createTextNode(replacement));
+  return true;
+}
+
+/* ====== Heuristic detector (returns array of matches) ======
+ Each match: { offset, length, message, replacements: [{value}], ruleId, category }
+ This is not exhaustive — it's a heuristic engine to catch common patterns,
+ and it supports repeated passes (apply → re-analyze).
+===========================================================*/
+function detectMatches(plain){
+  const matches = [];
+  const lower = plain.toLowerCase();
+
+  // Helper to push match
+  function pushMatch(start, len, message, replacements, ruleId, category){
+    // avoid overlapping duplicates
+    matches.push({ offset: start, length: len, message, replacements: replacements.map(v=>({value:v})), rule: {id: ruleId}, category });
+  }
+
+  // 1) Common irregular verbs & past tense mistakes using context (very heuristic)
+  // look for 'yesterday' or 'last' nearby -> prefer past tense
+  const pastContext = /\b(yesterday|last|ago|previously|earlier)\b/i;
+  let hasPastCtx = pastContext.test(plain);
+
+  // pattern list: find simple subject-verb tokens like "I goes", "we was", "we runned", etc.
+  const simpleVerbPattern = /\b(I|we|they|he|she|you|my cousin|my friend|friends)\s+(goes|go|runned|runned|runed|run|runs|sit|sit|eat|eat|share|share|dont|don't|doesnt|doesn't|was|are|is|was)\b/gi;
+  let m;
+  while((m = simpleVerbPattern.exec(plain)) !== null){
+    const subj = m[1], verb = m[2];
+    const start = m.index + m[0].toLowerCase().indexOf(verb.toLowerCase());
+    let suggested = null, cat = "Subject-verb agreement errors";
+    // handle specific verbs
+    if(/^(goes|go|runs|run)$/.test(verb.toLowerCase())){
+      if(hasPastCtx || /yesterday/i.test(plain)) suggested = IRREGULARS[verb.toLowerCase()] || "went";
+      else suggested = (verb.toLowerCase()==='goes' ? 'go' : verb);
+    }
+    if(/^(runned|runed)$/.test(verb.toLowerCase())) suggested = 'ran';
+    if(/^(eat|sit)$/.test(verb.toLowerCase())){
+      if(hasPastCtx) suggested = IRREGULARS[verb.toLowerCase()] || { 'eat':'ate','sit':'sat'}[verb.toLowerCase()];
+    }
+    if(/^(was|are|is)$/.test(verb.toLowerCase())){
+      // match subject plurality
+      const sub = subj.toLowerCase();
+      if(['we','they','you','friends','my friend','friends'].includes(sub) && verb.toLowerCase() === 'was') suggested = 'were';
+      if(['he','she','it','my cousin','my friend'].includes(sub) && verb.toLowerCase() === 'are') suggested = 'is';
+    }
+    if(verb.toLowerCase()==='dont' || verb.toLowerCase()==="don't" || verb.toLowerCase()==='doesnt' || verb.toLowerCase()==="doesn't"){
+      // fix don't vs doesn't for 3rd singular
+      const sub = subj.toLowerCase();
+      if(['he','she','it','my cousin','my friend'].includes(sub)) suggested = "doesn't";
+      else suggested = "don't";
+      cat = "Subject-verb agreement errors";
+    }
+    if(suggested){
+      pushMatch(start, verb.length, `Possible verb form: "${verb}" → "${suggested}"`, [suggested], 'verb-form', cat);
+    }
+  }
+
+  // 2) Specific known misspellings / wordform map (simple)
+  Object.keys(SPELL_MAP).forEach(w=>{
+    const re = new RegExp('\\b' + w + '\\b','gi');
+    let mm;
+    while((mm = re.exec(plain)) !== null){
+      const s = mm.index;
+      pushMatch(s, w.length, `Possible misspelling: "${mm[0]}" → "${SPELL_MAP[w]}"`, [SPELL_MAP[w]], 'spelling', 'Spelling errors');
+    }
+  });
+
+  // 3) Past tense verbs not used correctly: look for common verbs still present in base form after past-cues
+  const pastCues = /\b(yesterday|last|ago|earlier)\b/gi;
+  if(pastCues.test(plain)){
+    // find 'we go', 'we sit', 'we eat', 'I go' when near 'yesterday' (simple)
+    const simplePresentNearPast = /\b(I|we|they|he|she|you|my cousin|friends)\s+(go|eat|sit|run|play|is)\b/gi;
+    while((m = simplePresentNearPast.exec(plain)) !== null){
+      const subj = m[1], verb = m[2];
+      const start = m.index + m[0].toLowerCase().indexOf(verb.toLowerCase());
+      const repl = IRREGULARS[verb.toLowerCase()] || null;
+      if(repl && repl !== verb.toLowerCase()){
+        pushMatch(start, verb.length, `Use past tense for "${verb}" in past context`, [repl], 'past-tense', 'Tense errors');
+      }
+    }
+  }
+
+  // 4) Common wrong past participle: "gone to" vs "went to"
+  // If context contains 'went|gone' misuse with 'yesterday' or past cues, suggest 'went'
+  const gonePattern = /\b(gone|goes)\s+to\s+the\s+/gi;
+  while((m = gonePattern.exec(plain)) !== null){
+    const verb = m[1]; const start = m.index;
+    pushMatch(start, verb.length, `Check verb: "${verb}" — maybe "went" is right in past narrative`, ['went'], 'gone-vs-went', 'Tense errors');
+  }
+
+  // 5) Comma splice detection: two independent clauses joined by comma without conjunction
+  // simple heuristic: comma followed by lowercase letter starting a clause with a verb
+  const commaSplice = /, (\s*)([a-z][a-z']*\s+(?:\w+){1,6}\b)/g;
+  while((m = commaSplice.exec(plain)) !== null){
+    const start = m.index;
+    // ensure comma splice candidate: previous chunk ends with pronoun or noun (rough)
+    pushMatch(start, 1, 'Possible comma splice—two clauses linked by comma. Consider "." or ";" or "and"', [';','.',', and'], 'comma-splice', 'Comma splices');
+  }
+
+  // 6) Double negatives
+  const doubleNeg = /\b(don't|dont|doesn't|doesnt|didn't|didnt)\s+no\b/gi;
+  while((m = doubleNeg.exec(plain)) !== null){
+    pushMatch(m.index, m[0].length, 'Double negative detected', ["don't need any","do not need any"], 'double-negative', 'Double negatives');
+  }
+
+  // 7) Article errors: "eat some chips which was" -> suggest "which were" or tweak
+  // detect "which was" when referring to plural noun before it
+  const whichWas = /(\b\w+\b(?:\s+\w+){0,3})\s*,?\s+which\s+was\b/gi;
+  while((m = whichWas.exec(plain)) !== null){
+    const noun = m[1];
+    // crude plural detection: noun ends with 's' or preceding word 'chips','movies' etc.
+    if(/\b(chips|movies|people|books|things|we|they|friends)\b/i.test(noun) || /\bs\b/i.test(noun)){
+      pushMatch(m.index, ('which was').length, `Possible agreement: "which were" for plural "${noun.trim()}"`, ['which were'], 'which-was-plural', 'Subject-verb agreement errors');
+    }
+  }
+
+  // 8) Pronoun consistency: "My cousin don't like" -> should be "doesn't like"
+  const pronounDont = /\b(my cousin|he|she|it|my friend|the boy|the girl)\s+don'?t\s+like\b/gi;
+  while((m = pronounDont.exec(plain)) !== null){
+    const subj = m[1];
+    const start = m.index + m[0].toLowerCase().indexOf("don");
+    pushMatch(start, 5, `Pronoun agreement: use "doesn't like" for ${subj}`, ["doesn't"], 'pronoun-verb', 'Subject-verb agreement errors');
+  }
+
+  // 9) Simple capitalization errors: start of sentence not capitalized
+  const sentences = plain.split(/([.!?]\s+)|\n/);
+  // crude scan for lowercase start after sentence boundary
+  let offset = 0;
+  const sentenceRegex = /(?:^|[.!?]\s+)([a-z])/g;
+  while((m = sentenceRegex.exec(plain)) !== null){
+    const ch = m[1];
+    if(ch && ch === ch.toLowerCase()){
+      const pos = m.index + (m[0].length - 1);
+      pushMatch(pos, 1, 'Sentence should start with a capital letter', [ch.toUpperCase()], 'capitalization', 'Capitalization errors');
+    }
+  }
+
+  // 10) Punctuation: missing comma before which phrase, e.g., "chips which was" probably needs comma
+  const whichNoComma = /\b(\w+(?:\s+\w+){0,3})\s+which\s+/gi;
+  while((m = whichNoComma.exec(plain)) !== null){
+    const prev = m[1];
+    // if prev is plural/phrase, suggest comma
+    if(/\b(chips|movies|books|people|things|we|they|friends)\b/i.test(prev) || prev.split(' ').length>1){
+      const pos = m.index + prev.length;
+      pushMatch(pos, 1, 'Consider adding a comma before "which"', [', '], 'comma-before-which', 'Punctuation errors');
+    }
+  }
+
+  // 11) Excessive "too much far" -> suggest "too far"
+  const toomuchfar = /\btoo much far\b/gi;
+  while((m = toomuchfar.exec(plain)) !== null){
+    pushMatch(m.index, m[0].length, 'Use "too far" instead of "too much far"', ['too far'], 'word-form', 'Word form errors');
+  }
+
+  // 12) Simple spelling-like substitutions (sunami->tsunami). Already in SPELL_MAP, detect word boundaries
+  // (we already added above via SPELL_MAP)
+
+  // 13) Parallelism: detect "we were playing football but the ball gone to the lake" (structure mismatch) - hard
+  // We'll detect repeated 'and' lists with inconsistent verb forms, e.g., "we sit under a tree and eat" with past context
+  const parallelPattern = /\b(and|or)\s+\b\w+\b/gi; // placeholder; skip heavy logic for now
+
+  // 14) Run-on detection: long sentence with multiple verbs and commas > 2
+  const sentencesSplit = plain.split(/([.?!])/);
+  for(let i=0;i<sentencesSplit.length;i++){
+    const s = sentencesSplit[i];
+    if(s && s.length>120 && (s.match(/,/g)||[]).length >= 2){
+      const start = plain.indexOf(s);
+      pushMatch(start, Math.min(50,s.length), 'Long sentence — possible run-on. Consider splitting.', [], 'run-on', 'Run-on sentences');
+    }
+  }
+
+  // Deduplicate overlapping matches (keep earliest, prefer longer / more specific)
+  const dedup = [];
+  matches.sort((a,b)=>a.offset - b.offset || b.length - a.length);
+  for(const mm of matches){
+    const overlap = dedup.some(d => !(mm.offset + mm.length <= d.offset || d.offset + d.length <= mm.offset));
+    if(!overlap) dedup.push(mm);
+  }
+  return dedup;
+}
+
+/* CATEGORY mapping used in overview */
+function matchCategoryFromMatch(m){
+  return m.category || 'Uncategorized';
+}
+
+/* Visible matches filtering (ignored & already-equal) */
+function visibleMatchesFrom(matches, plain){
+  return matches.map((m, idx)=>({m, idx}))
+    .filter(({m})=>{
+      const rid = (m.rule && m.rule.id) ? m.rule.id : null;
+      if(rid && ignoredRuleIds.has(rid)) return false;
+      if(m.replacements && m.replacements.length){
+        const cur = (plain.substr(m.offset, m.length) || '').trim();
+        for(const r of m.replacements){ if(r && r.value && r.value.trim().toLowerCase() === cur.toLowerCase()) return false; }
+      }
+      return true;
+    });
+}
+
+/* RENDER: underlines, suggestions, overview */
+function renderAll(matches){
+  latestMatches = matches.slice();
+  const plain = editor.textContent || '';
+  removeUnderlines(editor);
+  const visible = visibleMatchesFrom(matches, plain);
+  visible.forEach(({m, idx})=>{
+    const span = wrapRangeInRoot(editor, m.offset, m.length, 'underline-err', {match: idx});
+    if(!span) return;
+    span.addEventListener('mouseenter', ()=> showTooltipForSpan(span, m, idx));
+    span.addEventListener('mouseleave', ()=> scheduleHideTooltip());
+    span.addEventListener('click', (e)=> { e.stopPropagation(); showTooltipForSpan(span, m, idx); });
+  });
+  renderSuggestionPanel(visible);
+  renderOverview(matches);
+}
+
+/* Suggestion list */
+function renderSuggestionPanel(visible){
+  suggestList.innerHTML = '';
+  if(visible.length === 0){
+    suggestList.innerHTML = '<div class="note">No suggestions — nice job ✅</div>';
+    suggestCount.textContent='0 issues';
+    return;
+  }
+  suggestCount.textContent = `${visible.length} issue${visible.length!==1 ? 's':''}`;
+  visible.forEach(({m, idx})=>{
+    const row = document.createElement('div'); row.className='suggestion-row';
+    const left = document.createElement('div'); left.className='s-left';
+    const ctx = document.createElement('div'); ctx.className='s-context';
+    const contextText = (m.message ? m.message : ( (editor.textContent||'').substr(Math.max(0,m.offset-20), m.length+40) ));
+    ctx.textContent = contextText;
+    left.appendChild(ctx);
+
+    const replWrap = document.createElement('div');
+    if(m.replacements && m.replacements.length){
+      m.replacements.slice(0,5).forEach(r=>{
+        const chip = document.createElement('button'); chip.className='chip'; chip.textContent = r.value;
+        chip.addEventListener('click', ()=> applySingleByMatch(m, r.value));
+        replWrap.appendChild(chip);
+      });
+    } else {
+      const none = document.createElement('div'); none.className='note'; none.textContent='(no suggestion)';
+      replWrap.appendChild(none);
+    }
+    left.appendChild(replWrap);
+
+    const right = document.createElement('div'); right.className='s-actions';
+    const acceptBtn = document.createElement('button'); acceptBtn.className='btn'; acceptBtn.textContent='Accept';
+    acceptBtn.addEventListener('click', ()=> applySingleByMatch(m, (m.replacements && m.replacements[0]) ? m.replacements[0].value : ''));
+    const ignoreBtn = document.createElement('button'); ignoreBtn.className='btn secondary'; ignoreBtn.textContent='Ignore';
+    ignoreBtn.addEventListener('click', ()=> { const rid = (m.rule && m.rule.id) ? m.rule.id : null; if(rid) ignoredRuleIds.add(rid); renderAll(latestMatches); });
+    right.appendChild(acceptBtn); right.appendChild(ignoreBtn);
+
+    row.appendChild(left); row.appendChild(right);
+    suggestList.appendChild(row);
+  });
+}
+
+/* Overview rendering */
+function renderOverview(matches){
+  overviewCounts.innerHTML = '';
+  overviewList.innerHTML = '';
+  const byCat = {};
+  CATEGORY_LIST.forEach(c=>byCat[c]=[]);
+  byCat['Uncategorized'] = [];
+  const plain = editor.textContent || '';
+
+  matches.forEach((m, i)=>{
+    const rid = (m.rule && m.rule.id) ? m.rule.id : null;
+    if(rid && ignoredRuleIds.has(rid)) return;
+    // skip if replacement equals current
+    if(m.replacements && m.replacements.length){
+      const cur = (plain.substr(m.offset, m.length) || '').trim();
+      for(const r of m.replacements){ if(r && r.value && r.value.trim().toLowerCase() === cur.toLowerCase()) return; }
+    }
+    const cat = matchCategoryFromMatch(m);
+    if(byCat[cat]) byCat[cat].push({m, idx:i}); else byCat['Uncategorized'].push({m, idx:i});
+  });
+
+  CATEGORY_LIST.forEach(k=>{
+    const cnt = (byCat[k]||[]).length;
+    if(cnt > 0){
+      const b = document.createElement('div'); b.className='badge'; b.textContent = `${k}: ${cnt}`;
+      b.addEventListener('click', ()=> { showOverviewList(k, byCat[k]||[]); highlightCategory(k, byCat[k]||[]); });
+      overviewCounts.appendChild(b);
+    }
+  });
+  if((byCat['Uncategorized']||[]).length>0){
+    const b = document.createElement('div'); b.className='badge'; b.textContent = `Uncategorized: ${byCat['Uncategorized'].length}`;
+    b.addEventListener('click', ()=> { showOverviewList('Uncategorized', byCat['Uncategorized']); highlightCategory('Uncategorized', byCat['Uncategorized']); });
+    overviewCounts.appendChild(b);
+  }
+}
+
+/* Show list for chosen category */
+function showOverviewList(key, items){
+  overviewList.innerHTML = '';
+  if(!items || items.length === 0){ overviewList.innerHTML = '<div class="note">No items in this category.</div>'; return; }
+  const plain = editor.textContent || '';
+  items.forEach(({m, idx})=>{
+    const row = document.createElement('div'); row.style.padding='8px 6px'; row.style.borderBottom='1px solid rgba(0,0,0,0.04)';
+    const word = (plain.substr(m.offset, m.length) || '').trim() || m.message || '(unknown)';
+    const wdiv = document.createElement('div'); wdiv.textContent = word; wdiv.style.cursor='pointer'; wdiv.title = m.message || '';
+    wdiv.addEventListener('click', ()=> {
+      const sp = editor.querySelector('span.underline-err[data-match="'+idx+'"]');
+      if(sp){ sp.scrollIntoView({behavior:'smooth', block:'center'}); showTooltipForSpan(sp, m, idx); }
+    });
+    row.appendChild(wdiv); overviewList.appendChild(row);
+  });
+}
+
+/* Highlight category items */
+function highlightCategory(key, items){
+  removeUnderlines(editor);
+  items.forEach(({m, idx})=>{
+    const span = wrapRangeInRoot(editor, m.offset, m.length, 'underline-err', {match: idx});
+    if(!span) return;
+    span.style.background = 'rgba(59,130,246,0.06)';
+    span.addEventListener('mouseenter', ()=> showTooltipForSpan(span, m, idx));
+    span.addEventListener('mouseleave', ()=> scheduleHideTooltip());
+    span.addEventListener('click', (e)=> { e.stopPropagation(); showTooltipForSpan(span, m, idx); });
+  });
+}
+
+/* Tooltip */
+let tooltipTimeout = null;
+function showTooltipForSpan(span, matchObj, matchIdx){
+  clearTimeout(tooltipTimeout); tooltip.style.display='block'; tooltip.innerHTML='';
+  const rect = span.getBoundingClientRect(); const top = rect.bottom + window.scrollY + 8; let left = rect.left + window.scrollX;
+  const msg = document.createElement('div'); msg.style.marginBottom='8px'; msg.textContent = matchObj.message || (matchObj.replacements && matchObj.replacements[0] && matchObj.replacements[0].value) || 'Suggestion';
+  const sugWrap = document.createElement('div'); sugWrap.className='sug';
+  if(matchObj.replacements && matchObj.replacements.length){
+    matchObj.replacements.slice(0,3).forEach(r=>{
+      const btn = document.createElement('button'); btn.textContent = r.value;
+      btn.addEventListener('click', ()=> { applySingleByMatch(matchObj, r.value); hideTooltip(); });
+      sugWrap.appendChild(btn);
+    });
+  } else { const no = document.createElement('div'); no.className='note'; no.textContent='(no suggestion)'; sugWrap.appendChild(no); }
+  const ign = document.createElement('button'); ign.className='ignore'; ign.textContent='Ignore';
+  ign.addEventListener('click', ()=> { const rid = (matchObj.rule && matchObj.rule.id) ? matchObj.rule.id : null; if(rid) ignoredRuleIds.add(rid); renderAll(latestMatches); hideTooltip(); });
+  tooltip.appendChild(msg); tooltip.appendChild(sugWrap); tooltip.appendChild(ign);
+  document.body.appendChild(tooltip);
+  const tRect = tooltip.getBoundingClientRect();
+  if(left + tRect.width > window.innerWidth - 12) left = window.innerWidth - tRect.width - 12;
+  if(left < 12) left = 12;
+  tooltip.style.left = left + 'px'; tooltip.style.top = top + 'px'; tooltip.setAttribute('aria-hidden','false');
+}
+function scheduleHideTooltip(){ clearTimeout(tooltipTimeout); tooltipTimeout = setTimeout(()=>{ tooltip.style.display='none'; tooltip.setAttribute('aria-hidden','true'); }, 260); }
+function hideTooltip(){ clearTimeout(tooltipTimeout); tooltip.style.display='none'; tooltip.setAttribute('aria-hidden','true'); }
+
+/* Apply single suggestion then re-analyze (continuous loop) */
+async function applySingleByMatch(matchObj, replacementValue){
+  if(!matchObj) return;
+  const start = matchObj.offset, len = matchObj.length;
+  const ok = replaceTextInRoot(editor, start, len, replacementValue || '');
+  if(!ok){
+    const p = editor.textContent || '';
+    editor.textContent = p.slice(0, start) + (replacementValue || '') + p.slice(start+len);
+  }
+  updateStats(editor.textContent || '');
+  hideTooltip();
+  // short recheck delay
+  setProcessing(true, 'Rechecking...');
+  await new Promise(r=>setTimeout(r, RECHECK_MS));
+  const matches = detectMatches(editor.textContent || '');
+  if(matches.length === 0){ renderAll([]); showToast('✅ All grammar issues fixed!'); setProcessing(false); return; }
+  renderAll(matches);
+  setProcessing(false);
+}
+
+/* Accept all iterative passes */
+async function acceptAllRecursive(){
+  showProgress('Applying fixes...');
+  try{
+    for(let pass=1; pass<=MAX_PASSES; pass++){
+      progressFill.style.width = `${Math.min(10 + pass*8, 92)}%`;
+      progressDetail.textContent = `Pass ${pass} — detecting suggestions...`;
+      const matches = detectMatches(editor.textContent || '');
+      const plain = editor.textContent || '';
+      // visible with replacements
+      const visible = matches.filter(m=>{
+        const rid = (m.rule && m.rule.id) ? m.rule.id : null;
+        if(rid && ignoredRuleIds.has(rid)) return false;
+        if(m.replacements && m.replacements.length){
+          const cur = (plain.substr(m.offset, m.length) || '').trim();
+          for(const r of m.replacements){ if(r && r.value && r.value.trim().toLowerCase() === cur.toLowerCase()) return false; }
+        }
+        return (m.replacements && m.replacements.length);
+      });
+      if(visible.length === 0){
+        renderAll(detectMatches(editor.textContent||'')); showToast('✅ All grammar issues fixed!'); break;
+      }
+      progressDetail.textContent = `Pass ${pass} — applying ${visible.length} fixes...`;
+      // apply replacements right-to-left
+      const actions = visible.map(m=>({ offset:m.offset, len:m.length, repl: (m.replacements && m.replacements[0])?m.replacements[0].value:'', obj:m}));
+      actions.sort((a,b)=>b.offset - a.offset);
+      actions.forEach(a => replaceTextInRoot(editor, a.offset, a.len, a.repl || ''));
+      updateStats(editor.textContent || '');
+      await new Promise(r=>setTimeout(r, RECHECK_MS));
+      if(pass === MAX_PASSES){
+        renderAll(detectMatches(editor.textContent||'')); showToast('⚠️ Reached pass limit — please inspect remaining suggestions', 3000);
+      }
+    }
+  } catch(e){ console.error(e); showToast('Error during Accept All'); }
+  finally{ hideProgress(); }
+}
+
+/* Processing helpers (UI) */
+function setProcessing(on, label='Processing...'){
+  if(on){ checkBtn.disabled=true; checkBtn.classList.add('processing'); checkBtn.innerHTML = '<span class="spinner"></span> '+label; }
+  else { checkBtn.disabled=false; checkBtn.classList.remove('processing'); checkBtn.textContent = 'Check Grammar'; }
+}
+function showProgress(detail='Working...'){ progressDetail.textContent = detail; progressFill.style.width='6%'; progressModal.classList.add('show'); }
+function hideProgress(){ progressModal.classList.remove('show'); progressFill.style.width='0%'; }
+function showToast(msg='Done', ms=2000){ toast.textContent = msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), ms); }
+
+/* UI wiring */
+checkBtn.addEventListener('click', async ()=>{
+  if(!editor.textContent.trim()){ alert('Please enter text to analyze.'); return; }
+  setProcessing(true, 'Checking...');
+  await new Promise(r=>setTimeout(r, FIRST_CHECK_MS));
+  const matches = detectMatches(editor.textContent || '');
+  renderAll(matches);
+  firstCheckDone = true;
+  setProcessing(false);
 });
 
-// Text formatting
-function convertUpper(){ textInput.value = textInput.value.toUpperCase(); }
-function convertLower(){ textInput.value = textInput.value.toLowerCase(); }
-function convertTitle(){ 
-  textInput.value = textInput.value.toLowerCase().split(' ').map(w=> w.charAt(0).toUpperCase()+w.slice(1)).join(' '); 
-}
-function headingFormat(tag){
-  const text = textInput.value;
-  textInput.value = `<${tag}>${text}</${tag}>`;
-}
-function boldText(){ textInput.value = `<b>${textInput.value}</b>`; }
-function italicText(){ textInput.value = `<i>${textInput.value}</i>`; }
-function addLink(){
-  let url = prompt("Enter the URL:");
-  if(url){
-    textInput.value = `<a href="${url}" target="_blank">${textInput.value}</a>`;
-  }
-}
+acceptAllBtn.addEventListener('click', ()=> acceptAllRecursive());
 
-// Copy & download
-function copyText(){ navigator.clipboard.writeText(textInput.value); alert("Text copied!"); }
-function downloadText(){
-  const blob = new Blob([textInput.value], {type:"text/plain"});
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "corrected_text.txt";
-  link.click();
-}
+document.getElementById('btnPaste').addEventListener('click', ()=> { editor.focus(); alert('Press Ctrl/Cmd+V'); });
+document.getElementById('btnUpload').addEventListener('click', ()=> fileInput.click());
+document.getElementById('btnBold').addEventListener('click', ()=> document.execCommand('bold'));
+document.getElementById('btnItalic').addEventListener('click', ()=> document.execCommand('italic'));
+document.getElementById('btnBullet').addEventListener('click', ()=> document.execCommand('insertUnorderedList'));
+document.getElementById('btnNumber').addEventListener('click', ()=> document.execCommand('insertOrderedList'));
+document.getElementById('btnClear').addEventListener('click', ()=> { if(confirm('Clear content?')){ editor.innerHTML=''; updateStats(''); removeUnderlines(editor); suggestList.innerHTML=''; overviewCounts.innerHTML=''; overviewList.innerHTML=''; ignoredRuleIds.clear(); }});
+clearIgnoresBtn.addEventListener('click', ()=> { ignoredRuleIds.clear(); renderAll(detectMatches(editor.textContent||'')); });
 
-// Analyze text with LanguageTool API
-async function analyzeText(){
-  const text = textInput.value.trim();
-  if(!text){ results.innerHTML = "Please enter text to analyze."; return; }
+fileInput.addEventListener('change', e=>{
+  const f = e.target.files && e.target.files[0]; if(!f) return;
+  if(f.type && f.type !== 'text/plain'){ alert('Please upload a .txt file'); return; }
+  const reader = new FileReader();
+  reader.onload = ev => { editor.textContent = ev.target.result; updateStats(editor.textContent||''); };
+  reader.readAsText(f);
+});
 
-  const words = text.split(/\s+/).filter(w => w.length>0);
-  const wordCount = words.length;
+editor.addEventListener('input', ()=>{
+  updateStats(editor.textContent || '');
+  removeUnderlines(editor);
+  suggestList.innerHTML = '<div class="note">Changes detected — click <strong>Check Grammar</strong> to re-analyze.</div>';
+  overviewCounts.innerHTML=''; overviewList.innerHTML='';
+});
 
-  const readingTime = Math.ceil(wordCount/200);
-  const sentences = text.split(/[.!?]/).filter(s=>s.length>0).length;
-  const syllables = countSyllables(text);
-  const fleschScore = Math.round(206.835 - 1.015*(wordCount/sentences) - 84.6*(syllables/wordCount));
+document.addEventListener('click', (e)=> { if(tooltip.contains(e.target)) return; tooltip.style.display='none'; });
 
-  results.innerHTML = "Checking grammar...";
-  try{
-    const response = await fetch("https://api.languagetool.org/v2/check",{
-      method:"POST",
-      headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `text=${encodeURIComponent(text)}&language=en-US`
-    });
-    const data = await response.json();
-    const matches = data.matches;
+/* Init */
+updateStats(editor.textContent || '');
+suggestList.innerHTML = '<div class="note">Click <strong>Check Grammar</strong> to analyze.</div>';
 
-    let correctedText = text;
-    matches.reverse().forEach(m=>{
-      correctedText = correctedText.slice(0,m.offset) + 
-        `<span class="highlight">${correctedText.slice(m.offset, m.offset+m.length)}</span>` + 
-        correctedText.slice(m.offset+m.length);
-    });
-
-    results.innerHTML = `
-      <p><strong>Total Words:</strong> ${wordCount}</p>
-      <p><strong>Total Errors:</strong> ${matches.length}</p>
-      <p><strong>Reading Time:</strong> ${readingTime} min</p>
-      <p><strong>Readability Score:</strong> ${fleschScore}</p>
-      <p><strong>Grammar Suggestions:</strong></p>
-      <p>${correctedText}</p>
-    `;
-  } catch(err){
-    results.innerHTML = "Error checking grammar. Please try again.";
-    console.error(err);
-  }
-}
-
-function countSyllables(text){
-  text=text.toLowerCase();
-  if(!text) return 0;
-  text=text.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
-  text=text.replace(/^y/, '');
-  const matches = text.match(/[aeiouy]{1,2}/g);
-  return matches ? matches.length : 1;
-}
 </script>
 
-<!-- SEO Content Section -->
-<section style="max-width:900px; margin:50px auto; background:#111; color:#fff; padding:40px; border-radius:12px; line-height:1.7; font-size:1.05rem;">
-  
-  <h2 style="color:#a17edc; margin-bottom:15px;">How to Use the Online Grammar Checker</h2>
-  <p>
-    Our <strong>online grammar checker</strong> is designed to be simple yet powerful. 
-    To get started, paste your text into the box above or upload your document. 
-    Then click on the <strong>Check Grammar</strong> button to instantly review grammar, spelling, and punctuation errors. 
-    The tool highlights mistakes, provides correction suggestions, and also shows total words, readability score, and estimated reading time.
-  </p>
-
-  <h2 style="color:#a17edc; margin-top:25px; margin-bottom:15px;">Why Use a Grammar Checker?</h2>
-  <p>
-    Whether you are a student, writer, or business professional, writing free of errors is essential. 
-    A small mistake can change the meaning of a sentence and reduce your credibility. 
-    By using a reliable <strong>text enhancer tool</strong>, you can polish your work, save time, and present your ideas with confidence.
-  </p>
-
-  <h2 style="color:#a17edc; margin-top:25px; margin-bottom:15px;">Benefits for Students</h2>
-  <p>
-    Students often need to write essays, assignments, or research papers. 
-    This <strong>free grammar checker</strong> helps them quickly identify errors, improve sentence structure, and increase readability. 
-    It also ensures academic work is presented in a clear and professional way.
-  </p>
-
-  <h2 style="color:#a17edc; margin-top:25px; margin-bottom:15px;">Benefits for Writers</h2>
-  <p>
-    Writers, bloggers, and content creators need engaging, error-free writing. 
-    With this <strong>check grammar free</strong> tool, writers can refine their articles, blog posts, and creative works. 
-    It helps maintain flow, style, and accuracy, which increases audience trust and engagement.
-  </p>
-
-  <h2 style="color:#a17edc; margin-top:25px; margin-bottom:15px;">Benefits for Professionals</h2>
-  <p>
-    Professionals rely on effective communication for emails, reports, and presentations. 
-    Using a grammar checker ensures that your writing is polished and professional. 
-    With added features like text case formatting, readability score, and word count, you can quickly optimize your writing before sharing it with clients or colleagues.
-  </p>
-
-</section>
-
-<!-- Extra Sections -->
-
+<!-- Suggested + Article Section -->
 <section id="suggested-tools">
   <h2>Suggested Tools</h2>
   <div class="suggested-list"></div>
 </section>
-
 <script src="https://nextonlinetools.com/js/suggested.js"></script>
+
+<div id="tool-article"></div>
+<script src="/js/toolsarticle.js"></script>
+<script>loadToolArticle("tool-article");</script>
 
 <div id="footer"></div>
 <script src="https://nextonlinetools.com/js/include.js"></script>
