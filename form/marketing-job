@@ -14,19 +14,11 @@
     <h1>Apply — Outreach & Marketing Coordinator</h1>
     <p class="description">Fill out the form below to apply for the remote position.</p>
 
-    <div class="contact-container">
-      <!-- Left side image -->
-      <div class="contact-left">
-        <img src="https://nextonlinetools.com/assets/contact.png" alt="Apply" />
-      </div>
-
-      <!-- Right side form -->
-      <div class="contact-right">
-        <form id="applyForm" enctype="multipart/form-data">
+    <div class="contact-container" style="display:flex; justify-content:center; align-items:center; width:100%;">
+      <div class="contact-right" style="width:100%; max-width:500px;">
+        <form id="applyForm" enctype="multipart/form-data" style="width:100%;">
           <input type="text" name="full_name" placeholder="Full Name" required />
-
           <input type="email" name="email" placeholder="Email Address" required />
-
           <input type="text" name="location" placeholder="Current Location (City, District)" required />
 
           <select name="pc_access" required>
@@ -52,7 +44,6 @@
         <p id="responseMsg"></p>
       </div>
     </div>
-  </section>
 
   <script>
     const form = document.getElementById("applyForm");
@@ -86,9 +77,5 @@
     });
   </script>
 
-  <div id="footer"></div>
-
-  <script src="https://nextonlinetools.com/js/include.js"></script>
-  <script src="https://nextonlinetools.com/js/search.js"></script>
 </body>
 </html>
